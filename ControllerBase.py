@@ -296,9 +296,6 @@ class ControllerBase:
 
 
     def _read_validator_metadata(self, id, filepath):
-        if filepath.find('bogus') != -1:
-            import pdb
-            pdb.set_trace()
         self.validators = FormValidatorContainer()
 
         metadata = FSMetadata(filepath)
