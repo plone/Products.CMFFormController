@@ -13,7 +13,7 @@
 ##############################################################################
 """ Customizable controlled python scripts that come from the filesystem.
 
-$Id: FSControllerPythonScript.py,v 1.12 2004/05/04 22:02:10 dreamcatcher Exp $
+$Id: FSControllerPythonScript.py,v 1.13 2004/06/15 21:08:16 plonista Exp $
 """
 
 import re
@@ -28,12 +28,13 @@ from Products.CMFCore.CMFCorePermissions import View, ManagePortal
 from Products.CMFCore.utils import getToolByName
 from Script import FSPythonScript as BaseClass
 from ControllerPythonScript import ControllerPythonScript
-from ControllerState import ControllerState
 from ControllerBase import ControllerBase
+from ControllerState import ControllerState
+from FSControllerBase import FSControllerBase
 from utils import log, logException
 
 
-class FSControllerPythonScript (BaseClass, ControllerBase):
+class FSControllerPythonScript (BaseClass, FSControllerBase):
     """FSControllerPythonScripts act like Controller Python Scripts but are not
     directly modifiable from the management interface."""
 

@@ -249,9 +249,12 @@ class ControllerBase:
             except AttributeError:
                 controller = None
 
+            _buttons_for_status = {}
+                
             actions = metadata._getSectionDict(cfg, 'actions')
             if actions is None:
                 actions = {}
+
             for (k, v) in actions.items():
                 # action.STATUS.CONTEXT_TYPE.BUTTON = ACTION_TYPE:ACTION_ARG
                 component = k.split('.')
@@ -273,8 +276,29 @@ class ControllerBase:
 
                 self.actions.set(FormAction(id, component[1], component[2], component[3], act[0], act[1], controller))
 
+                status_key = str(component[1])+'.'+str(context_type)
+                if _buttons_for_status.has_key(status_key):
+                    _buttons_for_status[status_key].append(component[3])
+                else:
+                    _buttons_for_status[status_key] = [component[3]]
+
+            for (k, v) in _buttons_for_status.items():
+                if v and not '' in v:
+                    sk = k.split('.')
+                    status = sk[0]
+                    content_type = sk[1]
+                    if not status:
+                        status = 'ANY'
+                    if not content_type:
+                        content_type = 'ANY'
+                    log('%s: No default action specified for status %s, content type %s.  Users of IE can submit pages using the return key, resulting in no button in the REQUEST.  Please specify a default action for this case.' % (str(filepath), status, content_type))
+                    
+
 
     def _read_validator_metadata(self, id, filepath):
+        if filepath.find('bogus') != -1:
+            import pdb
+            pdb.set_trace()
         self.validators = FormValidatorContainer()
 
         metadata = FSMetadata(filepath)
@@ -282,11 +306,12 @@ class ControllerBase:
         filepath = expandpath(filepath)
         if os.path.exists(filepath + '.metadata'):
             cfg.read(filepath + '.metadata')
-
             try:
                 controller = getToolByName(self, 'portal_form_controller')
             except AttributeError:
                 controller = None
+
+            _buttons_for_status = {}
 
             validators = metadata._getSectionDict(cfg, 'validators')
             if validators is None:
@@ -308,6 +333,20 @@ class ControllerBase:
                         log('Unknown context type %s for template %s' % (str(context_type), str(id)))
 
                 self.validators.set(FormValidator(id, component[1], component[2], v, controller))
+
+                status_key = str(context_type)
+                if _buttons_for_status.has_key(status_key):
+                    _buttons_for_status[status_key].append(component[2])
+                else:
+                    _buttons_for_status[status_key] = [component[2]]
+
+            for (k, v) in _buttons_for_status.items():
+                if v and not '' in v:
+                    content_type = k
+                    if not content_type:
+                        content_type = 'ANY'
+                    log('%s: No default validators specified for content type %s.  Users of IE can submit pages using the return key, resulting in no button in the REQUEST.  Please specify default validators for this case.' % (str(filepath), content_type))
+
 
     security.declarePublic('writableDefaults')
     def writableDefaults(self):

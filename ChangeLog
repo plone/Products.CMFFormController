@@ -1,3 +1,17 @@
+2004-06-15  Geoff Davis <geoff@geoffdavis.net> (plonista)
+
+   * Modified filesystem objects so that they check for updates to .metadata
+     files in debug mode.  A change in a .metadata file causes the file to
+     be reloaded and reparsed.  The new methods are in FSControllerBase.py.
+
+   * Added a check for a common action/validator bug:
+     In IE, you can submit a form using the Return key.  The result is that no
+     button is clicked.  If you specify actions for, say, success..Button1 and
+     success..Button2, but the user submits the form using the Return key,
+     you will get an exception because no next action is found.  The new check 
+     makes sure that you specify a default next action in the event of no button
+     pressed.
+
 2004-03-12  Geoff Davis <geoff@geoffdavis.net> (plonista)
 
    * Added some error handling to better deal with validators that don't return

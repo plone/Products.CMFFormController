@@ -13,7 +13,7 @@
 ##########################################################################
 """ Customizable validated page templates that come from the filesystem.
 
-$Id: FSControllerPageTemplate.py,v 1.10 2004/04/06 21:41:37 dreamcatcher Exp $
+$Id: FSControllerPageTemplate.py,v 1.11 2004/06/15 21:08:16 plonista Exp $
 """
 
 import copy
@@ -30,12 +30,13 @@ from Products.CMFCore.FSPageTemplate import FSPageTemplate as BaseClass
 from BaseControllerPageTemplate import BaseControllerPageTemplate
 from ControllerPageTemplate import ControllerPageTemplate
 from ControllerBase import ControllerBase
+from FSControllerBase import FSControllerBase
 from FormAction import FormActionContainer
 from FormValidator import FormValidatorContainer
 from utils import log, logException
 
 
-class FSControllerPageTemplate(BaseClass, BaseControllerPageTemplate):
+class FSControllerPageTemplate(BaseClass, BaseControllerPageTemplate, FSControllerBase):
     """Wrapper for Controller Page Template"""
 
     meta_type = 'Filesystem Controller Page Template'

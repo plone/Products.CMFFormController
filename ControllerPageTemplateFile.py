@@ -13,7 +13,7 @@
 ##########################################################################
 """ Zope object encapsulating a controlled page templates that comes from the filesystem.
 
-$Id: ControllerPageTemplateFile.py,v 1.4 2004/05/04 22:02:10 dreamcatcher Exp $
+$Id: ControllerPageTemplateFile.py,v 1.5 2004/06/15 21:08:16 plonista Exp $
 """
 
 import os
@@ -22,10 +22,11 @@ from AccessControl import ClassSecurityInfo
 from Products.CMFCore.CMFCorePermissions import View
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile as BaseClass
 from BaseControllerPageTemplate import BaseControllerPageTemplate
+from FSControllerBase import FSControllerBase
 from utils import logException
 
 
-class ControllerPageTemplateFile(BaseClass, BaseControllerPageTemplate):
+class ControllerPageTemplateFile(BaseClass, BaseControllerPageTemplate, FSControllerBase):
     """Wrapper for Controller Page Template"""
 
     meta_type = 'Controller Page Template (File)'
