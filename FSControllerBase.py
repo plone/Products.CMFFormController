@@ -42,7 +42,7 @@ class FSControllerBase(ControllerBase):
     # Python 2.1 is lame (Zope 2.6.x), I'm renaming this method _baseUpdateFromFS and am
     # delegating via an explicit _updateFromFS override in classes that inherit from
     # FSControllerBase
-    def __baseUpdateFromFS(self):
+    def _baseUpdateFromFS(self):
         parsed = self._parsed
         if not parsed or Globals.DevelopmentMode:
             fp = expandpath(self._filepath)
