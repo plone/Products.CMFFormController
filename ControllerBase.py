@@ -12,6 +12,7 @@
 ##########################################################################
 
 import os
+from Acquisition import aq_base
 from Globals import InitializeClass
 from AccessControl import ClassSecurityInfo
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
@@ -160,9 +161,15 @@ class ControllerBase:
 
         next_action = None
         try:
-            next_action = controller.actions.match(id, status, context_type, button)
+            next_action = controller.getAction(id, status, context_type, button)
         except ValueError:
             pass
+        if next_action is None:
+            try:
+                if hasattr(aq_base(context), 'formcontroller_actions'):
+                    next_action = context.formcontroller_actions.match(id, status, context_type, button)
+            except ValueError:
+                pass
         if next_action is None:
             try:
                 next_action = self.actions.match(id, status, context_type, button)
