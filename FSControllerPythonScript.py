@@ -13,7 +13,7 @@
 ##############################################################################
 """ Customizable controlled python scripts that come from the filesystem.
 
-$Id: FSControllerPythonScript.py,v 1.15 2004/07/11 01:26:41 plonista Exp $
+$Id: FSControllerPythonScript.py,v 1.16 2004/10/18 02:06:13 plonista Exp $
 """
 
 import re
@@ -24,7 +24,7 @@ from OFS.Cache import Cacheable
 from Products.PageTemplates.ZopePageTemplate import Src
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from Products.PageTemplates.TALES import CompilerError
-from Products.CMFCore.DirectoryView import registerFileExtension, registerMetaType
+from Products.CMFCore.DirectoryView import registerFileExtension, registerMetaType, expandpath
 from Products.CMFCore.CMFCorePermissions import View, ManagePortal
 from Products.CMFCore.utils import getToolByName
 from Script import FSPythonScript as BaseClass
@@ -57,7 +57,7 @@ class FSControllerPythonScript (FSControllerBase, BaseClass):
 
     def __init__(self, id, filepath, fullname=None, properties=None):
         BaseClass.__init__(self, id, filepath, fullname, properties)
-        self.filepath = filepath
+        self.filepath = self._filepath = filepath  # add _filepath for compatibility with pending CMF patch
         try:
             self._read_action_metadata(self.getId(), filepath)
             self._read_validator_metadata(self.getId(), self.filepath)
@@ -126,7 +126,7 @@ class FSControllerPythonScript (FSControllerBase, BaseClass):
 
     def _createZODBClone(self):
         """Create a ZODB (editable) equivalent of this object."""
-        obj = ControllerPythonScript(self.getId(), filepath=self.filepath)
+        obj = ControllerPythonScript(self.getId(), filepath=expandpath(self.filepath))
         obj.write(self.read())
         obj.validators = copy.copy(Acquisition.aq_base(self.validators))  # XXX - don't forget to enable this
         obj.actions = copy.copy(Acquisition.aq_base(self.actions))
