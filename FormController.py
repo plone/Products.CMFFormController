@@ -1,5 +1,6 @@
 form_action_types = {}
 
+from __future__ import nested_scopes
 import os, string
 from AccessControl import ClassSecurityInfo
 import Globals
