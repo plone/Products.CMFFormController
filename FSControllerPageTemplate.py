@@ -13,7 +13,7 @@
 ##########################################################################
 """ Customizable validated page templates that come from the filesystem.
 
-$Id: FSControllerPageTemplate.py,v 1.11 2004/06/15 21:08:16 plonista Exp $
+$Id: FSControllerPageTemplate.py,v 1.12 2004/07/01 18:17:12 plonista Exp $
 """
 
 import copy
@@ -22,6 +22,7 @@ from AccessControl import ClassSecurityInfo
 from OFS.Cache import Cacheable
 from Products.PageTemplates.ZopePageTemplate import Src
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
+from Products.PageTemplates.TALES import CompilerError
 from Products.CMFCore.DirectoryView import registerFileExtension, registerMetaType
 from Products.CMFCore.CMFCorePermissions import View, ManagePortal
 from Products.CMFCore.utils import expandpath
@@ -36,7 +37,7 @@ from FormValidator import FormValidatorContainer
 from utils import log, logException
 
 
-class FSControllerPageTemplate(BaseClass, BaseControllerPageTemplate, FSControllerBase):
+class FSControllerPageTemplate(FSControllerBase, BaseClass, BaseControllerPageTemplate):
     """Wrapper for Controller Page Template"""
 
     meta_type = 'Filesystem Controller Page Template'
@@ -58,9 +59,14 @@ class FSControllerPageTemplate(BaseClass, BaseControllerPageTemplate, FSControll
         try:
             self._read_action_metadata(self.getId(), filepath)
             self._read_validator_metadata(self.getId(), filepath)
-        except ValueError, e:
+        except (ValueError, CompilerError), e:
             log(summary='metadata error', text='file = %s' % filepath)
             raise
+
+
+    def _readFile(self, reparse):
+        BaseClass._readFile(self, reparse)
+        FSControllerBase._readMetadata(self)
 
 
     security.declarePrivate('manage_afterAdd')

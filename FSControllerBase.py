@@ -15,6 +15,7 @@ import os
 from AccessControl import ClassSecurityInfo
 import Globals
 from Products.CMFCore.FSMetadata import FSMetadata
+from Products.CMFCore.utils import expandpath
 from ControllerBase import ControllerBase
 
 class FSControllerBase(ControllerBase):
@@ -43,12 +44,12 @@ class FSControllerBase(ControllerBase):
         if not parsed or Globals.DevelopmentMode:
             fp = expandpath(self._filepath)
             try:
-                mtime=stat(fp)[8]
+                mtime=os.stat(fp)[8]
             except:
                 mtime=0
             e_fp = fp + '.metadata'
             try:
-                mmtime = stat(e_fp)[8]
+                mmtime = os.stat(e_fp)[8]
             except:
                 mmtime = 0
             if mmtime > mtime:
@@ -61,9 +62,7 @@ class FSControllerBase(ControllerBase):
                 self._parsed = 1
 
 
-    def _readFile(self, reparse):
-        BaseClass._readfile(self, reparse)
-
+    def _readMetadata(self):
         # re-read .metadata file if it exists
         e_fp = expandpath(self._filepath) + '.metadata'
         if os.path.exists(e_fp):
@@ -72,7 +71,7 @@ class FSControllerBase(ControllerBase):
             self._setProperties(metadata.getProperties())
     
             # re-read actions and validators whenever we re-read the file
-            self._read_action_metadata(self.getId(), self.filepath)
-            self._read_validator_metadata(self.getId(), self.filepath)
+            self._read_action_metadata(self.getId(), self._filepath)
+            self._read_validator_metadata(self.getId(), self._filepath)
 
 Globals.InitializeClass(FSControllerBase)

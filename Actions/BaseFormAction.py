@@ -3,6 +3,8 @@ from Acquisition import aq_base, aq_parent, aq_inner
 from Products.CMFCore.Expression import Expression
 from Products.PageTemplates.Expressions import getEngine
 from Products.PageTemplates.Expressions import SecureModuleImporter
+from Products.PageTemplates.TALES import CompilerError
+
 
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore import CMFCorePermissions
@@ -26,7 +28,10 @@ class BaseFormAction(Role.RoleManager):
         if arg is None:
             log('No argument specified for action.  This means that some of your CMFFormController actions may have been corrupted.  You may be able to fix them by editing the actions in question via the Actions tab and re-saving them.')
         else:
-            self.expression = Expression(arg)
+            try:
+                self.expression = Expression(arg)
+            except:
+                raise CompilerError, 'Bad action expression %s' % str(arg)
 
 
     def __call__(self, controller_state):
@@ -77,10 +82,9 @@ class BaseFormAction(Role.RoleManager):
         return self.expression(exprContext)
 
 
-    def updateQuery(self, url, kwargs):
+    def combineArgs(self, url, kwargs):
         """Utility method that takes a URL, parses its existing query string,
-        url encodes
-        and updates the query string using the values in kwargs"""
+        and combines the resulting dict with kwargs"""
         import urlparse
         import urllib
         import cgi
@@ -91,8 +95,35 @@ class BaseFormAction(Role.RoleManager):
         qs = parsed_url[4]
         # parse the query into a dict
         d = cgi.parse_qs(qs, 1)
-        ## update the dict
-        d.update(kwargs)
+        # update with stuff from kwargs
+        for k, v in kwargs.items():
+            d[k] = [v] # put in a list to be consistent with parse_qs
+        # parse_qs behaves a little unexpectedly -- all query string args
+        # are represented as lists.  I think the reason is so that you get
+        # consistent behavior for things like http://myurl?a=1&a=2&a=3
+        # For this case parse_qs returns d['a'] = ['1','2','3']
+        # However, that means that http://myurl?a=1 comes back as d['a']=['1']
+        # unmunge some of parse_qs's weirdness
+        dnew = {}
+        for k, v in d.items():
+            if v and len(v) == 1:
+                dnew[k] = v[0]
+            else:
+                dnew[k] = v
+        return dnew
+
+
+    def updateQuery(self, url, kwargs):
+        """Utility method that takes a URL, parses its existing query string,
+        url encodes
+        and updates the query string using the values in kwargs"""
+        d = self.combineArgs(url, kwargs)
+        
+        import urlparse
+
+        # parse the existing URL
+        parsed_url = list(urlparse.urlparse(url))
+            
         # re-encode the string
         # We use ZTUtils.make_query here because it
         # does Zope-specific marshalling of lists,

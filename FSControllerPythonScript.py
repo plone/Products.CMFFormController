@@ -13,7 +13,7 @@
 ##############################################################################
 """ Customizable controlled python scripts that come from the filesystem.
 
-$Id: FSControllerPythonScript.py,v 1.13 2004/06/15 21:08:16 plonista Exp $
+$Id: FSControllerPythonScript.py,v 1.14 2004/07/01 18:17:12 plonista Exp $
 """
 
 import re
@@ -23,6 +23,7 @@ from AccessControl import ClassSecurityInfo
 from OFS.Cache import Cacheable
 from Products.PageTemplates.ZopePageTemplate import Src
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
+from Products.PageTemplates.TALES import CompilerError
 from Products.CMFCore.DirectoryView import registerFileExtension, registerMetaType
 from Products.CMFCore.CMFCorePermissions import View, ManagePortal
 from Products.CMFCore.utils import getToolByName
@@ -34,7 +35,7 @@ from FSControllerBase import FSControllerBase
 from utils import log, logException
 
 
-class FSControllerPythonScript (BaseClass, FSControllerBase):
+class FSControllerPythonScript (FSControllerBase, BaseClass):
     """FSControllerPythonScripts act like Controller Python Scripts but are not
     directly modifiable from the management interface."""
 
@@ -60,9 +61,14 @@ class FSControllerPythonScript (BaseClass, FSControllerBase):
         try:
             self._read_action_metadata(self.getId(), filepath)
             self._read_validator_metadata(self.getId(), self.filepath)
-        except ValueError, e:
+        except (ValueError, CompilerError), e:
             log(summary='metadata error', text='file = %s' % filepath)
             raise
+
+
+    def _readFile(self, reparse):
+        BaseClass._readFile(self, reparse)
+        FSControllerBase._readMetadata(self)
 
 
     def __call__(self, *args, **kwargs):

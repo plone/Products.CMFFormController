@@ -13,7 +13,7 @@
 ##########################################################################
 """ Zope object encapsulating a controlled page templates that comes from the filesystem.
 
-$Id: ControllerPageTemplateFile.py,v 1.5 2004/06/15 21:08:16 plonista Exp $
+$Id: ControllerPageTemplateFile.py,v 1.6 2004/07/01 18:17:12 plonista Exp $
 """
 
 import os
@@ -21,6 +21,7 @@ import Globals, Acquisition
 from AccessControl import ClassSecurityInfo
 from Products.CMFCore.CMFCorePermissions import View
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile as BaseClass
+from Products.PageTemplates.TALES import CompilerError
 from BaseControllerPageTemplate import BaseControllerPageTemplate
 from FSControllerBase import FSControllerBase
 from utils import logException
@@ -53,9 +54,14 @@ class ControllerPageTemplateFile(BaseClass, BaseControllerPageTemplate, FSContro
             self._read_action_metadata(self.getId(), self.filepath)
             self._read_validator_metadata(self.getId(), self.filepath)
             return retval
-        except ValueError, e:
+        except (ValueError, CompilerError), e:
             log(summary='metadata error', text='file = %s' % self.filepath)
             raise
+
+
+    def _readFile(self, reparse):
+        BaseClass._readFile(self, reparse)
+        FSControllerBase._readMetadata(self)
 
 
     security.declarePrivate('manage_afterAdd')
