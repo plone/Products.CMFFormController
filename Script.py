@@ -6,6 +6,7 @@ from Products.CMFCore.FSPythonScript import FSPythonScript as BaseFSPythonScript
 import sys
 import re
 from zLOG import LOG, ERROR, INFO, PROBLEM
+from ExtensionClass import Base
 
 defaultBindings = {'name_context': 'context',
                    'name_container': 'container',
@@ -31,7 +32,12 @@ class NameAssignments(BaseNameAssignments):
     _exprs = tuple(_exprs)
 
 
-class PythonScript(BasePythonScript):
+class Script:
+    """Script is a mixin class for the other two below.
+
+    It needs to be this way to avoid MRO ambiguities, which happens
+    when we mix BasePythonScript and BaseFSPythonScript, because both
+    inherit from Shared.DC.Scripts.Script.Script"""
 
     def __init__(self, id, filepath=None):
         self.id = id
@@ -111,10 +117,11 @@ class PythonScript(BasePythonScript):
             LOG(self.meta_type, ERROR, 'write failed', error=sys.exc_info())
             raise
 
+class PythonScript(Script, BasePythonScript): pass
+
 Globals.InitializeClass(PythonScript)
 
-
-class FSPythonScript(BaseFSPythonScript, PythonScript):
+class FSPythonScript(BaseFSPythonScript, Script):
     def _createZODBClone(self):
         """Create a ZODB (editable) equivalent of this object."""
         obj = PythonScript(self.getId(), filepath=self._filepath)
