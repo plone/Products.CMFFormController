@@ -11,13 +11,13 @@
 #
 ##############################################################################
 
-"""Controlled Python Scripts Product
+"""Controller Python Scripts Product
 
 This product provides support for Script objects containing restricted
 Python code.
 """
 
-__version__='$Revision: 1.4 $'[11:-2]
+__version__='$Revision: 1.4.2.1 $'[11:-2]
 
 import sys, os, re
 from Globals import package_home
@@ -83,7 +83,7 @@ class ControlledPythonScript(PythonScript, ControlledBase):
     not attempt to use the "exec" statement or certain restricted builtins.
     """
 
-    meta_type='Controlled Python Script'
+    meta_type='Controller Python Script'
 
     manage_options = (
         {'label':'Edit',
@@ -93,6 +93,7 @@ class ControlledPythonScript(PythonScript, ControlledBase):
         {'label':'Test',
          'action':'ZScriptHTML_tryForm',
          'help': ('PythonScripts', 'PythonScript_test.stx')},
+        {'label':'Validation','action':'manage_formValidatorsForm'},
         {'label':'Actions','action':'manage_formActionsForm'},             
         {'label':'Proxy',
          'action':'manage_proxyForm',
@@ -117,11 +118,25 @@ class ControlledPythonScript(PythonScript, ControlledBase):
 
 
     def __init__(self, *args, **kwargs):
+        self.validators = FormValidatorContainer()
         self.actions = FormActionContainer()
         return ControlledPythonScript.inheritedAttribute('__init__')(self, *args, **kwargs)
 
 
     def __call__(self, *args, **kwargs):
+        REQUEST = self.REQUEST
+
+        controller = getToolByName(self, 'portal_form_controller')
+        controller_state = controller.getState(self, is_validator=0)
+
+        validators = self.getValidators(controller_state, REQUEST).getValidators()
+        controller_state = controller.validate(controller_state, REQUEST, validators)
+
+        if controller_state.getStatus() != 'success':
+            if REQUEST.get('form.submitted',None):
+                del REQUEST.form['form.submitted']
+            return self.getNext(controller_state, REQUEST)
+
         result = ControlledPythonScript.inheritedAttribute('__call__')(self, *args, **kwargs)
         if getattr(result, '__class__', None) == ControllerState and not result._isValidating():
             return self.getNext(result, self.REQUEST)

@@ -12,7 +12,7 @@
 ##############################################################################
 """ Customizable controlled python scripts that come from the filesystem.
 
-$Id: FSControlledPythonScript.py,v 1.7 2003/09/12 22:49:03 tesdal Exp $
+$Id: FSControlledPythonScript.py,v 1.7.2.1 2003/09/14 22:58:33 tesdal Exp $
 """
 
 import Globals, Acquisition
@@ -20,6 +20,7 @@ from AccessControl import ClassSecurityInfo
 from OFS.Cache import Cacheable
 from Products.PageTemplates.ZopePageTemplate import Src
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
+from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.DirectoryView import registerFileExtension, registerMetaType
 from Products.CMFCore.CMFCorePermissions import View, ManagePortal
 from Products.CMFCore.FSPythonScript import FSPythonScript as BaseClass
@@ -29,15 +30,16 @@ from ControlledBase import ControlledBase
 from utils import logException
 
 class FSControlledPythonScript (BaseClass, ControlledBase):
-    """FSControlledPythonScripts act like Controlled Python Scripts but are not 
+    """FSControlledPythonScripts act like Controller Python Scripts but are not 
     directly modifiable from the management interface."""
 
-    meta_type = 'Controlled Python Script'
+    meta_type = 'Filesystem Controller Python Script'
 
     manage_options=(
            (
             {'label':'Customize', 'action':'manage_main'},
             {'label':'Test', 'action':'ZScriptHTML_tryForm'},
+            {'label':'Validation','action':'manage_formValidatorsForm'},
             {'label':'Actions','action':'manage_formActionsForm'},             
            ) + Cacheable.manage_options)
 
@@ -50,9 +52,23 @@ class FSControlledPythonScript (BaseClass, ControlledBase):
         BaseClass.__init__(self, id, filepath, fullname, properties)
         self.filepath = filepath
         self._read_action_metadata(self.getId(), filepath)
+        self._read_validator_metadata(self.getId(), filepath)
 
 
     def __call__(self, *args, **kwargs):
+        REQUEST = self.REQUEST
+
+        controller = getToolByName(self, 'portal_form_controller')
+        controller_state = controller.getState(self, is_validator=0)
+
+        validators = self.getValidators(controller_state, REQUEST).getValidators()
+        controller_state = controller.validate(controller_state, REQUEST, validators)
+
+        if controller_state.getStatus() != 'success':
+            if REQUEST.get('form.submitted',None):
+                del REQUEST.form['form.submitted']
+            return self.getNext(controller_state, REQUEST)
+
         result = FSControlledPythonScript.inheritedAttribute('__call__')(self, *args, **kwargs)
         if getattr(result, '__class__', None) == ControllerState and not result._isValidating():
             return self.getNext(result, self.REQUEST)
@@ -87,4 +103,4 @@ class FSControlledPythonScript (BaseClass, ControlledBase):
 Globals.InitializeClass(FSControlledPythonScript)
 
 registerFileExtension('cpy', FSControlledPythonScript)
-registerMetaType('Controlled Python Script', FSControlledPythonScript)
+registerMetaType('Controller Python Script', FSControlledPythonScript)

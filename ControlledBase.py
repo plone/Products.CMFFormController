@@ -238,4 +238,32 @@ class ControlledBase:
         """Can default actions and validators be modified?"""
         return 1
     
+    def getValidators(self, controller_state, REQUEST):
+        context = controller_state.getContext()
+        context_type = self._getTypeName(context)
+        button = controller_state.getButton()
+        controller = getToolByName(self, 'portal_form_controller')
+
+        validators = None
+        try:
+            validators = controller.validators.match(self.id, context_type, button)
+            if validators is not None:
+                return validators
+        except ValueError:
+            pass
+        try:
+            validators = self.validators.match(self.id, context_type, button)
+            if validators is not None:
+                return validators
+        except ValueError:
+            pass
+        return FormValidator(self.id, ANY_CONTEXT, ANY_BUTTON, [])
+
+
+    def _getTypeName(self, obj):
+        type_name = getattr(obj, '__class__', None)
+        if type_name:
+            type_name = getattr(type_name, '__name__', None)
+        return type_name
+
 InitializeClass(ControlledBase)

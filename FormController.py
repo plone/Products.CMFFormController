@@ -3,7 +3,10 @@ form_action_types = {}
 import string
 from AccessControl import ClassSecurityInfo
 from Globals import InitializeClass
+from ZPublisher.Publish import call_object, missing_name, dont_publish_class
+from ZPublisher.mapply import mapply
 from OFS.ObjectManager import bad_id
+from ValidationError import ValidationError
 from Products.CMFCore.utils import getToolByName, UniqueObject, SimpleItemWithProperties
 from Products.CMFCore.CMFCorePermissions import ManagePortal
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
@@ -293,5 +296,39 @@ class FormController(UniqueObject, SimpleItemWithProperties):
     def writableDefaults(self):
         """Can default actions and validators be modified?"""
         return 0
+
+    def validate(self, controller_state, REQUEST, validators):
+        context = controller_state.getContext()
+        if validators is None:
+            REQUEST.set('controller_state', controller_state)
+            return controller_state
+        for v in validators:
+            REQUEST.set('controller_state', controller_state)
+            if not controller_state.getValidatorHistory('success').has_key(v):
+                try:
+                    obj = context.restrictedTraverse(v)
+                    REQUEST = controller_state.getContext().REQUEST
+                    controller_state = mapply(obj, REQUEST.args, REQUEST,
+                                              call_object, 1, missing_name, dont_publish_class,
+                                              REQUEST, bind=1)
+        
+                except ValidationError, e:
+                    # if a validator raises a ValidatorException, execution of
+                    # validators is halted and the controller_state is set to
+                    # the controller_state embedded in the exception
+                    controller_state = e.controller_state
+                    state_class = getattr(controller_state, '__class__', None)
+                    if state_class != ControllerState:
+                        raise Exception, 'Bad validator return type (%s)' % str(state_class)
+                    break
+                state_class = getattr(controller_state, '__class__', None)
+                if state_class != ControllerState:
+                    raise Exception, 'Bad validator return type from validator %s (%s)' % (str(v), str(state_class))
+                controller_state.addValidatorResult(v)
+                REQUEST.set('controller_state', controller_state)
+
+        REQUEST.set('controller_state', controller_state)
+        return controller_state
+
 
 InitializeClass(FormController)

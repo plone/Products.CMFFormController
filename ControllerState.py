@@ -30,7 +30,10 @@ class ControllerState(AccessControl.Role.RoleManager):
     # The default next action.  This can be overridden by values in the form
     # controller.
     next_action = None
-    
+
+    # A list of validators that have been run. 
+    # It is a dict with validator id, and results as a list to enable to store all results
+    validator_history = {}
     
     # A dict of variables including such things as portal_status_message.  Again,
     # each key corresponding to a message should have an i18n friendly value,
@@ -38,12 +41,13 @@ class ControllerState(AccessControl.Role.RoleManager):
     kwargs = {}
 
     def __init__(self, id=None, context=None, button=None, status='success', \
-                 errors={}, next_action=None, **kwargs):
+                 errors={}, next_action=None, validator_history={}, **kwargs):
         self.setId(id)
         self.setButton(button)
         self.setStatus(status)
         self.setErrors(errors)
         self.setContext(context)
+        self.setValidatorHistory(validator_history)
         self.setKwargs(kwargs)
         self.setNextAction(next_action)
         self._is_validating = 0
@@ -149,6 +153,28 @@ class ControllerState(AccessControl.Role.RoleManager):
         self.context = [context]
         # self.context = context
 
+    def addValidatorResult(self, validator_id, result=None):
+        if not result:
+            result = self.getStatus()
+        if not self.validator_history.has_key(validator_id):
+            self.validator_history[validator_id] = [result]
+        else:
+            self.validator_history[validator_id].append(result)
+
+    def setValidatorHistory(self, history):
+        self.validator_history = history
+    
+    def getValidatorHistory(self, state=None):
+        if not state:
+            return self.validator_history
+        else:
+            result = {}
+            for validator_id in self.validator_history.keys():
+                if len(self.validator_history[validator_id]) > 0:
+                    if self.validator_history[validator_id][len(self.validator_history[validator_id]) - 1] == state:
+                        result[validator_id] = self.validator_history[validator_id]
+            return result
+    
     def getKwargs(self):
         """Get any extra arguments (e.g. portal_status_message) that should be
         passed along to the next template/script"""
