@@ -281,7 +281,7 @@ class FormController(UniqueObject, SimpleItemWithProperties):
                 container.delete(FormActionKey(old_object_id, old_status, old_context_type, old_button, self))
 
 
-    def getValidators(self, object_id, context_type, button):
+    def getValidators(self, id, context_type, button):
         return self.validators.match(id, context_type, button)
 
 
