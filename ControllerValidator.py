@@ -18,7 +18,7 @@ This product provides support for Script objects containing restricted
 Python code.
 """
 
-__version__='$Revision: 1.7 $'[11:-2]
+__version__='$Revision: 1.8 $'[11:-2]
 
 import sys, os, re
 from Globals import package_home
@@ -32,7 +32,7 @@ from OFS.History import Historical
 from OFS.Cache import Cacheable
 from zLOG import LOG, ERROR, INFO, PROBLEM
 from Products.CMFCore.utils import getToolByName
-from Script import PythonScript
+from Script import PythonScript as BaseClass
 from ControllerBase import ControllerBase
 from FormAction import FormActionContainer
 
@@ -78,7 +78,7 @@ def manage_addControllerValidator(self, id, REQUEST=None, submit=None):
     return ''
 
 
-class ControllerValidator(PythonScript, ControllerBase):
+class ControllerValidator(BaseClass, ControllerBase):
     """Web-callable scripts written in a safe subset of Python.
 
     The function may include standard python code, so long as it does
@@ -133,3 +133,15 @@ class ControllerValidator(PythonScript, ControllerBase):
 
     def _getState(self):
         return getToolByName(self, 'portal_form_controller').getState(self, is_validator=1)
+
+    def _notifyOfCopyTo(self, container, op=0):
+        # BaseClass.inheritedAttribute('notifyOfCopyTo')(self, container, op)
+        self._base_notifyOfCopyTo(container, op)
+
+    def manage_afterAdd(self, object, container):
+        BaseClass.inheritedAttribute('manage_afterAdd')(self, object, container)
+        self._base_manage_afterAdd(object, container)
+
+    def manage_afterClone(self, object):
+        BaseClass.inheritedAttribute('manage_afterClone')(self, object)
+        self._base_manage_afterClone(object)

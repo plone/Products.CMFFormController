@@ -6,6 +6,9 @@ Using the CMFFormController
    modifying code, making it easier to upgrade packages without
    disturbing the modifications.
 
+   **Be sure to read the CMFFormController tutorial in 
+   the Products/CMFFormController/documentation directory.**
+
    How it works:
 
    * Developers associate a set of default variables for their Page

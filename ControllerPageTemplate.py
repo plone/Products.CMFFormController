@@ -79,5 +79,17 @@ class ControllerPageTemplate(BaseClass, BaseControllerPageTemplate):
     def __call__(self, *args, **kwargs):
         return self._call(ControllerPageTemplate.inheritedAttribute('__call__'), *args, **kwargs)
 
+    def _notifyOfCopyTo(self, container, op=0):
+        # BaseClass.inheritedAttribute('notifyOfCopyTo')(self, container, op)
+        self._base_notifyOfCopyTo(container, op)
+
+    def manage_afterAdd(self, object, container):
+        BaseClass.inheritedAttribute('manage_afterAdd')(self, object, container)
+        self._base_manage_afterAdd(object, container)
+
+    def manage_afterClone(self, object):
+        BaseClass.inheritedAttribute('manage_afterClone')(self, object)
+        self._base_manage_afterClone(object)
+
 
 Globals.InitializeClass(ControllerPageTemplate)

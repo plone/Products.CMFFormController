@@ -34,7 +34,8 @@ class FormController(UniqueObject, SimpleItemWithProperties):
     manage_options = ( ({'label':'Overview', 'action':'manage_overview'},
                         {'label':'Documentation', 'action':'manage_docs'},
                         {'label': 'Validation', 'action': 'manage_formValidatorsForm'},
-                        {'label': 'Actions', 'action': 'manage_formActionsForm'},) +
+                        {'label': 'Actions', 'action': 'manage_formActionsForm'},
+                        {'label': 'Purge', 'action': 'manage_purgeForm'},) +
                        SimpleItemWithProperties.manage_options)
 
     security.declareProtected(ManagePortal, 'manage_overview')
@@ -53,6 +54,10 @@ class FormController(UniqueObject, SimpleItemWithProperties):
     security.declareProtected(ManagePortal, 'manage_formValidatorsForm')
     manage_formValidatorsForm = PageTemplateFile(os.path.join('www','manage_formValidatorsForm'), globals())
     manage_formValidatorsForm.__name__ = 'manage_formValidatorsForm'
+
+    security.declareProtected(ManagePortal, 'manage_purgeForm')
+    manage_purgeForm = PageTemplateFile(os.path.join('www','manage_purgeForm'), globals())
+    manage_purgeForm.__name__ = 'manage_purgeForm'
 
     # some aliases
     security.declareProtected(ManagePortal, 'manage_main')
@@ -400,5 +405,46 @@ class FormController(UniqueObject, SimpleItemWithProperties):
             type_name = getattr(type_name, '__name__', None)
         return type_name
 
+
+    security.declareProtected(ManagePortal, 'purge')
+    def purge(self):
+        """Remove actions and validators for ids that no longer correspond to
+        objects in the portal"""
+        actions = self.actions.getFiltered()
+        action_dict = {}
+        for a in actions:
+            action_dict[a.getObjectId()] = 1
+        validators = self.validators.getFiltered()
+        validator_dict = {}
+        for v in validators:
+            validator_dict[v.getObjectId()] = 1
+
+        def fn(obj, dict):
+            dict[obj.getId()] = 0
+            print str(dict)
+        meta_types = ['Controller Page Template', 'Controller Page Template (File)', 'Filesystem Controller Page Template', 'Controller Python Script', 'Filesystem Controller Python Script']
+        portal = getToolByName(self, 'portal_url').getPortalObject()
+        catalog = getToolByName(self, 'portal_catalog')
+        result = catalog.ZopeFindAndApply(portal, obj_metatypes=meta_types, search_sub=1, result=[])
+        for (path, r) in result:
+            if action_dict.has_key(r.getId()):
+                del action_dict[r.getId()]
+            if validator_dict.has_key(r.getId()):
+                del validator_dict[r.getId()]
+
+        n_actions = 0
+        for k in action_dict.keys():
+            to_be_deleted = self.actions.getFiltered(object_id=k)
+            n_actions += len(to_be_deleted)
+            for a in to_be_deleted:
+                self.actions.delete(a.getKey())
+        catalog.ZopeFindAndApply(portal, meta_types, search_sub=1, apply_func=lambda o: fn(o, validator_dict))
+        n_validators = 0
+        for k in validator_dict.keys():
+            to_be_deleted = self.validators.getFiltered(object_id=k)
+            n_validators += len(to_be_deleted)
+            for v in to_be_deleted:
+                self.validators.delete(v.getKey())
+        return '%d action overrides deleted, %d validator overrides deleted' % (n_actions, n_validators)
 
 Globals.InitializeClass(FormController)

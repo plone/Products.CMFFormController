@@ -38,12 +38,64 @@ class ControllerBase:
     manage_formValidatorsForm = PageTemplateFile('www/manage_formValidatorsForm', globals())
     manage_formValidatorsForm.__name__ = 'manage_formValidatorsForm'
 
+    def _updateActions(self, container, old_id, new_id, move):
+        """Copy action overrides stored in portal_form_controller from one 
+        object id to another"""
+        actions = container.getFiltered(object_id=old_id)
+        for a in actions:
+            # if not container.match(new_id, a.getStatus(), a.getContextType(), a.getButton()):
+            container.set(FormAction(new_id, a.getStatus(), a.getContextType(),
+                           a.getButton(), a.getActionType(), a.getActionArg()))
+        if move:
+            for a in actions:
+                container.delete(a.getKey())
+                
+    def _updateValidators(self, container, old_id, new_id, move):
+        """Copy validator overrides stored in portal_form_controller from one 
+        object id to another"""
+        validators = container.getFiltered(object_id=old_id)
+        for v in validators:
+            # if not container.match(new_id, v.getContextType(), v.getButton()):
+            container.set(FormValidator(new_id, v.getContextType(), v.getButton(), v.getValidators()))
+        if move:
+            for v in validators:
+                container.delete(v.getKey())
+        
+    def _base_notifyOfCopyTo(self, container, op=0):
+        self._old_id = self.getId()
+        if op==0:  # copy
+            self._cloned_object_path = self.getPhysicalPath()
+
+    def _fixup_old_ids(self, old_id):
+        fc = getToolByName(self, 'portal_form_controller')
+        id = self.getId()
+        if old_id != id:
+            if hasattr(aq_base(self), 'actions'):
+                self._updateActions(self.actions, old_id, id, move=1) # swap the ids for the default actions
+                self._updateActions(fc.actions, old_id, id, move=0) # copy the overrides
+            if hasattr(aq_base(self), 'validators'):
+                self._updateValidators(self.validators, old_id, id, move=1) # swap the ids for the default validators
+                self._updateValidators(fc.validators, old_id, id, move=0) # copy the overrides
+
+    def _base_manage_afterAdd(self, object, container):
+        old_id = getattr(self, '_old_id', None)
+        if old_id:
+            self._fixup_old_ids(old_id)
+            delattr(self, '_old_id')
+
+    def _base_manage_afterClone(self, object):
+        # clean up the old object
+        cloned_object_path = getattr(self, '_cloned_object_path')
+        cloned_object = self.getPhysicalRoot().unrestrictedTraverse(cloned_object_path)
+        delattr(cloned_object, '_old_id')
+        delattr(cloned_object, '_cloned_object_path')
+        # clean up the new object
+        delattr(self, '_cloned_object_path')
 
     security.declareProtected(ManagePortal, 'listActionTypes')
     def listActionTypes(self):
         """Return a list of available action types."""
         return getToolByName(self, 'portal_form_controller').listActionTypes()
-
 
     security.declareProtected(ManagePortal, 'listFormValidators')
     def listFormValidators(self, override, **kwargs):
@@ -293,7 +345,6 @@ class ControllerBase:
                         content_type = 'ANY'
                     log('%s: No default action specified for status %s, content type %s.  Users of IE can submit pages using the return key, resulting in no button in the REQUEST.  Please specify a default action for this case.' % (str(filepath), status, content_type))
                     
-
 
     def _read_validator_metadata(self, id, filepath):
         self.validators = FormValidatorContainer()
