@@ -28,7 +28,7 @@ class FormController(UniqueObject, SimpleItemWithProperties):
     security = ClassSecurityInfo()
 
     id = 'portal_form_controller'
-    title = 'Manage form validation and post-validation actions'
+    title = 'Manages form validation and post-validation actions'
     meta_type= 'Form Controller Tool'
 
     manage_options = ( ({'label':'Overview', 'action':'manage_overview'},
