@@ -220,6 +220,13 @@ class ControllerBase:
         except ValueError:
             pass
         try:
+            if hasattr(aq_base(context), 'formcontroller_validators'):
+                validators = context.formcontroller_validators.match(self.id, context_type, button)
+                if validators is not None:
+                    return validators
+        except ValueError:
+            pass
+        try:
             validators = self.validators.match(self.id, context_type, button)
             if validators is not None:
                 return validators
