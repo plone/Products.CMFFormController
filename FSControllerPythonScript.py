@@ -13,7 +13,7 @@
 ##############################################################################
 """ Customizable controlled python scripts that come from the filesystem.
 
-$Id: FSControllerPythonScript.py,v 1.14 2004/07/01 18:17:12 plonista Exp $
+$Id: FSControllerPythonScript.py,v 1.15 2004/07/11 01:26:41 plonista Exp $
 """
 
 import re
@@ -66,9 +66,19 @@ class FSControllerPythonScript (FSControllerBase, BaseClass):
             raise
 
 
+    def _updateFromFS(self):
+        # workaround for Python 2.1 multiple inheritance lameness
+        return self._baseUpdateFromFS()
+
+    
+    def _readMetadata(self):
+        # workaround for Python 2.1 multiple inheritance lameness
+        return self._baseReadMetadata()
+
+    
     def _readFile(self, reparse):
         BaseClass._readFile(self, reparse)
-        FSControllerBase._readMetadata(self)
+        self._readMetadata()
 
 
     def __call__(self, *args, **kwargs):

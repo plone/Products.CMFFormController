@@ -79,13 +79,6 @@ class FormController(UniqueObject, SimpleItemWithProperties):
         return self._docs
 
 
-    security.declarePrivate('manage_afterAdd')
-    def manage_afterAdd(self, object, container):
-        portal = getToolByName(object, 'portal_url').getPortalObject()
-        object.plone = portal.__class__.__name__ == 'PloneSite'
-        SimpleItemWithProperties.manage_afterAdd(self, object, container)
-
-
     def view(self, REQUEST, RESPONSE):
         """Invokes the default view."""
         return self.__call__(REQUEST, RESPONSE)
@@ -105,7 +98,8 @@ class FormController(UniqueObject, SimpleItemWithProperties):
         s = bad_id(id)
         if s:
             return '\'%s\' is not a valid id' % (id)
-        if self.plone:
+        # extra checks for Plone sites
+        if portal.__class__.__name__ == 'PloneSite':
             if hasattr(portal, 'portal_properties') and \
                 hasattr(portal.portal_properties, 'site_properties') and \
                 hasattr(portal.portal_properties.site_properties, 'invalid_ids'):

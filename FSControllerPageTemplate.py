@@ -13,7 +13,7 @@
 ##########################################################################
 """ Customizable validated page templates that come from the filesystem.
 
-$Id: FSControllerPageTemplate.py,v 1.12 2004/07/01 18:17:12 plonista Exp $
+$Id: FSControllerPageTemplate.py,v 1.13 2004/07/11 01:26:41 plonista Exp $
 """
 
 import copy
@@ -63,10 +63,20 @@ class FSControllerPageTemplate(FSControllerBase, BaseClass, BaseControllerPageTe
             log(summary='metadata error', text='file = %s' % filepath)
             raise
 
+        
+    def _updateFromFS(self):
+        # workaround for Python 2.1 multiple inheritance lameness
+        return self._baseUpdateFromFS()
+
+    
+    def _readMetadata(self):
+        # workaround for Python 2.1 multiple inheritance lameness
+        return self._baseReadMetadata()
+
 
     def _readFile(self, reparse):
         BaseClass._readFile(self, reparse)
-        FSControllerBase._readMetadata(self)
+        self._readMetadata()
 
 
     security.declarePrivate('manage_afterAdd')

@@ -36,10 +36,13 @@ class FSControllerBase(ControllerBase):
             if cache:
                 self.ZCacheable_setManagerId(cache)
 
-
     # Refresh our contents from the filesystem if that is newer and we are
     # running in debug mode.
-    def _updateFromFS(self):
+    # This method replaces FSObject's _updateFromFS.  Because multiple inheritance in 
+    # Python 2.1 is lame (Zope 2.6.x), I'm renaming this method _baseUpdateFromFS and am
+    # delegating via an explicit _updateFromFS override in classes that inherit from
+    # FSControllerBase
+    def __baseUpdateFromFS(self):
         parsed = self._parsed
         if not parsed or Globals.DevelopmentMode:
             fp = expandpath(self._filepath)
@@ -61,8 +64,11 @@ class FSControllerBase(ControllerBase):
                 self._file_mod_time = mtime
                 self._parsed = 1
 
-
-    def _readMetadata(self):
+    # This method replaces FSMetadata's _readMetadata.  Because multiple inheritance in 
+    # Python 2.1 is lame (Zope 2.6.x), I'm renaming this method _baseReadMetadata and am
+    # delegating via an explicit _readMetadata override in classes that inherit from
+    # FSControllerBase
+    def _baseReadMetadata(self):
         # re-read .metadata file if it exists
         e_fp = expandpath(self._filepath) + '.metadata'
         if os.path.exists(e_fp):
