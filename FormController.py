@@ -320,7 +320,7 @@ class FormController(UniqueObject, SimpleItemWithProperties):
                 # clear out values we don't want to carry over from previous states.
                 controller_state.setStatus('success')
                 controller_state.setNextAction(None)
-                controller_state.setButton(None)
+                #controller_state.setButton(None)
             controller_state.set(id=id, context=obj.getParentNode())
         else:
             if controller_state is None:
