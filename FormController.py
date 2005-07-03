@@ -407,8 +407,16 @@ class FormController(UniqueObject, SimpleItemWithProperties):
         return type_name
 
 
+    security.declareProtected(ManagePortal, 'manage_purge')
+    def manage_purge(self, REQUEST):
+        """TTW interface for purge"""
+        text = self._purge()
+        # might want to do a redirect here instead
+        return text
+
+
     security.declareProtected(ManagePortal, 'purge')
-    def purge(self):
+    def _purge(self):
         """Remove actions and validators for ids that no longer correspond to
         objects in the portal"""
         actions = self.actions.getFiltered()

@@ -18,7 +18,7 @@ returns.  <a href="#docs">Learn more</a>.</p>
 
 <h3 class="form-help">Edit Form/Script Action Overrides</h3>
 
-<form method="POST"
+<form method="post"
       tal:attributes="action here/absolute_url" 
       tal:define="form_actions python:here.listFormActions(1, **filters);">
    <input type="hidden" name="override:int" value="1" />

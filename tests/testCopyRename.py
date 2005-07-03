@@ -49,7 +49,7 @@ class TestCopyRename(PloneTestCase.PloneTestCase):
         self.assertEqual(formcontroller.validators.match('test2', 'Document', 'submit').getValidators(), ['d','e','f'])
         self.assertEqual(formcontroller.validators.match('test', 'Document', 'submit').getValidators(), ['d','e','f'])
 
-        formcontroller.purge()
+        formcontroller._purge()
         self.assertEqual(formcontroller.validators.match('test2', 'Document', 'submit').getValidators(), ['d','e','f'])
         self.assertEqual(formcontroller.validators.match('test', 'Document', 'submit'), None)
 
@@ -90,7 +90,7 @@ class TestCopyRename(PloneTestCase.PloneTestCase):
         self.assertEqual(formcontroller.validators.match('copy_of_test', 'Document', 'submit').getValidators(), ['d','e','f'])
         self.assertEqual(formcontroller.validators.match('test', 'Document', 'submit').getValidators(), ['d','e','f'])
 
-        formcontroller.purge()
+        formcontroller._purge()
         self.assertEqual(formcontroller.actions.match('test', 'success', 'Document', 'submit').getActionArg(), 'test4')
         self.assertEqual(formcontroller.actions.match('copy_of_test', 'success', 'Document', 'submit').getActionArg(), 'test4')
         self.assertEqual(formcontroller.validators.match('copy_of_test', 'Document', 'submit').getValidators(), ['d','e','f'])
