@@ -351,8 +351,10 @@ class FormController(UniqueObject, SimpleItemWithProperties):
                 kwargs = argdict
             else:
                 kwargs = {}
-                for k, v in REQUEST.items():
-                    kwargs[k] = v
+                for k in REQUEST.keys():
+                    if k in ('SESSION',):
+                        continue
+                    kwargs[k] = REQUEST[k]
                 kwargs.update(argdict)
         context = controller_state.getContext()
         if validators is None:
