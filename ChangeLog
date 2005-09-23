@@ -1,3 +1,8 @@
+2005-09-23  Sidnei da Silva  <sidnei@awkly.org>
+
+	* FormController.py (FormController.validate): Avoid waking up
+	REQUEST.SESSION.
+
 2005-07-24 Hanno Schlichting <schlichting@bakb.net> (hannosch)
 
    * Added a runalltests.py to tests folder
@@ -6,12 +11,12 @@
 
    * Added missing manage_purgeForm
    * 1.0.5 beta release
-	
+
 2005-06-30  Martin Aspeli (optilude)
 
    * (Actions/TraverseToAction.py, Actions/RedirectToAction.py) Fixed
      action handling for CMF 1.5 method aliases.
-	
+
 2005-06-11  Leonard Norrgard  <vinsci@refactor.fi>
 
    * (Actions/TraverseTo.py): Corrected docs for traverse_to.
@@ -19,11 +24,11 @@
 2004-11-27  Geoff Davis <geoff@geoffdavis.net> (plonista)
 
    * 1.0.4 release
-	
+
 2004-11-07  Geoff Davis <geoff@geoffdavis.net> (plonista)
 
    * Fixed handling of image buttons
-	
+
 2004-10-17  Geoff Davis <geoff@geoffdavis.net> (plonista)
 
    * Added tutorial from the Plone Conference to /documentation
@@ -40,7 +45,7 @@
 2004-07-10  Geoff Davis <geoff@geoffdavis.net> (plonista)
 
    * Made previous fixes play nicely with Python 2.1
-   
+
    * Got rid of some code in manage_afterAdd that caused problems during site imports
 
 2004-06-15  Geoff Davis <geoff@geoffdavis.net> (plonista)
@@ -53,7 +58,7 @@
      In IE, you can submit a form using the Return key.  The result is that no
      button is clicked.  If you specify actions for, say, success..Button1 and
      success..Button2, but the user submits the form using the Return key,
-     you will get an exception because no next action is found.  The new check 
+     you will get an exception because no next action is found.  The new check
      makes sure that you specify a default next action in the event of no button
      pressed.
 
@@ -62,7 +67,7 @@
    * Added some error handling to better deal with validators that don't return
      the state object.
 
-   * Fixed the version number 
+   * Fixed the version number
 
    * Released 1.0.1
 
@@ -72,8 +77,8 @@
 
 2004-03-05  Geoff Davis <geoff@geoffdavis.net> (plonista)
 
-   * Got rid of some spurious warnings about "Unknown context type" when 
-     installing new templates with .metadata specifying actions/validators for 
+   * Got rid of some spurious warnings about "Unknown context type" when
+     installing new templates with .metadata specifying actions/validators for
      all types.
 
 2004-03-03  Geoff Davis <geoff@geoffdavis.net> (plonista)
@@ -127,7 +132,7 @@
 
 2003-10-29  Geoff Davis <geoff@geoffdavis.net> (plonista)
 
-   * Fixed code that tests for existence of validators and objects being 
+   * Fixed code that tests for existence of validators and objects being
      traversed to.  You'll get a helpful ValueError now instead of a cryptic
      Unauthorized exception when things aren't found.
 
@@ -141,7 +146,7 @@
    * Fixed validation for scripts so that it will work when scripts are called
      programmatically and/or from unit tests (e.g. without a REQUEST)
 
-   * Added missing initial self.validators and self.actions to 
+   * Added missing initial self.validators and self.actions to
      ControllerPythonScripts
 
 2003-10-24  Geoff Davis <geoff@geoffdavis.net> (plonista)
@@ -232,22 +237,22 @@
 
 2003-08-08  Geoff Davis <geoff@geoffdavis.net> (plonista)
 
-   * Modified the way that ControllerState objects store the context.  For 
+   * Modified the way that ControllerState objects store the context.  For
      reasons I don't completely understand, the old way I was storing them
      trashed the stored object's acquisition context (even when they were
      properly unwrapped via aq_inner).  The fix is kind of evil: I store the
-     context in a list, so the acquisition context is unchanged by the 
+     context in a list, so the acquisition context is unchanged by the
      container.  This will wreak havoc if we ever try to persist ControllerState
-     objects, but this shouldn't have to happen, since we just pass around the 
+     objects, but this shouldn't have to happen, since we just pass around the
      state objects in the REQUEST.
 
-   * Added a default.html file that has some useful default content for 
+   * Added a default.html file that has some useful default content for
      ControlledPageTemplates that are created in the ZMI.
-    
+
 2003-08-06  Kevin Teague <kevin@bud.ca> (Wheat)
 
    * Minor corrections and edits to the documentation within the ZMI Validation
-     and Actions tabs. Added an example of setting portal_status_message from a 
+     and Actions tabs. Added an example of setting portal_status_message from a
      script using state.setKwargs() in the docs.
 
 2003-08-01  Kevin Teague <kevin@bud.ca> (Wheat)
