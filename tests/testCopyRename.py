@@ -10,6 +10,7 @@ from Testing import ZopeTestCase
 from Products.CMFPlone.tests import PloneTestCase
 from Products.CMFFormController.FormAction import FormAction
 from Products.CMFFormController.FormValidator import FormValidator
+import transaction
 
 class TestCopyRename(PloneTestCase.PloneTestCase):
 
@@ -34,7 +35,7 @@ class TestCopyRename(PloneTestCase.PloneTestCase):
         self.assertEqual(len(formcontroller.validators.getFiltered(object_id='test')), 1)
         self.assertEqual(formcontroller.validators.match('test', 'Document', 'submit').getValidators(), ['d','e','f'])
 
-        get_transaction().commit(1)
+        transaction.commit(1)
 
         self.loginPortalOwner()
         self.folder.manage_renameObjects(['test'], ['test2'])
@@ -74,7 +75,7 @@ class TestCopyRename(PloneTestCase.PloneTestCase):
         self.assertEqual(len(formcontroller.validators.getFiltered(object_id='test')), 1)
         self.assertEqual(formcontroller.validators.match('test', 'Document', 'submit').getValidators(), ['d','e','f'])
 
-        get_transaction().commit(1)
+        transaction.commit(1)
 
         self.loginPortalOwner()
         cb = self.folder.manage_copyObjects(['test'])

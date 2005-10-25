@@ -1,7 +1,11 @@
+2005-10-25 Hanno Schlichting <schlichting@bakb.net>
+
+   * Moved to new ZODB transaction API
+
 2005-09-23  Sidnei da Silva  <sidnei@awkly.org>
 
-	* FormController.py (FormController.validate): Avoid waking up
-	REQUEST.SESSION.
+    * FormController.py (FormController.validate): Avoid waking up
+    REQUEST.SESSION.
 
 2005-07-24 Hanno Schlichting <schlichting@bakb.net> (hannosch)
 
