@@ -9,7 +9,7 @@ from ZPublisher.Publish import call_object, missing_name, dont_publish_class
 from ZPublisher.mapply import mapply
 from Products.CMFFormController import GLOBALS as fc_globals
 from Products.CMFCore.utils import getToolByName, UniqueObject, SimpleItemWithProperties, format_stx
-from Products.CMFCore.CMFCorePermissions import ManagePortal
+from Products.CMFCore.permissions import ManagePortal
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from Products.CMFFormController.ControllerState import ControllerState
 from FormAction import FormActionType, FormActionKey, FormAction, FormActionContainer

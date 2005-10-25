@@ -13,7 +13,7 @@
 ##############################################################################
 """ Customizable controlled python scripts that come from the filesystem.
 
-$Id: FSControllerPythonScript.py,v 1.16 2004/10/18 02:06:13 plonista Exp $
+$Id$
 """
 
 import re
@@ -25,7 +25,7 @@ from Products.PageTemplates.ZopePageTemplate import Src
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from Products.PageTemplates.TALES import CompilerError
 from Products.CMFCore.DirectoryView import registerFileExtension, registerMetaType, expandpath
-from Products.CMFCore.CMFCorePermissions import View, ManagePortal
+from Products.CMFCore.permissions import View, ManagePortal
 from Products.CMFCore.utils import getToolByName
 from Script import FSPythonScript as BaseClass
 from ControllerPythonScript import ControllerPythonScript

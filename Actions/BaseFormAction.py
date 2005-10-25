@@ -7,7 +7,7 @@ from Products.PageTemplates.TALES import CompilerError
 
 
 from Products.CMFCore.utils import getToolByName
-from Products.CMFCore import CMFCorePermissions
+from Products.CMFCore import permissions as CMFCorePermissions
 from Products.CMFFormController.FormController import registerFormAction
 from Products.CMFFormController.utils import log
 from IFormAction import IFormAction
