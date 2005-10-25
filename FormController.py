@@ -8,9 +8,10 @@ from OFS.ObjectManager import bad_id
 from ZPublisher.Publish import call_object, missing_name, dont_publish_class
 from ZPublisher.mapply import mapply
 from Products.CMFFormController import GLOBALS as fc_globals
-from Products.CMFCore.utils import getToolByName, UniqueObject, SimpleItemWithProperties, format_stx
+from Products.CMFCore.utils import getToolByName, UniqueObject, SimpleItemWithProperties
 from Products.CMFCore.permissions import ManagePortal
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
+from StructuredText.StructuredText import HTML
 from Products.CMFFormController.ControllerState import ControllerState
 from FormAction import FormActionType, FormActionKey, FormAction, FormActionContainer
 from FormValidator import FormValidatorKey, FormValidator, FormValidatorContainer
@@ -71,7 +72,7 @@ class FormController(UniqueObject, SimpleItemWithProperties):
     f = open(os.path.join(wwwpath, 'docs.stx'), 'r')
     _docs = f.read()
     f.close()
-    _docs = format_stx(_docs)
+    _docs = HTML(_docs)
 
 
     def __init__(self):

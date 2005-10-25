@@ -1,6 +1,7 @@
 2005-10-25 Hanno Schlichting <schlichting@bakb.net>
 
-   * Moved to new ZODB transaction API
+   * Moved to new ZODB transaction API, fixed import locations of
+     format_stx and expandPath
 
 2005-09-23  Sidnei da Silva  <sidnei@awkly.org>
 

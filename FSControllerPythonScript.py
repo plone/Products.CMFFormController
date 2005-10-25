@@ -24,9 +24,9 @@ from OFS.Cache import Cacheable
 from Products.PageTemplates.ZopePageTemplate import Src
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from Products.PageTemplates.TALES import CompilerError
-from Products.CMFCore.DirectoryView import registerFileExtension, registerMetaType, expandpath
+from Products.CMFCore.DirectoryView import registerFileExtension, registerMetaType
 from Products.CMFCore.permissions import View, ManagePortal
-from Products.CMFCore.utils import getToolByName
+from Products.CMFCore.utils import getToolByName, expandpath
 from Script import FSPythonScript as BaseClass
 from ControllerPythonScript import ControllerPythonScript
 from ControllerBase import ControllerBase
