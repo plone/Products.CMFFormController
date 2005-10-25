@@ -5,9 +5,7 @@ from Products.PageTemplates.Expressions import getEngine
 from Products.PageTemplates.Expressions import SecureModuleImporter
 from Products.PageTemplates.TALES import CompilerError
 
-
 from Products.CMFCore.utils import getToolByName
-from Products.CMFCore import permissions as CMFCorePermissions
 from Products.CMFFormController.FormController import registerFormAction
 from Products.CMFFormController.utils import log
 from IFormAction import IFormAction
