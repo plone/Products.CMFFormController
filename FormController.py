@@ -138,14 +138,14 @@ class FormController(UniqueObject, SimpleItemWithProperties):
 
 
     security.declareProtected(ManagePortal, 'listFormValidators')
-    def listFormValidators(self, override, **kwargs):
+    def listFormValidators(self, override=None, **kwargs):
         """Return a list of existing validators.  Validators can be filtered by
            specifying required attributes via kwargs"""
         return self.validators.getFiltered(**kwargs)
 
 
     security.declareProtected(ManagePortal, 'listFormActions')
-    def listFormActions(self, override, **kwargs):
+    def listFormActions(self, override=None, **kwargs):
         """Return a list of existing actions.  Actions can be filtered by
            specifying required attributes via kwargs"""
         return self.actions.getFiltered(**kwargs)

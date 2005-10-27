@@ -1,3 +1,8 @@
+2005-10-27 Geoff Davis <geoff@geoffdavis.net>
+
+   * Added importexport.py for CMFSetup
+   * Changed version #
+	
 2005-10-25 Hanno Schlichting <schlichting@bakb.net>
 
    * Moved to new ZODB transaction API, fixed import locations of
