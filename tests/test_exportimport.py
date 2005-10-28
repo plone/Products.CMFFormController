@@ -97,7 +97,7 @@ class _CMFFormControllerSetup(BaseRegistryTests):
 class CMFFormControllerExportConfiguratorTests(_CMFFormControllerSetup):
 
     def _getTargetClass(self):
-        from Products.CMFFormController.importexport \
+        from Products.CMFFormController.exportimport \
                 import CMFFormControllerExportConfigurator
 
         return CMFFormControllerExportConfigurator
@@ -118,7 +118,7 @@ class CMFFormControllerExportConfiguratorTests(_CMFFormControllerSetup):
 class CMFFormControllerImportConfiguratorTests(_CMFFormControllerSetup):
 
     def _getTargetClass(self):
-        from Products.CMFFormController.importexport \
+        from Products.CMFFormController.exportimport \
                 import CMFFormControllerImportConfigurator
 
         return CMFFormControllerImportConfigurator
@@ -156,7 +156,7 @@ class CMFFormControllerImportConfiguratorTests(_CMFFormControllerSetup):
 class Test_exportCMFFormController(_CMFFormControllerSetup):
 
     def test_empty(self):
-        from Products.CMFFormController.importexport \
+        from Products.CMFFormController.exportimport \
              import exportCMFFormController
 
         site = self._initSite(with_info=False)
@@ -170,7 +170,7 @@ class Test_exportCMFFormController(_CMFFormControllerSetup):
         self.assertEqual(content_type, 'text/xml')
 
     def test_with_info(self):
-        from Products.CMFFormController.importexport \
+        from Products.CMFFormController.exportimport \
              import exportCMFFormController
 
         site = self._initSite(with_info=True)
@@ -187,7 +187,7 @@ class Test_exportCMFFormController(_CMFFormControllerSetup):
 class Test_importCMFFormController(_CMFFormControllerSetup):
 
     def test_normal(self):
-        from Products.CMFFormController.importexport \
+        from Products.CMFFormController.exportimport \
              import importCMFFormController
 
         site = self._initSite(with_info=False)

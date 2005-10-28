@@ -12,7 +12,7 @@
 ##############################################################################
 """CMFFormController setup handlers.
 
-$Id: importexport.py 39473 2005-10-16 16:36:25Z yuppie $
+$Id:$
 """
 
 import os

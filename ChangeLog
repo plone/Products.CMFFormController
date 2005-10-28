@@ -1,3 +1,7 @@
+2005-10-28 Rob Miller <ra@burningman.com>
+
+   * renamed importexport.py to exportimport.py
+
 2005-10-27 Geoff Davis <geoff@geoffdavis.net>
 
    * Added importexport.py for CMFSetup
