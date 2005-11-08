@@ -17,7 +17,8 @@ class TraverseToAction(BaseFormAction):
         fti = context.getTypeInfo()
 
         try:
-            action_url = fti.getActionById(action)
+            #action_url = fti.getActionById(action)
+            action_url = fti.getActionObject(action).getActionExpression()
             haveAction = True
         except ValueError:
             actions = controller_state.getContext().portal_actions.listFilteredActionsFor(controller_state.getContext())
@@ -45,7 +46,9 @@ class TraverseToAction(BaseFormAction):
             # Don't raise if we don't have CMF 1.5
             pass
 
-        action_url = 'string:%s' % (action_url,)
+        # XXX: Is there a better way to check this?
+        if not action_url.startswith('string:'):
+            action_url = 'string:%s' % (action_url,)
         return TraverseTo.TraverseTo(action_url)(controller_state)
 
 registerFormAction('traverse_to_action',
