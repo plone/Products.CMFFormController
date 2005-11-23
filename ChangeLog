@@ -1,7 +1,11 @@
+2005-11-23 Hanno Schlichting <schlichting@bakb.net> (hannosch)
+
+   * Made tests compatible with Zope 2.9 (transaction module)
+
 2005-09-23  Sidnei da Silva  <sidnei@awkly.org>
 
-	* FormController.py (FormController.validate): Avoid waking up
-	REQUEST.SESSION.
+   * FormController.py (FormController.validate): Avoid waking up
+     REQUEST.SESSION.
 
 2005-07-24 Hanno Schlichting <schlichting@bakb.net> (hannosch)
 
