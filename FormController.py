@@ -417,7 +417,7 @@ class FormController(UniqueObject, SimpleItemWithProperties):
         return text
 
 
-    security.declareProtected(ManagePortal, 'purge')
+    security.declareProtected(ManagePortal, '_purge')
     def _purge(self):
         """Remove actions and validators for ids that no longer correspond to
         objects in the portal"""

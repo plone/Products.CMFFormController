@@ -1,4 +1,8 @@
-2005-11-23 Hanno Schlichting <schlichting@bakb.net> (hannosch)
+2005-11-30 Hanno Schlichting (hannosch)
+
+   * Correct some wrong security settings.
+
+2005-11-23 Hanno Schlichting (hannosch)
 
    * Made tests compatible with Zope 2.9 (transaction module)
 
