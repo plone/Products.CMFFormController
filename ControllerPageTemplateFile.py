@@ -13,13 +13,17 @@
 ##########################################################################
 """ Zope object encapsulating a controlled page templates that comes from the filesystem.
 
-$Id: ControllerPageTemplateFile.py,v 1.7 2004/07/11 01:26:41 plonista Exp $
+$Id$
 """
 
 import os
 import Globals, Acquisition
 from AccessControl import ClassSecurityInfo
-from Products.CMFCore.CMFCorePermissions import View
+# BBB CMF < 1.5
+try:
+    from Products.CMFCore.permissions import View
+except ImportError:
+    from Products.CMFCore.CMFCorePermissions import View
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile as BaseClass
 from Products.PageTemplates.TALES import CompilerError
 from BaseControllerPageTemplate import BaseControllerPageTemplate

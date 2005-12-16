@@ -16,7 +16,11 @@ from Acquisition import aq_base
 from Globals import InitializeClass
 from AccessControl import ClassSecurityInfo
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
-from Products.CMFCore.CMFCorePermissions import View, ManagePortal
+# BBB CMF < 1.5
+try:
+    from Products.CMFCore.permissions import View, ManagePortal
+except ImportError:
+    from Products.CMFCore.CMFCorePermissions import View, ManagePortal
 from Products.CMFCore.utils import getToolByName, expandpath
 from Products.CMFCore.FSMetadata import FSMetadata, CMFConfigParser
 from FormAction import FormActionType, FormAction, FormActionContainer

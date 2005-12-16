@@ -13,7 +13,7 @@
 ##############################################################################
 """ Customizable controlled python scripts that come from the filesystem.
 
-$Id: FSControllerValidator.py,v 1.7 2004/05/04 22:02:10 dreamcatcher Exp $
+$Id$
 """
 
 import copy
@@ -23,7 +23,11 @@ from OFS.Cache import Cacheable
 from Products.PageTemplates.ZopePageTemplate import Src
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from Products.CMFCore.DirectoryView import registerFileExtension, registerMetaType
-from Products.CMFCore.CMFCorePermissions import View, ManagePortal
+# BBB CMF < 1.5
+try:
+    from Products.CMFCore.permissions import View, ManagePortal
+except ImportError:
+    from Products.CMFCore.CMFCorePermissions import View, ManagePortal
 from Products.CMFCore.utils import getToolByName
 from Script import FSPythonScript as BaseClass
 from ControllerValidator import ControllerValidator

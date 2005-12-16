@@ -5,16 +5,12 @@ from Products.PageTemplates.Expressions import getEngine
 from Products.PageTemplates.Expressions import SecureModuleImporter
 from Products.PageTemplates.TALES import CompilerError
 
-
 from Products.CMFCore.utils import getToolByName
-from Products.CMFCore import CMFCorePermissions
 from Products.CMFFormController.FormController import registerFormAction
 from Products.CMFFormController.utils import log
 from IFormAction import IFormAction
 from ZTUtils.Zope import make_query
 
-
-# ###########################################################################
 class BaseFormAction(Role.RoleManager):
     __implements__ = IFormAction,
 
@@ -136,5 +132,3 @@ class BaseFormAction(Role.RoleManager):
         # rebuild the URL
         return urlparse.urlunparse(parsed_url)
 
-
-# ###########################################################################

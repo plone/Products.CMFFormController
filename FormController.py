@@ -5,11 +5,16 @@ import os, string
 from AccessControl import ClassSecurityInfo
 import Globals
 from OFS.ObjectManager import bad_id
+from StructuredText.StructuredText import HTML
 from ZPublisher.Publish import call_object, missing_name, dont_publish_class
 from ZPublisher.mapply import mapply
 from Products.CMFFormController import GLOBALS as fc_globals
-from Products.CMFCore.utils import getToolByName, UniqueObject, SimpleItemWithProperties, format_stx
-from Products.CMFCore.CMFCorePermissions import ManagePortal
+from Products.CMFCore.utils import getToolByName, UniqueObject, SimpleItemWithProperties
+# BBB CMF < 1.5
+try:
+    from Products.CMFCore.permissions import ManagePortal
+except ImportError:
+    from Products.CMFCore.CMFCorePermissions import ManagePortal
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from Products.CMFFormController.ControllerState import ControllerState
 from FormAction import FormActionType, FormActionKey, FormAction, FormActionContainer
@@ -71,7 +76,7 @@ class FormController(UniqueObject, SimpleItemWithProperties):
     f = open(os.path.join(wwwpath, 'docs.stx'), 'r')
     _docs = f.read()
     f.close()
-    _docs = format_stx(_docs)
+    _docs = HTML(_docs)
 
 
     def __init__(self):

@@ -4,7 +4,11 @@ import os
 import Globals
 from AccessControl import ClassSecurityInfo
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
-from Products.CMFCore.CMFCorePermissions import ManagePortal, View
+# BBB CMF < 1.5
+try:
+    from Products.CMFCore.permissions import View, ManagePortal
+except ImportError:
+    from Products.CMFCore.CMFCorePermissions import View, ManagePortal
 from Products.CMFCore.utils import getToolByName
 from ControllerBase import ControllerBase
 from ControllerState import ControllerState
