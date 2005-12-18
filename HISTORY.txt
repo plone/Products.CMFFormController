@@ -2,7 +2,11 @@ Changelog for CMFFormController
 
     (name of developer listed in brackets)
 
-CMFFormController 1.0.7 - Unreleased
+CMFFormController 1.0.8 - unreleased
+
+    -
+
+CMFFormController 1.0.7 - Released December 18, 2005
 
     - Correct some wrong security settings.
       [hannosch]
