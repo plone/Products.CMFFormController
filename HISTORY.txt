@@ -1,0 +1,15 @@
+Changelog for CMFFormController
+
+    (name of developer listed in brackets)
+
+CMFFormController 1.0.7 - Released December 18, 2005
+
+    - Correct some wrong security settings.
+      [hannosch]
+
+    - Made tests compatible with Zope 2.9 (transaction module)
+      [hannosch]
+
+CMFFormController 1.0.6 - Released October 9, 2005
+
+    - For details see the ChangeLog file

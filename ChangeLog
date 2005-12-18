@@ -1,10 +1,4 @@
-2005-11-30 Hanno Schlichting (hannosch)
-
-   * Correct some wrong security settings.
-
-2005-11-23 Hanno Schlichting (hannosch)
-
-   * Made tests compatible with Zope 2.9 (transaction module)
+*** This file is closed. For details on newer releases, look in HISTORY.txt ***
 
 2005-09-23  Sidnei da Silva  <sidnei@awkly.org>
 
