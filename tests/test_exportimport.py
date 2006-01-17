@@ -18,9 +18,9 @@ import unittest
 #import Testing
 
 
-from Products.CMFSetup.tests.common import BaseRegistryTests
-from Products.CMFSetup.tests.common import DummyExportContext
-from Products.CMFSetup.tests.common import DummyImportContext
+from Products.GenericSetup.tests.common import BaseRegistryTests
+from Products.GenericSetup.tests.common import DummyExportContext
+from Products.GenericSetup.tests.common import DummyImportContext
 from Products.CMFFormController.FormAction import FormAction
 from Products.CMFFormController.FormValidator import FormValidator
 
