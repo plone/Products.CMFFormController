@@ -8,9 +8,9 @@ if __name__ == '__main__':
 
 from Testing import ZopeTestCase
 from Products.CMFPlone.tests import PloneTestCase
-from Products.CMFFormController.tests import transaction
 from Products.CMFFormController.FormAction import FormAction
 from Products.CMFFormController.FormValidator import FormValidator
+import transaction
 
 class TestCopyRename(PloneTestCase.PloneTestCase):
 

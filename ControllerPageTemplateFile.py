@@ -12,18 +12,12 @@
 # THIS FILE CONTAINS MODIFIED CODE FROM ZOPE 2.6.2
 ##########################################################################
 """ Zope object encapsulating a controlled page templates that comes from the filesystem.
-
-$Id$
 """
 
 import os
 import Globals, Acquisition
 from AccessControl import ClassSecurityInfo
-# BBB CMF < 1.5
-try:
-    from Products.CMFCore.permissions import View
-except ImportError:
-    from Products.CMFCore.CMFCorePermissions import View
+from Products.CMFCore.permissions import View
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile as BaseClass
 from Products.PageTemplates.TALES import CompilerError
 from BaseControllerPageTemplate import BaseControllerPageTemplate

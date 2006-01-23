@@ -1,6 +1,3 @@
-# $Id: __init__.py,v 1.6 2004/05/04 22:02:10 dreamcatcher Exp $
-# $Source: /home/hazmat/projects/psvn/collective/CMFFormController/__init__.py,v $
-__version__ = "$Revision: 1.6 $"[11:-2]
 """Initialize CMFFormController"""
 
 import sys

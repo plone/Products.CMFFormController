@@ -10,11 +10,7 @@ from ZPublisher.Publish import call_object, missing_name, dont_publish_class
 from ZPublisher.mapply import mapply
 from Products.CMFFormController import GLOBALS as fc_globals
 from Products.CMFCore.utils import getToolByName, UniqueObject, SimpleItemWithProperties
-# BBB CMF < 1.5
-try:
-    from Products.CMFCore.permissions import ManagePortal
-except ImportError:
-    from Products.CMFCore.CMFCorePermissions import ManagePortal
+from Products.CMFCore.permissions import ManagePortal
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from Products.CMFFormController.ControllerState import ControllerState
 from FormAction import FormActionType, FormActionKey, FormAction, FormActionContainer
@@ -142,14 +138,14 @@ class FormController(UniqueObject, SimpleItemWithProperties):
 
 
     security.declareProtected(ManagePortal, 'listFormValidators')
-    def listFormValidators(self, override, **kwargs):
+    def listFormValidators(self, override=None, **kwargs):
         """Return a list of existing validators.  Validators can be filtered by
            specifying required attributes via kwargs"""
         return self.validators.getFiltered(**kwargs)
 
 
     security.declareProtected(ManagePortal, 'listFormActions')
-    def listFormActions(self, override, **kwargs):
+    def listFormActions(self, override=None, **kwargs):
         """Return a list of existing actions.  Actions can be filtered by
            specifying required attributes via kwargs"""
         return self.actions.getFiltered(**kwargs)

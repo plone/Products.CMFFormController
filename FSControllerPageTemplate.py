@@ -12,8 +12,6 @@
 # THIS FILE CONTAINS MODIFIED CODE FROM ZOPE 2.6.2
 ##########################################################################
 """ Customizable validated page templates that come from the filesystem.
-
-$Id$
 """
 
 import copy
@@ -24,11 +22,7 @@ from Products.PageTemplates.ZopePageTemplate import Src
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from Products.PageTemplates.TALES import CompilerError
 from Products.CMFCore.DirectoryView import registerFileExtension, registerMetaType
-# BBB CMF < 1.5
-try:
-    from Products.CMFCore.permissions import View, ManagePortal
-except ImportError:
-    from Products.CMFCore.CMFCorePermissions import View, ManagePortal
+from Products.CMFCore.permissions import View, ManagePortal
 from Products.CMFCore.utils import expandpath
 from Products.CMFCore.FSPageTemplate import FSPageTemplate
 from Products.CMFCore.FSPageTemplate import FSPageTemplate as BaseClass

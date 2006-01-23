@@ -2,9 +2,17 @@ Changelog for CMFFormController
 
     (name of developer listed in brackets)
 
-CMFFormController 1.0.8 - unreleased
+CMFFormController 2.0 - unreleased
 
-    -
+    - renamed importexport.py to exportimport.py
+      [RaFromBRC]
+
+    - Added importexport.py for CMFSetup
+      [plonista]
+
+    - Moved to new ZODB transaction API, fixed import locations of
+      format_stx and expandPath
+      [hannosch]
 
 CMFFormController 1.0.7 - Released December 18, 2005
 

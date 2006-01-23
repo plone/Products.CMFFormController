@@ -12,6 +12,5 @@ def install(self):
         addTool = self.manage_addProduct['CMFFormController'].manage_addTool
         addTool('Form Controller Tool')
         out.write('Added Form Controller Tool\n')
-#    portal_form_controller = self.portal_form_controller
 
     return out.getvalue()

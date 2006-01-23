@@ -12,8 +12,6 @@
 # THIS FILE CONTAINS MODIFIED CODE FROM ZOPE 2.6.2
 ##############################################################################
 """ Customizable controlled python scripts that come from the filesystem.
-
-$Id$
 """
 
 import copy
@@ -23,11 +21,7 @@ from OFS.Cache import Cacheable
 from Products.PageTemplates.ZopePageTemplate import Src
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from Products.CMFCore.DirectoryView import registerFileExtension, registerMetaType
-# BBB CMF < 1.5
-try:
-    from Products.CMFCore.permissions import View, ManagePortal
-except ImportError:
-    from Products.CMFCore.CMFCorePermissions import View, ManagePortal
+from Products.CMFCore.permissions import View, ManagePortal
 from Products.CMFCore.utils import getToolByName
 from Script import FSPythonScript as BaseClass
 from ControllerValidator import ControllerValidator
