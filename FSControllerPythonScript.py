@@ -31,13 +31,17 @@ from ControllerBase import ControllerBase
 from ControllerState import ControllerState
 from FSControllerBase import FSControllerBase
 from utils import log, logException
+from interfaces import IControllerPythonScript
 
+from zope.interface import implements
 
 class FSControllerPythonScript (FSControllerBase, BaseClass):
     """FSControllerPythonScripts act like Controller Python Scripts but are not
     directly modifiable from the management interface."""
 
     meta_type = 'Filesystem Controller Python Script'
+
+    implements(IControllerPythonScript)
 
     manage_options=(
            (

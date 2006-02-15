@@ -37,6 +37,9 @@ from ControllerBase import ControllerBase
 from ControllerState import ControllerState
 from FormAction import FormActionContainer
 from FormValidator import FormValidatorContainer
+from interfaces import IControllerPythonScript
+
+from zope.interface import implements
 
 # Track the Python bytecode version
 import imp
@@ -92,6 +95,8 @@ class ControllerPythonScript(BaseClass, ControllerBase):
     """
 
     meta_type='Controller Python Script'
+
+    implements(IControllerPythonScript)
 
     manage_options = (
         {'label':'Edit',

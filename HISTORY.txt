@@ -4,6 +4,12 @@ Changelog for CMFFormController
 
 CMFFormController 2.0 - unreleased
 
+    - Changed exportimport module to a package, added some interfaces
+      and configure.zcml in order to register separate import / export
+      handlers for .vpy and .cpy, since snapshot exports were breaking
+      when these were handled like default .py files
+      [RaFromBRC]
+
     - renamed importexport.py to exportimport.py
       [RaFromBRC]
 

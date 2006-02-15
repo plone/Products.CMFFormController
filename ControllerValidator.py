@@ -35,6 +35,9 @@ from Products.CMFCore.utils import getToolByName
 from Script import PythonScript as BaseClass
 from ControllerBase import ControllerBase
 from FormAction import FormActionContainer
+from interfaces import IControllerValidator
+
+from zope.interface import implements
 
 # Track the Python bytecode version
 import imp
@@ -86,6 +89,8 @@ class ControllerValidator(BaseClass, ControllerBase):
     """
 
     meta_type='Controller Validator'
+
+    implements(IControllerValidator)
 
     manage_options = (
         {'label':'Edit',

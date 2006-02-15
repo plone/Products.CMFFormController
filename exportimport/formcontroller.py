@@ -31,8 +31,8 @@ from Products.CMFSetup.utils import ImportConfiguratorBase, ExportConfiguratorBa
 _pkgdir = package_home( globals() )
 _xmldir = os.path.join( _pkgdir, 'xml' )
 
-from FormAction import FormAction
-from FormValidator import FormValidator
+from Products.CMFFormController.FormAction import FormAction
+from Products.CMFFormController.FormValidator import FormValidator
 
 #
 #   Configurator entry points
