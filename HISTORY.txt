@@ -4,6 +4,10 @@ Changelog for CMFFormController
 
 CMFFormController 2.0 - unreleased
 
+    - Moved xml folder into exportimport module, as tests were expecting it in
+      this location.
+      [hannosch]
+
     - Changed exportimport module to a package, added some interfaces
       and configure.zcml in order to register separate import / export
       handlers for .vpy and .cpy, since snapshot exports were breaking
