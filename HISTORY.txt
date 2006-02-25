@@ -2,7 +2,7 @@ Changelog for CMFFormController
 
     (name of developer listed in brackets)
 
-CMFFormController 2.0 - unreleased
+CMFFormController 2.0 - Released February 25, 2006
 
     - Moved xml folder into exportimport module, as tests were expecting it in
       this location.
