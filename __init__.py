@@ -18,8 +18,9 @@ GLOBALS = globals()
 
 def initialize(context):
     tools = (FormController.FormController,)
-    ToolInit('Form Controller Tool', tools=tools,
-             product_name='CMFFormController', icon='tool.gif',
+    ToolInit('Form Controller Tool',
+             tools=tools,
+             icon='tool.gif',
             ).initialize( context )
     context.registerClass(
         ControllerPageTemplate.ControllerPageTemplate,
