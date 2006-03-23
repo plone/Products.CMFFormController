@@ -293,7 +293,7 @@ Using the CMFFormController
                       name="form.button.button2"
                       value="Second Button" />
 
-            Next, specify actionss for button1 and for button2::
+            Next, specify actions for button1 and for button2::
 
                [actions]
                action.success..button1 = traverse_to:string:script1
@@ -305,7 +305,7 @@ Using the CMFFormController
             context is a Document by adding::
 
                [actions]
-               action.success.Documnet.button2 = traverse_to:string:document_script2
+               action.success.Document.button2 = traverse_to:string:document_script2
 
          Specifying Actions in the ZMI
 
