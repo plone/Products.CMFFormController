@@ -33,16 +33,6 @@ class RedirectToAction(BaseFormAction):
         if not haveAction:
             raise ValueError, 'No %s action found for %s' % (action, controller_state.getContext().getId())
 
-        # If we have CMF 1.5, the actual action_url may be hidden behind a method
-        # alias. Attempt to resolve this
-        try:
-            if action_url:
-                action_url = fti.queryMethodID(action_url, default = action_url,
-                                                           context = context)
-        except AttributeError:
-            # Don't raise if we don't have CMF 1.5
-            pass
-
         # XXX: Is there a better way to check this?
         if not action_url.startswith('string:'):
             action_url = 'string:%s' % (action_url,)

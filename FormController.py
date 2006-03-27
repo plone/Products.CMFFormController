@@ -433,7 +433,6 @@ class FormController(UniqueObject, SimpleItemWithProperties):
 
         def fn(obj, dict):
             dict[obj.getId()] = 0
-            print str(dict)
         meta_types = ['Controller Page Template', 'Controller Page Template (File)', 'Filesystem Controller Page Template', 'Controller Python Script', 'Filesystem Controller Python Script']
         portal = getToolByName(self, 'portal_url').getPortalObject()
         catalog = getToolByName(self, 'portal_catalog')

@@ -12,7 +12,7 @@
 ##############################################################################
 """CMFFormController setup handlers.
 
-$Id:$
+$Id$
 """
 
 import os
@@ -60,7 +60,7 @@ def importCMFFormController(context):
 
     for validator in fc_info['validators']:
         fc.validators.set(FormValidator(validator['object_id'], validator['context_type'], validator['button'], str(validator['validators']).split(',')))
-    for action in fc_info['actions']: 
+    for action in fc_info['actions']:
         fc.actions.set(FormAction(action['object_id'], action['status'], action['context_type'], action['button'], action['action_type'], action['action_arg']))
 
     return 'CMFFormController settings imported.'
@@ -106,7 +106,6 @@ class CMFFormControllerExportConfigurator(ExportConfiguratorBase):
         fc = getToolByName(self._site, 'portal_form_controller')
 
         for action in fc.listFormActions():
-            print action.getAction()
             yield {'object_id': action.getObjectId(),
                    'status': action.getStatus(),
                    'context_type': action.getContextType(),

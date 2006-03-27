@@ -39,8 +39,17 @@ class TraverseToAction(BaseFormAction):
         # alias. Attempt to resolve this
         try:
             if action_url:
-                action_url = fti.queryMethodID(action_url, default = action_url,
-                                                           context = context)
+                # If our url is a path, then we need to see if it contains the
+                # path to the current object, if so we need to check if the
+                # remaining path element is a method alias
+                possible_alias = action_url
+                current_path = '/'+context.absolute_url(relative=1)
+                if possible_alias.startswith(current_path):
+                    possible_alias = possible_alias[len(current_path)+1:]
+                if possible_alias:
+                    action_url = fti.queryMethodID(possible_alias,
+                                                   default = action_url,
+                                                   context = context)
         except AttributeError:
             # Don't raise if we don't have CMF 1.5
             pass
