@@ -2,9 +2,19 @@ Changelog for CMFFormController
 
     (name of developer listed in brackets)
 
-CMFFormController 2.0.1 - Unreleased
+CMFFormController 2.0.1 - Released March 28, 2006
 
-    - 
+    - Fix method alias lookup on TraverseToAction, so that the conversion of
+      urls to aliases doesn't cause empty pages to be returned. Remove the alias
+      lookup on RedirectToAction because it is entirely unnecessary and
+      counter-intuitive. Removed some useless print statements.
+      [alecm]
+
+    - Fix two typos in documentation.
+      [vinsci]
+
+    - Shut down DeprecationWarning for product_name of ToolInit.
+      [hannosch]
 
 CMFFormController 2.0 - Released February 25, 2006
 
