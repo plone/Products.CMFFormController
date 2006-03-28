@@ -2,6 +2,10 @@ Changelog for CMFFormController
 
     (name of developer listed in brackets)
 
+CMFFormController 2.0.2 - Unreleased
+
+
+
 CMFFormController 2.0.1 - Released March 28, 2006
 
     - Fix method alias lookup on TraverseToAction, so that the conversion of
