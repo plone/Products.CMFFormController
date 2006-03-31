@@ -4,7 +4,8 @@ Changelog for CMFFormController
 
 CMFFormController 2.0.2 - Unreleased
 
-
+    - Update tests to comply with PloneTestCase 0.8 API.
+      [hannosch]
 
 CMFFormController 2.0.1 - Released March 28, 2006
 
