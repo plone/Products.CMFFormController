@@ -39,7 +39,7 @@ class TestCopyRename(PloneTestCase.PloneTestCase):
 
         transaction.savepoint(optimistic=True)
 
-        self.loginPortalOwner()
+        self.loginAsPortalOwner()
         self.folder.manage_renameObjects(['test'], ['test2'])
         pt2 = self.folder.test2
         self.assertEqual(len(pt2.actions.getFiltered(object_id='test')), 0)
@@ -79,7 +79,7 @@ class TestCopyRename(PloneTestCase.PloneTestCase):
 
         transaction.savepoint(optimistic=True)
 
-        self.loginPortalOwner()
+        self.loginAsPortalOwner()
         cb = self.folder.manage_copyObjects(['test'])
         self.folder.manage_pasteObjects(cb)
         pt2 = self.folder.copy_of_test

@@ -4,7 +4,8 @@ Changelog for CMFFormController
 
 CMFFormController 1.0.8 - unreleased
 
-    -
+    - Fix tests to work with PloneTestCase >= 0.8.
+      [hannosch]
 
 CMFFormController 1.0.7 - Released December 18, 2005
 
