@@ -4,6 +4,9 @@ Changelog for CMFFormController
 
 CMFFormController 2.0.2 - Unreleased
 
+    - Avoid DeprecationWarning for manageAddDelete.
+      [hannosch]
+
     - Update tests to comply with PloneTestCase 0.8 API.
       [hannosch]
 
