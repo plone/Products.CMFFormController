@@ -4,7 +4,9 @@ Changelog for CMFFormController
 
 CMFFormController 2.0.2 - Unreleased
 
-    - Fixed trac issue #5446.
+    - RedirectToActions call to getActionObject on objects would always fail.
+      Fixed http://dev.plone.org/plone/ticket/5446.
+      [regebro]
 
     - Avoid DeprecationWarning for manageAddDelete.
       [hannosch]
