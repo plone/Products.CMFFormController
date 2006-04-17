@@ -17,7 +17,7 @@ class RedirectToAction(BaseFormAction):
         fti = context.getTypeInfo()
 
         try:
-            action_url = fti.getActionObject(action).getActionExpression()
+            action_url = fti.getActionObject('object/'+action).getActionExpression()
             haveAction = True
         except ValueError:
             actions = controller_state.getContext().portal_actions.listFilteredActionsFor(controller_state.getContext())

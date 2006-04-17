@@ -4,6 +4,8 @@ Changelog for CMFFormController
 
 CMFFormController 2.0.2 - Unreleased
 
+    - Fixed trac issue #5446.
+
     - Avoid DeprecationWarning for manageAddDelete.
       [hannosch]
 
