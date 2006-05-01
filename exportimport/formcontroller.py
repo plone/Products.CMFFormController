@@ -25,8 +25,8 @@ from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.permissions import ManagePortal
 
-from Products.CMFSetup.utils import CONVERTER, DEFAULT, KEY
-from Products.CMFSetup.utils import ImportConfiguratorBase, ExportConfiguratorBase
+from Products.GenericSetup.utils import CONVERTER, DEFAULT, KEY
+from Products.GenericSetup.utils import ImportConfiguratorBase, ExportConfiguratorBase
 
 _pkgdir = package_home( globals() )
 _xmldir = os.path.join( _pkgdir, 'xml' )
