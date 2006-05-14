@@ -4,6 +4,9 @@ Changelog for CMFFormController
 
 CMFFormController 2.0.2 - Unreleased
 
+    - Only export ZODB controller scripts and validators, not FS versions.
+      [rafrombrc]
+
     - Changed exportimport handlers to depend on GenericSetup directly instead
       of the soon to be removed CMFSetup.
       [hannosch]
