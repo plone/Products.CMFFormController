@@ -2,7 +2,7 @@ Changelog for CMFFormController
 
     (name of developer listed in brackets)
 
-CMFFormController 2.0.2 - Unreleased
+CMFFormController 2.0.2 - Released May 15, 2006
 
     - Only export ZODB controller scripts and validators, not FS versions.
       [rafrombrc]
