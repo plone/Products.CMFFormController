@@ -17,9 +17,14 @@ class RedirectToAction(BaseFormAction):
         fti = context.getTypeInfo()
 
         try:
-            action_url = fti.getActionObject('object/'+action).getActionExpression()
+            # Test to see if the action is defined in the FTI as an object or
+            # folder action
+            action_ob = fti.getActionObject('object/'+action)
+            if action_ob is None:
+                action_ob = fti.getActionObject('folder/'+action)
+            action_url = action_ob.getActionExpression()
             haveAction = True
-        except ValueError:
+        except (ValueError, AttributeError):
             actions = controller_state.getContext().portal_actions.listFilteredActionsFor(controller_state.getContext())
             # flatten the actions as we don't care where they are
             actions = reduce(lambda x,y,a=actions:  x+a[y], actions.keys(), [])
