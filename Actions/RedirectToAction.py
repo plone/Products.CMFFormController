@@ -1,5 +1,6 @@
 from BaseFormAction import BaseFormAction, registerFormAction
 import RedirectTo
+from Products.CMFCore.utils import getToolByName
 
 def factory(arg):
     """Create a new redirect-to-action action"""
@@ -14,6 +15,7 @@ class RedirectToAction(BaseFormAction):
         haveAction = False
 
         context = controller_state.getContext()
+        actions_tool = getToolByName(context, 'portal_actions')
         fti = context.getTypeInfo()
 
         try:
@@ -22,10 +24,13 @@ class RedirectToAction(BaseFormAction):
             action_ob = fti.getActionObject('object/'+action)
             if action_ob is None:
                 action_ob = fti.getActionObject('folder/'+action)
-            action_url = action_ob.getActionExpression()
+            # Use portal actions here so we have a full expression context
+            ec = actions_tool._getExprContext(context)
+            action_url = action_ob.getAction(ec)['url'].strip()
             haveAction = True
         except (ValueError, AttributeError):
-            actions = controller_state.getContext().portal_actions.listFilteredActionsFor(controller_state.getContext())
+            actions = actions_tool.listFilteredActionsFor(
+                                                controller_state.getContext())
             # flatten the actions as we don't care where they are
             actions = reduce(lambda x,y,a=actions:  x+a[y], actions.keys(), [])
             for actiondict in actions:

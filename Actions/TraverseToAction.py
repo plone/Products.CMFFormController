@@ -1,5 +1,6 @@
 from BaseFormAction import BaseFormAction, registerFormAction
 import TraverseTo
+from Products.CMFCore.utils import getToolByName
 
 def factory(arg):
     """Create a new traverse-to-action action"""
@@ -14,28 +15,36 @@ class TraverseToAction(BaseFormAction):
         haveAction = False
 
         context = controller_state.getContext()
+        actions_tool = getToolByName(context, 'portal_actions')
         fti = context.getTypeInfo()
 
         try:
+            # Test to see if the action is defined in the FTI as an object or
+            # folder action
             action_ob = fti.getActionObject('object/'+action)
             if action_ob is None:
                 action_ob = fti.getActionObject('folder/'+action)
-            action_url = action_ob.getActionExpression()
+            # Use portal actions here so we have a full expression context
+            ec = actions_tool._getExprContext(context)
+            actiondict = action_ob.getAction(ec)
             haveAction = True
         except (ValueError, AttributeError):
-            actions = controller_state.getContext().portal_actions.listFilteredActionsFor(controller_state.getContext())
+            actions = actions_tool.listFilteredActionsFor(
+                                                controller_state.getContext())
             # flatten the actions as we don't care where they are
             actions = reduce(lambda x,y,a=actions:  x+a[y], actions.keys(), [])
             for actiondict in actions:
                 if actiondict['id'] == action:
-                    action_url = actiondict['url'].strip()
-                    if action_url.startswith('http://'):
-                        action_url = action_url[7:]
-                        action_url = action_url[action_url.index('/'):]
                     haveAction = True
                     break
-
-        if not haveAction:
+        # For traversal, our 'url' must be a traversable path
+        # XXX: this seems potentially brittle in virtual hosted environments
+        if haveAction:
+            action_url = actiondict['url'].strip()
+            if action_url.startswith('http://'):
+                action_url = action_url[7:]
+                action_url = action_url[action_url.index('/'):]
+        else:
             raise ValueError, 'No %s action found for %s' % (action, controller_state.getContext().getId())
 
         # If we have CMF 1.5, the actual action_url may be hidden behind a method
