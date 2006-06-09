@@ -5,7 +5,7 @@ Changelog for CMFFormController
 CMFFormController 2.0.3 - Released June 9, 2006
 
     - Fix issue with redirecting/traversing to FTI actions which are defined
-      in the folder category.  Also, made action traversal/redirection less
+      in the folder category. Also, made action traversal/redirection less
       error prone.
       [alecm]
 
