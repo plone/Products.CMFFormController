@@ -15,7 +15,6 @@ class RedirectToAction(BaseFormAction):
         haveAction = False
 
         context = controller_state.getContext()
-        actions_tool = getToolByName(context, 'portal_actions')
         fti = context.getTypeInfo()
 
         try:
@@ -24,11 +23,10 @@ class RedirectToAction(BaseFormAction):
             action_ob = fti.getActionObject('object/'+action)
             if action_ob is None:
                 action_ob = fti.getActionObject('folder/'+action)
-            # Use portal actions here so we have a full expression context
-            ec = actions_tool._getExprContext(context)
-            action_url = action_ob.getAction(ec)['url'].strip()
+            action_url = action_ob.getActionExpression()
             haveAction = True
         except (ValueError, AttributeError):
+            actions_tool = getToolByName(context, 'portal_actions')
             actions = actions_tool.listFilteredActionsFor(
                                                 controller_state.getContext())
             # flatten the actions as we don't care where they are
