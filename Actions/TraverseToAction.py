@@ -1,6 +1,7 @@
 from BaseFormAction import BaseFormAction, registerFormAction
 import TraverseTo
 from Products.CMFCore.utils import getToolByName
+from urlparse import urlsplit
 
 def factory(arg):
     """Create a new traverse-to-action action"""
@@ -17,6 +18,7 @@ class TraverseToAction(BaseFormAction):
         context = controller_state.getContext()
         actions_tool = getToolByName(context, 'portal_actions')
         fti = context.getTypeInfo()
+        REQUEST = getattr(context, 'REQUEST', None)
 
         try:
             # Test to see if the action is defined in the FTI as an object or
@@ -38,12 +40,16 @@ class TraverseToAction(BaseFormAction):
                     haveAction = True
                     break
         # For traversal, our 'url' must be a traversable path
-        # XXX: this seems potentially brittle in virtual hosted environments
         if haveAction:
             action_url = actiondict['url'].strip()
-            if action_url.startswith('http://'):
-                action_url = action_url[7:]
-                action_url = action_url[action_url.index('/'):]
+            url_parts = urlsplit(action_url)
+            # Check to see if we have a protocol, if so convert to a path,
+            # otherwise make the assumption that we are dealing with a
+            # physical path
+            if url_parts[0] and REQUEST is not None:
+                action_url = '/'.join(REQUEST.physicalPathFromURL(action_url))
+            else:
+                action_url = url_parts[2]
         else:
             raise ValueError, 'No %s action found for %s' % (action, controller_state.getContext().getId())
 
@@ -55,7 +61,7 @@ class TraverseToAction(BaseFormAction):
                 # path to the current object, if so we need to check if the
                 # remaining path element is a method alias
                 possible_alias = action_url
-                current_path = '/'+context.absolute_url(relative=1)
+                current_path = '/'.join(context.getPhysicalPath())
                 if possible_alias.startswith(current_path):
                     possible_alias = possible_alias[len(current_path)+1:]
                 if possible_alias:
