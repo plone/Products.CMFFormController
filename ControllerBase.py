@@ -198,6 +198,8 @@ class ControllerBase:
 
 
     def getNext(self, controller_state, REQUEST):
+        __traceback_info__ = str(controller_state).split('\n')
+        
         id = self.getId()
         status = controller_state.getStatus()
         context = controller_state.getContext()
@@ -263,6 +265,8 @@ class ControllerBase:
 
 
     def getValidators(self, controller_state, REQUEST):
+        __traceback_info__ = str(controller_state).split('\n')
+        
         controller = getToolByName(self, 'portal_form_controller')
         context = controller_state.getContext()
         context_type = controller._getTypeName(context)
