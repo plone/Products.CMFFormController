@@ -2,6 +2,8 @@ Changelog for CMFFormController
 
     (name of developer listed in brackets)
 
+CMFFormController 2.0.4 - Released June 17, 2006
+
     - Fix issue with usage of relative urls for action traversal, rather than
       actual physical paths, which are necessary.
       [alecm]
