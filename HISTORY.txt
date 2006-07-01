@@ -2,6 +2,11 @@ Changelog for CMFFormController
 
     (name of developer listed in brackets)
 
+CMFFormController 2.0.5 - Unreleased
+
+    - Cleaned up test infrastructure, removed custom testrunner.
+      [hannosch]
+
 CMFFormController 2.0.4 - Released June 17, 2006
 
     - Fix issue with usage of relative urls for action traversal, rather than

@@ -2,9 +2,7 @@
 # Test copying/pasting of controller objects
 #
 
-import os, sys
-if __name__ == '__main__':
-    execfile(os.path.join(sys.path[0], 'framework.py'))
+import unittest
 
 from Testing import ZopeTestCase
 from Products.PloneTestCase import PloneTestCase
@@ -99,14 +97,10 @@ class TestCopyRename(PloneTestCase.PloneTestCase):
         self.assertEqual(formcontroller.validators.match('copy_of_test', 'Document', 'submit').getValidators(), ['d','e','f'])
         self.assertEqual(formcontroller.validators.match('test', 'Document', 'submit').getValidators(), ['d','e','f'])
 
-        
-#        self.assertEqual(temp_doc.meta_type, 'Document')
-
 def test_suite():
-    from unittest import TestSuite, makeSuite
-    suite = TestSuite()
-    suite.addTest(makeSuite(TestCopyRename))
+    suite = unittest.TestSuite()
+    suite.addTest(unittest.makeSuite(TestCopyRename))
     return suite
 
 if __name__ == '__main__':
-    framework()
+    unittest.main(defaultTest="test_suite")

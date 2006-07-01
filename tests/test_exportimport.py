@@ -10,7 +10,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-"""CachingPolicyManager setup handler unit tests.
+"""CMFFormController setup handler unit tests.
 """
 import unittest
 
@@ -19,7 +19,6 @@ from Products.GenericSetup.tests.common import DummyExportContext
 from Products.GenericSetup.tests.common import DummyImportContext
 from Products.CMFFormController.FormAction import FormAction
 from Products.CMFFormController.FormValidator import FormValidator
-
 
 class _CMFFormControllerSetup(BaseRegistryTests):
 
@@ -70,7 +69,6 @@ class _CMFFormControllerSetup(BaseRegistryTests):
        V_BUTTON,
        ','.join(V_VALIDATORS),
       )
-
 
     def _initSite(self, with_info=False):
         from OFS.Folder import Folder
