@@ -15,12 +15,13 @@
 """
 
 import copy
+from zope.tales.tales import CompilerError
+
 import Globals, Acquisition
 from AccessControl import ClassSecurityInfo
 from OFS.Cache import Cacheable
 from Products.PageTemplates.ZopePageTemplate import Src
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
-from Products.PageTemplates.TALES import CompilerError
 from Products.CMFCore.DirectoryView import registerFileExtension, registerMetaType
 from Products.CMFCore.permissions import View, ManagePortal
 from Products.CMFCore.utils import expandpath
@@ -33,7 +34,6 @@ from FSControllerBase import FSControllerBase
 from FormAction import FormActionContainer
 from FormValidator import FormValidatorContainer
 from utils import log, logException
-
 
 class FSControllerPageTemplate(FSControllerBase, BaseClass, BaseControllerPageTemplate):
     """Wrapper for Controller Page Template"""

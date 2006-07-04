@@ -1,9 +1,10 @@
+from zope.tales.tales import CompilerError
+
 from AccessControl import Role, ClassSecurityInfo
 from Acquisition import aq_base, aq_parent, aq_inner
 from Products.CMFCore.Expression import Expression
 from Products.PageTemplates.Expressions import getEngine
 from Products.PageTemplates.Expressions import SecureModuleImporter
-from Products.PageTemplates.TALES import CompilerError
 
 from Products.CMFCore.utils import getToolByName
 from Products.CMFFormController.FormController import registerFormAction

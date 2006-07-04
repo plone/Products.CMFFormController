@@ -16,12 +16,13 @@
 
 import re
 import copy
+from zope.tales.tales import CompilerError
+
 import Globals, Acquisition
 from AccessControl import ClassSecurityInfo
 from OFS.Cache import Cacheable
 from Products.PageTemplates.ZopePageTemplate import Src
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
-from Products.PageTemplates.TALES import CompilerError
 from Products.CMFCore.DirectoryView import registerFileExtension, registerMetaType
 from Products.CMFCore.permissions import View, ManagePortal
 from Products.CMFCore.utils import getToolByName, expandpath
