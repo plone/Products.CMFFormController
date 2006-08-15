@@ -14,7 +14,7 @@ def exceptionString():
                             # (otherwise will generate a circular reference)
     if s[0] == None:
         return None
-    if type(s[0]) == type(''):
+    if isinstance(s[0], basestring):
         return s[0]
     return str(s[1])
 

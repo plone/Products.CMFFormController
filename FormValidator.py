@@ -67,7 +67,7 @@ class FormValidator(SimpleItem):
     def __init__(self, object_id, context_type, button, validators, controller=None):
         self.key = FormValidatorKey(object_id, context_type, button, controller)
 
-        if type(validators) == type(''):
+        if isinstance(validators, basestring):
             validators = validators.split(',')
         validators = [v.strip() for v in validators if v]
         if controller:

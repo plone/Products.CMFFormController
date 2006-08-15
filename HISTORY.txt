@@ -4,6 +4,14 @@ Changelog for CMFFormController
 
 CMFFormController 2.0.5 - Unreleased
 
+    - Modernized type checking to use isinstance() instead of type() as the
+      latter does not recognize derived types. As an example checking for
+      UnicodeType or unicode with type() does not recognize Zope3 Messages,
+      which are derived from unicode. Usually for checking for stringish types
+      you want to do isinstance(foo, basestring) nowadays. This fixes
+      http://dev.plone.org/plone/ticket/5741.
+      [hannosch]
+
     - Fixed some deprecation warnings for CompilerError.
       [hannosch]
 

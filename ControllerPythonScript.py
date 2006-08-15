@@ -76,7 +76,8 @@ def manage_addControllerPythonScript(self, id, REQUEST=None, submit=None):
     id = self._setObject(id, ControllerPythonScript(id))
     if REQUEST is not None:
         file = REQUEST.form.get('file', '')
-        if type(file) is not type(''): file = file.read()
+        if not isinstance(file, str):
+            file = file.read()
         if not file:
             file = open(_default_file).read()
         self._getOb(id).write(file)
