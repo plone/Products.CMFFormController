@@ -271,7 +271,7 @@ class FormController(UniqueObject, SimpleItemWithProperties):
         return REQUEST.RESPONSE.redirect(self.absolute_url()+'/manage_formActionsForm')
 
 
-    security.declarePrivate('_delFormAction')
+    security.declarePrivate('_delFormActions')
     def _delFormActions(self, container, REQUEST):
         for k in REQUEST.form.keys():
             if k.startswith('del_id_'):
