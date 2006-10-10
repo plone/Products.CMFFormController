@@ -61,7 +61,7 @@ def importCMFFormController(context):
     for validator in fc_info['validators']:
         fc.validators.set(FormValidator(validator['object_id'], validator['context_type'], validator['button'], str(validator['validators']).split(',')))
     for action in fc_info['actions']:
-        fc.actions.set(FormAction(action['object_id'], action['status'], action['context_type'], action['button'], action['action_type'], action['action_arg']))
+        fc.actions.set(FormAction(action['object_id'], action['status'], action['context_type'], action['button'], action['action_type'], str(action['action_arg'])))
 
     return 'CMFFormController settings imported.'
 
