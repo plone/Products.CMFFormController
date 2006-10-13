@@ -1,10 +1,11 @@
+import logging
 import sys
 import traceback
-from zLOG import LOG, INFO, WARNING
 
+logger = logging.getLogger('CMFFormController')
 
-def log(summary='', text='', log_level=INFO):
-    LOG('Plone Debug', log_level, summary, text)
+def log(summary='', text='', log_level=logging.INFO):
+    logger.log(log_level, '%s \n%s' % (summary, text))
 
 # Enable scripts to get the string value of an exception
 # even if the thrown exception is a string and not a
@@ -24,4 +25,4 @@ def logException():
     """Dump an exception to the log"""
     log(summary=str(exceptionString()),
         text='\n'.join(traceback.format_exception(*sys.exc_info())),
-        log_level=WARNING)
+        log_level=logging.WARNING)

@@ -30,7 +30,6 @@ from Shared.DC.Scripts.Script import BindingsUI
 from AccessControl import getSecurityManager
 from OFS.History import Historical
 from OFS.Cache import Cacheable
-from zLOG import LOG, ERROR, INFO, PROBLEM
 from Products.CMFCore.utils import getToolByName
 from Script import PythonScript as BaseClass
 from ControllerBase import ControllerBase

@@ -12,14 +12,18 @@
 # THIS FILE CONTAINS MODIFIED CODE FROM ZOPE 2.6.2
 ##############################################################################
 
+import logging
+import re
+import sys
+
 import Globals
 from Shared.DC.Scripts.Script import Script
 from Shared.DC.Scripts.Bindings import NameAssignments as BaseNameAssignments
 from Products.PythonScripts.PythonScript import PythonScript as BasePythonScript
 from Products.CMFCore.FSPythonScript import FSPythonScript as BaseFSPythonScript, bad_func_code
-import sys
-import re
-from zLOG import LOG, ERROR, INFO, PROBLEM
+from ZODB.POSException import ConflictError
+
+logger = logging.getLogger('CMFFormController')
 
 defaultBindings = {'name_context': 'context',
                    'name_container': 'container',
@@ -121,8 +125,10 @@ class PythonScript(BasePythonScript):
                 self.ZBindings_edit(bindmap)
             else:
                 self._makeFunction()
+        except (ConflictError, KeyboardInterrupt):
+            raise
         except:
-            LOG(self.meta_type, ERROR, 'write failed', error=sys.exc_info())
+            logger.exception('%s write failed' % self.meta_type)
             raise
 
 Globals.InitializeClass(PythonScript)

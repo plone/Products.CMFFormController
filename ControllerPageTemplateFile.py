@@ -22,7 +22,7 @@ from Products.PageTemplates.PageTemplateFile import PageTemplateFile as BaseClas
 from Products.PageTemplates.TALES import CompilerError
 from BaseControllerPageTemplate import BaseControllerPageTemplate
 from FSControllerBase import FSControllerBase
-from utils import logException
+from utils import log, logException
 
 
 class ControllerPageTemplateFile(BaseClass, BaseControllerPageTemplate, FSControllerBase):

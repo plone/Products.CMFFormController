@@ -2,6 +2,11 @@ Changelog for CMFFormController
 
     (name of developer listed in brackets)
 
+CMFFormController 2.0.6 - Unreleased
+
+    - Converted log functions to use the logging package instead of zLOG.
+      [hannosch]
+
 CMFFormController 2.0.5 - Released September 8, 2006
 
     - Modernized type checking to use isinstance() instead of type() as the
