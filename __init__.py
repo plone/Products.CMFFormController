@@ -1,7 +1,5 @@
 """Initialize CMFFormController"""
 
-import sys
-from Products.CMFCore.DirectoryView import registerDirectory
 from Products.CMFCore.utils import registerIcon, ToolInit
 
 from config import *
@@ -12,9 +10,6 @@ import FormController
 from Actions import RedirectTo, TraverseTo, RedirectToAction, TraverseToAction
 
 GLOBALS = globals()
-
-# Make the skins available as DirectoryViews
-# registerDirectory('skins', globals())
 
 def initialize(context):
     tools = (FormController.FormController,)

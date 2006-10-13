@@ -1,4 +1,6 @@
-from BaseFormAction import BaseFormAction, registerFormAction
+from BaseFormAction import BaseFormAction
+
+from Products.CMFFormController.FormController import registerFormAction
 from ZPublisher.Publish import call_object, missing_name, dont_publish_class
 from ZPublisher.mapply import mapply
 import urlparse

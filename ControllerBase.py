@@ -1,16 +1,3 @@
-##############################################################################
-#
-# Copyright (c) 2001 Zope Corporation and Contributors. All Rights Reserved.
-#
-# This software is subject to the provisions of the Zope Public License,
-# Version 2.0 (ZPL).  A copy of the ZPL should accompany this distribution.
-# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY AND ALL EXPRESS OR IMPLIED
-# WARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-# WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
-# FOR A PARTICULAR PURPOSE
-#
-##########################################################################
-
 import os
 from Acquisition import aq_base
 from Globals import InitializeClass
@@ -19,7 +6,7 @@ from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from Products.CMFCore.permissions import View, ManagePortal
 from Products.CMFCore.utils import getToolByName, expandpath
 from Products.CMFCore.FSMetadata import FSMetadata, CMFConfigParser
-from FormAction import FormActionType, FormAction, FormActionContainer
+from FormAction import FormAction, FormActionContainer
 from FormValidator import FormValidator, FormValidatorContainer
 from globalVars import ANY_CONTEXT, ANY_BUTTON
 from utils import log

@@ -7,7 +7,6 @@ from Products.PageTemplates.Expressions import getEngine
 from Products.PageTemplates.Expressions import SecureModuleImporter
 
 from Products.CMFCore.utils import getToolByName
-from Products.CMFFormController.FormController import registerFormAction
 from Products.CMFFormController.utils import log
 from IFormAction import IFormAction
 from ZTUtils.Zope import make_query
@@ -83,7 +82,6 @@ class BaseFormAction(Role.RoleManager):
         """Utility method that takes a URL, parses its existing query string,
         and combines the resulting dict with kwargs"""
         import urlparse
-        import urllib
         import cgi
 
         # parse the existing URL

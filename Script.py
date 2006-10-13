@@ -14,10 +14,8 @@
 
 import logging
 import re
-import sys
 
 import Globals
-from Shared.DC.Scripts.Script import Script
 from Shared.DC.Scripts.Bindings import NameAssignments as BaseNameAssignments
 from Products.PythonScripts.PythonScript import PythonScript as BasePythonScript
 from Products.CMFCore.FSPythonScript import FSPythonScript as BaseFSPythonScript, bad_func_code

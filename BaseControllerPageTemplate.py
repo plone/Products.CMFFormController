@@ -1,19 +1,8 @@
-# ###########################################################################
-
 import Globals
 from AccessControl import ClassSecurityInfo
-from Products.PageTemplates.PageTemplateFile import PageTemplateFile
-from Products.CMFCore.permissions import ManagePortal, View
+from Products.CMFCore.permissions import View
 from Products.CMFCore.utils import getToolByName
 from ControllerBase import ControllerBase
-from ControllerState import ControllerState
-from FormValidator import FormValidatorKey, FormValidator
-from FormAction import FormActionKey, FormAction
-from globalVars import ANY_CONTEXT, ANY_BUTTON
-
-import sys
-from urllib import quote
-
 
 class BaseControllerPageTemplate(ControllerBase):
 

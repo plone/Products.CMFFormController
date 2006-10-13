@@ -1,6 +1,8 @@
-from BaseFormAction import BaseFormAction, registerFormAction
+from BaseFormAction import BaseFormAction
 import RedirectTo
+
 from Products.CMFCore.utils import getToolByName
+from Products.CMFFormController.FormController import registerFormAction
 
 def factory(arg):
     """Create a new redirect-to-action action"""

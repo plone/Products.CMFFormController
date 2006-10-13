@@ -14,18 +14,14 @@
 """ Customizable controlled python scripts that come from the filesystem.
 """
 
-import copy
-import Globals, Acquisition
+import Globals
 from AccessControl import ClassSecurityInfo
 from OFS.Cache import Cacheable
-from Products.PageTemplates.ZopePageTemplate import Src
-from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from Products.CMFCore.DirectoryView import registerFileExtension, registerMetaType
-from Products.CMFCore.permissions import View, ManagePortal
+from Products.CMFCore.permissions import View
 from Products.CMFCore.utils import getToolByName
 from Script import FSPythonScript as BaseClass
 from ControllerValidator import ControllerValidator
-from ControllerState import ControllerState
 from ControllerBase import ControllerBase
 from utils import logException
 from interfaces import IControllerValidator

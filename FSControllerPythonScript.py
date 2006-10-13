@@ -14,21 +14,17 @@
 """ Customizable controlled python scripts that come from the filesystem.
 """
 
-import re
 import copy
 from zope.tales.tales import CompilerError
 
 import Globals, Acquisition
 from AccessControl import ClassSecurityInfo
 from OFS.Cache import Cacheable
-from Products.PageTemplates.ZopePageTemplate import Src
-from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from Products.CMFCore.DirectoryView import registerFileExtension, registerMetaType
-from Products.CMFCore.permissions import View, ManagePortal
+from Products.CMFCore.permissions import View
 from Products.CMFCore.utils import getToolByName, expandpath
 from Script import FSPythonScript as BaseClass
 from ControllerPythonScript import ControllerPythonScript
-from ControllerBase import ControllerBase
 from ControllerState import ControllerState
 from FSControllerBase import FSControllerBase
 from utils import log, logException

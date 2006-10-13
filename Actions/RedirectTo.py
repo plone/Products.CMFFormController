@@ -1,4 +1,5 @@
-from BaseFormAction import BaseFormAction, registerFormAction
+from BaseFormAction import BaseFormAction
+from Products.CMFFormController.FormController import registerFormAction
 from urlparse import urlparse, urljoin
 
 def factory(arg):

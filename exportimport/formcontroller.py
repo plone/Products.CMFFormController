@@ -17,7 +17,6 @@ $Id$
 
 import os
 from AccessControl import ClassSecurityInfo
-from AccessControl.Permission import Permission
 from Globals import InitializeClass
 from Globals import package_home
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
@@ -25,7 +24,7 @@ from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.permissions import ManagePortal
 
-from Products.GenericSetup.utils import CONVERTER, DEFAULT, KEY
+from Products.GenericSetup.utils import DEFAULT, KEY
 from Products.GenericSetup.utils import ImportConfiguratorBase, ExportConfiguratorBase
 
 _pkgdir = package_home( globals() )

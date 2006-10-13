@@ -1,6 +1,8 @@
-from BaseFormAction import BaseFormAction, registerFormAction
+from BaseFormAction import BaseFormAction
 import TraverseTo
+
 from Products.CMFCore.utils import getToolByName
+from Products.CMFFormController.FormController import registerFormAction
 from urlparse import urlsplit
 
 def factory(arg):

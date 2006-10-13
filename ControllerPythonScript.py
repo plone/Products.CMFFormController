@@ -18,15 +18,12 @@ This product provides support for Script objects containing restricted
 Python code.
 """
 
-__version__='$Revision: 1.10 $'[11:-2]
-
-import sys, os, re
+import os, re
 from Globals import package_home
-import AccessControl, OFS
+import AccessControl
 from OFS.SimpleItem import SimpleItem
 from urllib import quote
 from Shared.DC.Scripts.Script import BindingsUI
-from AccessControl import getSecurityManager
 from OFS.History import Historical
 from OFS.Cache import Cacheable
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile

@@ -11,11 +11,11 @@
 #
 # THIS FILE CONTAINS MODIFIED CODE FROM ZOPE 2.6.2
 ##########################################################################
-""" Zope object encapsulating a controlled page templates that comes from the filesystem.
+"""Zope object encapsulating a controlled page templates that comes from the
+   filesystem.
 """
 
 import os
-import Globals, Acquisition
 from AccessControl import ClassSecurityInfo
 from Products.CMFCore.permissions import View
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile as BaseClass

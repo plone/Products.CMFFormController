@@ -1,7 +1,6 @@
 import Globals
 import AccessControl
 from AccessControl import ClassSecurityInfo
-from Acquisition import aq_inner, aq_parent, aq_chain, aq_self, Implicit
 from Products.CMFCore.utils import getToolByName
 from FormAction import FormAction
 from globalVars import ANY_CONTEXT, ANY_BUTTON

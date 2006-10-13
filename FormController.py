@@ -1,7 +1,5 @@
-form_action_types = {}
-
 from __future__ import nested_scopes
-import os, string
+import os
 from AccessControl import ClassSecurityInfo
 import Globals
 from OFS.ObjectManager import bad_id
@@ -16,9 +14,9 @@ from Products.CMFFormController.ControllerState import ControllerState
 from FormAction import FormActionType, FormActionKey, FormAction, FormActionContainer
 from FormValidator import FormValidatorKey, FormValidator, FormValidatorContainer
 from ValidationError import ValidationError
-from globalVars import ANY_CONTEXT, ANY_BUTTON
 
 _marker = []
+form_action_types = {}
 
 def registerFormAction(id, factory, description=''):
     form_action_types[id] = FormActionType(id, factory, description)

@@ -1,19 +1,13 @@
-from Products.PageTemplates.ZopePageTemplate import ZopePageTemplate as BaseClass
-
 import os
 import Globals
 from AccessControl import ClassSecurityInfo
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
-from Products.CMFCore.permissions import ManagePortal, View
-from Products.CMFCore.utils import getToolByName
-from ControllerBase import ControllerBase
-from ControllerState import ControllerState
-from ValidationError import ValidationError
+from Products.PageTemplates.ZopePageTemplate import ZopePageTemplate as BaseClass
+from Products.CMFCore.permissions import View
 from BaseControllerPageTemplate import BaseControllerPageTemplate
 from FormAction import FormActionContainer
 from FormValidator import FormValidatorContainer
 
-import sys
 from urllib import quote
 
 # ###########################################################################

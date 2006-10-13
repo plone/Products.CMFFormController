@@ -4,6 +4,9 @@ Changelog for CMFFormController
 
 CMFFormController 2.0.6 - Unreleased
 
+    - General code cleaned, removed unused imports.
+      [hannosch]
+
     - Converted log functions to use the logging package instead of zLOG.
       [hannosch]
 

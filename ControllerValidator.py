@@ -18,22 +18,18 @@ This product provides support for Script objects containing restricted
 Python code.
 """
 
-__version__='$Revision: 1.8 $'[11:-2]
-
-import sys, os, re
+import os
 from Globals import package_home
-import AccessControl, OFS
+import AccessControl
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from OFS.SimpleItem import SimpleItem
 from urllib import quote
 from Shared.DC.Scripts.Script import BindingsUI
-from AccessControl import getSecurityManager
 from OFS.History import Historical
 from OFS.Cache import Cacheable
 from Products.CMFCore.utils import getToolByName
 from Script import PythonScript as BaseClass
 from ControllerBase import ControllerBase
-from FormAction import FormActionContainer
 from interfaces import IControllerValidator
 
 from zope.interface import implements

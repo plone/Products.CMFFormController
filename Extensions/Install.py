@@ -1,9 +1,4 @@
-from cStringIO import StringIO
-from Products.CMFCore.DirectoryView import addDirectoryViews
-from Products.CMFCore.utils import getToolByName
-from Products.CMFFormController import GLOBALS
-import string
-
+from StringIO import StringIO
 
 def install(self):
     out = StringIO()
