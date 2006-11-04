@@ -2,7 +2,7 @@ Changelog for CMFFormController
 
     (name of developer listed in brackets)
 
-CMFFormController 2.0.6 - Unreleased
+CMFFormController 2.0.6 - Released November 4, 2006
 
     - General code cleaned, removed unused imports.
       [hannosch]
