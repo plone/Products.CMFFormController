@@ -2,6 +2,13 @@ Changelog for CMFFormController
 
     (name of developer listed in brackets)
 
+CMFFormController 2.0.7 - Unreleased
+
+    - Fixed the import of XML files where the context_type/button attributes
+      are missing. It's not exported when the value is None, which means any
+      button or any content-type.
+      [deo]
+
 CMFFormController 2.0.6 - Released November 4, 2006
 
     - General code cleaned, removed unused imports.

@@ -70,6 +70,28 @@ class _CMFFormControllerSetup(BaseRegistryTests):
        ','.join(V_VALIDATORS),
       )
 
+    _WITH_PARTIAL_INFO_EXPORT = """\
+<?xml version="1.0"?>
+<cmfformcontroller>
+   <action
+     object_id="%s"
+     status="%s"
+     action_type="%s"
+     action_arg="%s"
+     />
+   <validator
+     object_id="%s"
+     validators="%s"
+     />
+</cmfformcontroller>
+""" % (A_OBJECT_ID,
+       A_STATUS,
+       A_ACTION_TYPE,
+       A_ACTION_ARG,
+       V_OBJECT_ID,
+       ','.join(V_VALIDATORS),
+      )
+
     def _initSite(self, with_info=False):
         from OFS.Folder import Folder
         from Products.CMFFormController.FormController import FormController
@@ -81,7 +103,7 @@ class _CMFFormControllerSetup(BaseRegistryTests):
 
         if with_info:
             fc = getattr(site, mgr.getId())
-            
+
             fc.actions.set(FormAction(self.A_OBJECT_ID, self.A_STATUS, self.A_CONTEXT_TYPE, self.A_BUTTON, self.A_ACTION_TYPE, self.A_ACTION_ARG))
             fc.validators.set(FormValidator(self.V_OBJECT_ID, self.V_CONTEXT_TYPE, self.V_BUTTON, ','.join(self.V_VALIDATORS)))
 
@@ -211,12 +233,40 @@ class Test_importCMFFormController(_CMFFormControllerSetup):
         self.assertEqual(validator.getButton(), self.V_BUTTON)
         self.assertEqual(validator.getValidators(), self.V_VALIDATORS)
 
-    def test_action_not_unicode(self):
-        """
-        the action arg cannot be unicode for unrestrictedTraverse calls to
-        work properly
-        """
+    def test_partial(self):
+        from Products.CMFFormController.exportimport \
+             import importCMFFormController
 
+        site = self._initSite(with_info=False)
+        fc = site.portal_form_controller
+
+        self.assertEqual(len(fc.listFormValidators()), 0)
+        self.assertEqual(len(fc.listFormActions()), 0)
+
+        context = DummyImportContext(site)
+        context._files['cmfformcontroller.xml'] = self._WITH_PARTIAL_INFO_EXPORT
+        importCMFFormController(context)
+
+        self.assertEqual(len(fc.listFormActions()), 1)
+        self.assertEqual(len(fc.listFormValidators()), 1)
+
+        action = fc.listFormActions()[0]
+        self.assertEqual(action.getObjectId(), self.A_OBJECT_ID)
+        self.assertEqual(action.getStatus(), self.A_STATUS)
+        self.assertEqual(action.getContextType(), None)
+        self.assertEqual(action.getButton(), None)
+        self.assertEqual(action.getActionType(), self.A_ACTION_TYPE)
+        self.assertEqual(action.getActionArg(), self.A_ACTION_ARG)
+
+        validator = fc.listFormValidators()[0]
+        self.assertEqual(validator.getObjectId(), self.V_OBJECT_ID)
+        self.assertEqual(validator.getContextType(), None)
+        self.assertEqual(validator.getButton(), None)
+        self.assertEqual(validator.getValidators(), self.V_VALIDATORS)
+
+    def test_action_not_unicode(self):
+        # The action arg cannot be unicode for unrestrictedTraverse
+        # calls to work properly
         from Products.CMFFormController.exportimport \
              import importCMFFormController
 
@@ -229,6 +279,7 @@ class Test_importCMFFormController(_CMFFormControllerSetup):
 
         action = fc.listFormActions()[0]
         self.failUnless(isinstance(action.getActionArg(), str))
+
 
 def test_suite():
     return unittest.TestSuite((
