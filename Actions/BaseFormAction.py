@@ -7,6 +7,7 @@ from Products.PageTemplates.Expressions import getEngine
 from Products.PageTemplates.Expressions import SecureModuleImporter
 
 from Products.CMFCore.utils import getToolByName
+from Products.CMFFormController.config import URL_ENCODING
 from Products.CMFFormController.utils import log
 from IFormAction import IFormAction
 from ZTUtils.Zope import make_query
@@ -92,6 +93,8 @@ class BaseFormAction(Role.RoleManager):
         d = cgi.parse_qs(qs, 1)
         # update with stuff from kwargs
         for k, v in kwargs.items():
+            if isinstance(v, unicode):
+                v = v.encode(URL_ENCODING)
             d[k] = [v] # put in a list to be consistent with parse_qs
         # parse_qs behaves a little unexpectedly -- all query string args
         # are represented as lists.  I think the reason is so that you get
