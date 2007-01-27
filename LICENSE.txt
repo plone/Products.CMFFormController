@@ -1,4 +1,4 @@
-Copyright (c) 2003-2006, Geoff Davis <geoff@geoffdavis.net>, and the respective
+Copyright (c) 2003-2007, Geoff Davis <geoff@geoffdavis.net>, and the respective
 authors. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
