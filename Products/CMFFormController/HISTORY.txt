@@ -2,7 +2,10 @@ Changelog for CMFFormController
 
     (name of developer listed in brackets)
 
-CMFFormController 2.1.0 - Unreleased
+CMFFormController 2.1b1 - Released
+
+    - Converted to a regular Python package in the Products namespace.
+      [hannosch]
 
     - Fixed deprecation warnings for minimalpath and expandpath methods. These
       weren't needed at all anymore, as the stored filepath is absolut anyways.
