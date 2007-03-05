@@ -2,7 +2,7 @@ Changelog for CMFFormController
 
     (name of developer listed in brackets)
 
-CMFFormController 2.1b1 - Released
+CMFFormController 2.1b1 - Released March 5, 2007
 
     - Converted to a regular Python package in the Products namespace.
       [hannosch]

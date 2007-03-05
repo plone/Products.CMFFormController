@@ -3,10 +3,8 @@ import OFS
 class Key(OFS.SimpleItem.SimpleItem):
     key = None
 
-
     def __init__(self, key):
         self.key = key
-
 
     def __cmp__(self, k):
         keylen = len(self.key)
@@ -14,7 +12,6 @@ class Key(OFS.SimpleItem.SimpleItem):
             if self.key[i] != k.key[i]:
                 return self._compare(self.key[i], k.key[i])
         return self._compare(self.key[keylen-1], k.key[keylen-1])
-
 
     def _compare(self, k1, k2):
         # make None end up last
