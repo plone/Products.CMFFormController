@@ -7,13 +7,17 @@ from StructuredText.StructuredText import HTML
 from ZPublisher.Publish import call_object, missing_name, dont_publish_class
 from ZPublisher.mapply import mapply
 from Products.CMFFormController import GLOBALS as fc_globals
-from Products.CMFCore.utils import getToolByName, UniqueObject, SimpleItemWithProperties
+from Products.CMFCore.utils import UniqueObject, SimpleItemWithProperties
 from Products.CMFCore.permissions import ManagePortal
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from Products.CMFFormController.ControllerState import ControllerState
 from FormAction import FormActionType, FormActionKey, FormAction, FormActionContainer
 from FormValidator import FormValidatorKey, FormValidator, FormValidatorContainer
 from ValidationError import ValidationError
+from zope.component import getUtility
+from Products.CMFCore.interfaces import ICatalogTool
+from Products.CMFCore.interfaces import ITypesTool
+from Products.CMFCore.interfaces import IURLTool
 
 _marker = []
 form_action_types = {}
@@ -97,7 +101,7 @@ class FormController(UniqueObject, SimpleItemWithProperties):
 
     def _checkId(self, id):
         """See if an id is valid CMF/Plone id"""
-        portal = getToolByName(self, 'portal_url').getPortalObject()
+        portal = getUtility(IURLTool).getPortalObject()
         if not id:
             return 'Empty id'
         s = bad_id(id)
@@ -131,7 +135,7 @@ class FormController(UniqueObject, SimpleItemWithProperties):
     security.declareProtected(ManagePortal, 'listContextTypes')
     def listContextTypes(self):
         """Return list of possible types for template context objects"""
-        types_tool = getToolByName(self, 'portal_types')
+        types_tool = getUtility(ITypesTool)
         return types_tool.listContentTypes()
 
 
@@ -432,8 +436,8 @@ class FormController(UniqueObject, SimpleItemWithProperties):
         def fn(obj, dict):
             dict[obj.getId()] = 0
         meta_types = ['Controller Page Template', 'Controller Page Template (File)', 'Filesystem Controller Page Template', 'Controller Python Script', 'Filesystem Controller Python Script']
-        portal = getToolByName(self, 'portal_url').getPortalObject()
-        catalog = getToolByName(self, 'portal_catalog')
+        portal = getUtility(IURLTool).getPortalObject()
+        catalog = getUtility(ICatalogTool)
         result = catalog.ZopeFindAndApply(portal, obj_metatypes=meta_types, search_sub=1, result=[])
         for (path, r) in result:
             if action_dict.has_key(r.getId()):

@@ -1,12 +1,15 @@
 from zope.tales.tales import CompilerError
 
+from zope.component import getUtility
+from Products.CMFCore.interfaces import IMembershipTool
+from Products.CMFCore.interfaces import IURLTool
+
 from AccessControl import Role, ClassSecurityInfo
 from Acquisition import aq_base, aq_parent, aq_inner
 from Products.CMFCore.Expression import Expression
 from Products.PageTemplates.Expressions import getEngine
 from Products.PageTemplates.Expressions import SecureModuleImporter
 
-from Products.CMFCore.utils import getToolByName
 from Products.CMFFormController.config import URL_ENCODING
 from Products.CMFFormController.utils import log
 from IFormAction import IFormAction
@@ -40,8 +43,8 @@ class BaseFormAction(Role.RoleManager):
         the argument to the action and evaluate the expression."""
         context = controller_state.getContext()
 
-        portal = getToolByName(context, 'portal_url').getPortalObject()
-        portal_membership = getToolByName(portal, 'portal_membership')
+        portal = getUtility(IURLTool).getPortalObject()
+        portal_membership = getUtility(IMembershipTool)
 
         if context is None or not hasattr(context, 'aq_base'):
             folder = portal
