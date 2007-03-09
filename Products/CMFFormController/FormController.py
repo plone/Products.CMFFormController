@@ -1,5 +1,9 @@
 from __future__ import nested_scopes
 import os
+from zope.interface import implements
+from zope.component import getUtility
+
+
 from AccessControl import ClassSecurityInfo
 import Globals
 from OFS.ObjectManager import bad_id
@@ -8,16 +12,17 @@ from ZPublisher.Publish import call_object, missing_name, dont_publish_class
 from ZPublisher.mapply import mapply
 from Products.CMFFormController import GLOBALS as fc_globals
 from Products.CMFCore.utils import UniqueObject, SimpleItemWithProperties
-from Products.CMFCore.permissions import ManagePortal
-from Products.PageTemplates.PageTemplateFile import PageTemplateFile
-from Products.CMFFormController.ControllerState import ControllerState
-from FormAction import FormActionType, FormActionKey, FormAction, FormActionContainer
-from FormValidator import FormValidatorKey, FormValidator, FormValidatorContainer
-from ValidationError import ValidationError
-from zope.component import getUtility
 from Products.CMFCore.interfaces import ICatalogTool
 from Products.CMFCore.interfaces import ITypesTool
 from Products.CMFCore.interfaces import IURLTool
+from Products.CMFCore.permissions import ManagePortal
+from Products.PageTemplates.PageTemplateFile import PageTemplateFile
+
+from Products.CMFFormController.ControllerState import ControllerState
+from Products.CMFFormController.interfaces import IFormControllerTool
+from FormAction import FormActionType, FormActionKey, FormAction, FormActionContainer
+from FormValidator import FormValidatorKey, FormValidator, FormValidatorContainer
+from ValidationError import ValidationError
 
 _marker = []
 form_action_types = {}
@@ -34,6 +39,8 @@ class FormController(UniqueObject, SimpleItemWithProperties):
     id = 'portal_form_controller'
     title = 'Manages form validation and post-validation actions'
     meta_type= 'Form Controller Tool'
+
+    implements(IFormControllerTool)
 
     manage_options = ( ({'label':'Overview', 'action':'manage_overview'},
                         {'label':'Documentation', 'action':'manage_docs'},
