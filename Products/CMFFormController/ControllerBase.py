@@ -1,5 +1,6 @@
 import os
 from zope.component import getUtility
+from zope.component import queryUtility
 
 from Acquisition import aq_base
 from Globals import InitializeClass
@@ -292,10 +293,7 @@ class ControllerBase:
         cfg = CMFConfigParser()
         if os.path.exists(filepath + '.metadata'):
             cfg.read(filepath + '.metadata')
-            try:
-                controller = getUtility(IFormControllerTool)
-            except AttributeError:
-                controller = None
+            controller = queryUtility(IFormControllerTool)
 
             _buttons_for_status = {}
                 
@@ -349,10 +347,7 @@ class ControllerBase:
         cfg = CMFConfigParser()
         if os.path.exists(filepath + '.metadata'):
             cfg.read(filepath + '.metadata')
-            try:
-                controller = getUtility(IFormControllerTool)
-            except AttributeError:
-                controller = None
+            controller = queryUtility(IFormControllerTool)
 
             _buttons_for_status = {}
 
