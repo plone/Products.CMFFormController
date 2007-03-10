@@ -20,7 +20,6 @@ Python code.
 
 import os, re
 from zope.component import getUtility
-from zope.component import queryUtility
 from zope.interface import implements
 
 from Globals import package_home

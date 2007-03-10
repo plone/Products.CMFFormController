@@ -1,5 +1,4 @@
 from zope.component import getUtility
-from zope.component import queryUtility
 
 import Globals
 from AccessControl import ClassSecurityInfo
