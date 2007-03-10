@@ -19,16 +19,19 @@ Python code.
 """
 
 import os
-from Globals import package_home
-import AccessControl
-from Products.PageTemplates.PageTemplateFile import PageTemplateFile
-from OFS.SimpleItem import SimpleItem
 from urllib import quote
-from Shared.DC.Scripts.Script import BindingsUI
+from zope.component import getUtility
+
+import AccessControl
+from Globals import package_home
+from OFS.SimpleItem import SimpleItem
 from OFS.History import Historical
 from OFS.Cache import Cacheable
-from Products.CMFCore.utils import getToolByName
+from Products.PageTemplates.PageTemplateFile import PageTemplateFile
+from Shared.DC.Scripts.Script import BindingsUI
 from Script import PythonScript as BaseClass
+
+from Products.CMFFormController.interfaces import IFormControllerTool
 from ControllerBase import ControllerBase
 from interfaces import IControllerValidator
 
@@ -133,7 +136,7 @@ class ControllerValidator(BaseClass, ControllerBase):
         return result
 
     def _getState(self):
-        return getToolByName(self, 'portal_form_controller').getState(self, is_validator=1)
+        return getUtility(IFormControllerTool).getState(self, is_validator=1)
 
     def _notifyOfCopyTo(self, container, op=0):
         # BaseClass.inheritedAttribute('notifyOfCopyTo')(self, container, op)

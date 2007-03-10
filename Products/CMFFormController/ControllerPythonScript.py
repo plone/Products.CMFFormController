@@ -19,6 +19,10 @@ Python code.
 """
 
 import os, re
+from zope.component import getUtility
+from zope.component import queryUtility
+from zope.interface import implements
+
 from Globals import package_home
 import AccessControl
 from OFS.SimpleItem import SimpleItem
@@ -27,15 +31,15 @@ from Shared.DC.Scripts.Script import BindingsUI
 from OFS.History import Historical
 from OFS.Cache import Cacheable
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
-from Products.CMFCore.utils import getToolByName
+from Products.CMFFormController.interfaces import IFormControllerTool
 from Script import PythonScript as BaseClass
+
 from ControllerBase import ControllerBase
 from ControllerState import ControllerState
 from FormAction import FormActionContainer
 from FormValidator import FormValidatorContainer
 from interfaces import IControllerPythonScript
 
-from zope.interface import implements
 
 # Track the Python bytecode version
 import imp
@@ -139,7 +143,7 @@ class ControllerPythonScript(BaseClass, ControllerBase):
 
     def __call__(self, *args, **kwargs):
         REQUEST = self.REQUEST
-        controller = getToolByName(self, 'portal_form_controller')
+        controller = getUtility(IFormControllerTool)
         controller_state = controller.getState(self, is_validator=0)
         controller_state = self.getButton(controller_state, REQUEST)
         validators = self.getValidators(controller_state, REQUEST).getValidators()
@@ -167,7 +171,7 @@ class ControllerPythonScript(BaseClass, ControllerBase):
 
 
     def _getState(self):
-        return getToolByName(self, 'portal_form_controller').getState(self, is_validator=0)
+        return getUtility(IFormControllerTool).getState(self, is_validator=0)
 
 
     def _notifyOfCopyTo(self, container, op=0):

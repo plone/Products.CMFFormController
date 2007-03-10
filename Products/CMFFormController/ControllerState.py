@@ -1,7 +1,10 @@
+from zope.component import getUtility
+
 import Globals
 import AccessControl
 from AccessControl import ClassSecurityInfo
-from Products.CMFCore.utils import getToolByName
+from Products.CMFFormController.interfaces import IFormControllerTool
+
 from FormAction import FormAction
 from globalVars import ANY_CONTEXT, ANY_BUTTON
 
@@ -204,7 +207,7 @@ class ControllerState(AccessControl.Role.RoleManager):
                 args = split_action[1].strip()
             else:
                 args = None
-        controller = getToolByName(self.getContext(), 'portal_form_controller')
+        controller = getUtility(IFormControllerTool)
         if not action_type in controller.validActionTypes():
             raise KeyError, 'Unknown action type %s\n' % action_type
         self.next_action = FormAction(self.getId(), self.getStatus(), ANY_CONTEXT, ANY_BUTTON, action_type, args, controller)

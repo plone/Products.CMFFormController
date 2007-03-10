@@ -1,7 +1,11 @@
+from zope.component import getUtility
+from zope.component import queryUtility
+
 import Globals
 from AccessControl import ClassSecurityInfo
 from Products.CMFCore.permissions import View
-from Products.CMFCore.utils import getToolByName
+from Products.CMFFormController.interfaces import IFormControllerTool
+
 from ControllerBase import ControllerBase
 
 class BaseControllerPageTemplate(ControllerBase):
@@ -16,7 +20,7 @@ class BaseControllerPageTemplate(ControllerBase):
 
         REQUEST = self.REQUEST
 
-        controller = getToolByName(self, 'portal_form_controller')
+        controller = getUtility(IFormControllerTool)
         controller_state = controller.getState(self, is_validator=0)
 
         form_submitted = REQUEST.form.get('form.submitted', None)

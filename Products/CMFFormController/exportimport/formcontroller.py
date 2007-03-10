@@ -16,12 +16,14 @@ $Id$
 """
 
 import os
+from zope.component import getUtility
+from zope.component import queryUtility
+
 from AccessControl import ClassSecurityInfo
 from Globals import InitializeClass
 from Globals import package_home
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 
-from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.permissions import ManagePortal
 
 from Products.GenericSetup.utils import DEFAULT, KEY
@@ -32,6 +34,7 @@ _xmldir = os.path.join( _pkgdir, 'xml' )
 
 from Products.CMFFormController.FormAction import FormAction
 from Products.CMFFormController.FormValidator import FormValidator
+from Products.CMFFormController.interfaces import IFormControllerTool
 
 #
 #   Configurator entry points
@@ -42,7 +45,7 @@ def importCMFFormController(context):
     """ Import CMFFormController settings from an XML file.
     """
     site = context.getSite()
-    fc = getToolByName(site, 'portal_form_controller', None)
+    fc = queryUtility(IFormControllerTool)
     if fc is None:
         return 'CMFFormController: No tool!'
 
@@ -77,7 +80,7 @@ def exportCMFFormController(context):
     """
     site = context.getSite()
 
-    fc = getToolByName(site, 'portal_form_controller', None)
+    fc = queryUtility(IFormControllerTool)
     if fc is None:
         return 'CMFFormController: Nothing to export.'
 
@@ -98,7 +101,7 @@ class CMFFormControllerExportConfigurator(ExportConfiguratorBase):
     def listValidators(self):
         """ Return a list of mappings describing the tool's validators.
         """
-        fc = getToolByName(self._site, 'portal_form_controller')
+        fc = getUtility(IFormControllerTool)
 
         for validator in fc.listFormValidators():
             yield {'object_id': validator.getObjectId(),
@@ -110,7 +113,7 @@ class CMFFormControllerExportConfigurator(ExportConfiguratorBase):
     def listActions(self):
         """ Return a list of mappings describing the tool's actions.
         """
-        fc = getToolByName(self._site, 'portal_form_controller')
+        fc = getUtility(IFormControllerTool)
 
         for action in fc.listFormActions():
             yield {'object_id': action.getObjectId(),

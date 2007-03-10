@@ -1,12 +1,16 @@
+from zope.component import getUtility
+
 from AccessControl import ClassSecurityInfo
+from Acquisition import aq_base
 from Globals import InitializeClass
 from OFS.SimpleItem import SimpleItem
-from Products.CMFCore.utils import getToolByName
-from Key import Key
+from Products.CMFFormController.interfaces import IFormControllerTool
+
 from globalVars import ANY_CONTEXT, ANY_BUTTON
-from Acquisition import aq_base
+from Key import Key
 
 _marker = []
+
 
 class FormActionType(SimpleItem):
 
@@ -153,7 +157,7 @@ class FormActionContainer(SimpleItem):
         self._p_changed = 1
 
     def match(self, object_id, status, context_type, button):
-        controller = getToolByName(self, 'portal_form_controller')
+        controller = getUtility(IFormControllerTool)
         action = None
         try:
             action = self.actions.get(FormActionKey(object_id, status, \

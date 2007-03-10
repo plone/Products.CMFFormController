@@ -15,6 +15,8 @@
 """
 
 import copy
+from zope.component import getUtility
+from zope.interface import implements
 from zope.tales.tales import CompilerError
 
 import Globals, Acquisition
@@ -22,7 +24,6 @@ from AccessControl import ClassSecurityInfo
 from OFS.Cache import Cacheable
 from Products.CMFCore.DirectoryView import registerFileExtension, registerMetaType
 from Products.CMFCore.permissions import View
-from Products.CMFCore.utils import getToolByName
 from Script import FSPythonScript as BaseClass
 from ControllerPythonScript import ControllerPythonScript
 from ControllerState import ControllerState
@@ -30,7 +31,7 @@ from FSControllerBase import FSControllerBase
 from utils import log, logException
 from interfaces import IControllerPythonScript
 
-from zope.interface import implements
+from Products.CMFFormController.interfaces import IFormControllerTool
 
 class FSControllerPythonScript (FSControllerBase, BaseClass):
     """FSControllerPythonScripts act like Controller Python Scripts but are not
@@ -82,7 +83,7 @@ class FSControllerPythonScript (FSControllerBase, BaseClass):
 
     def __call__(self, *args, **kwargs):
         REQUEST = self.REQUEST
-        controller = getToolByName(self, 'portal_form_controller')
+        controller = getUtility(IFormControllerTool)
         controller_state = controller.getState(self, is_validator=0)
         controller_state = self.getButton(controller_state, REQUEST)
         validators = self.getValidators(controller_state, REQUEST).getValidators()
@@ -138,7 +139,7 @@ class FSControllerPythonScript (FSControllerBase, BaseClass):
         return 0
 
     def _getState(self):
-        return getToolByName(self, 'portal_form_controller').getState(self, is_validator=0)
+        return getUtility(IFormControllerTool).getState(self, is_validator=0)
 
 
 Globals.InitializeClass(FSControllerPythonScript)

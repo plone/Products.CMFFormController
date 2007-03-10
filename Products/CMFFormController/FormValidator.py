@@ -1,12 +1,16 @@
+from zope.component import getUtility
+
 from AccessControl import ClassSecurityInfo
+from Acquisition import aq_base
 from Globals import InitializeClass
 from OFS.SimpleItem import SimpleItem
-from Products.CMFCore.utils import getToolByName
-from Key import Key
+from Products.CMFFormController.interfaces import IFormControllerTool
+
 from globalVars import ANY_CONTEXT, ANY_BUTTON
-from Acquisition import aq_base
+from Key import Key
 
 _marker = []
+
 
 class FormValidatorKey(Key):
 
@@ -111,7 +115,7 @@ class FormValidatorContainer(SimpleItem):
         self._p_changed = 1
 
     def match(self, object_id, context_type, button):
-        controller = getToolByName(self, 'portal_form_controller')
+        controller = getUtility(IFormControllerTool)
         validator = None
         try:
             validator = self.validators.get(FormValidatorKey(object_id, context_type, button, controller), None)

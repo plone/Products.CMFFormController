@@ -1,11 +1,14 @@
 import os
+from zope.component import getUtility
+
 from Acquisition import aq_base
 from Globals import InitializeClass
 from AccessControl import ClassSecurityInfo
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from Products.CMFCore.permissions import View, ManagePortal
-from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.FSMetadata import FSMetadata, CMFConfigParser
+from Products.CMFFormController.interfaces import IFormControllerTool
+
 from FormAction import FormAction, FormActionContainer
 from FormValidator import FormValidator, FormValidatorContainer
 from globalVars import ANY_CONTEXT, ANY_BUTTON
@@ -54,7 +57,7 @@ class ControllerBase:
             self._cloned_object_path = self.getPhysicalPath()
 
     def _fixup_old_ids(self, old_id):
-        fc = getToolByName(self, 'portal_form_controller')
+        fc = getUtility(IFormControllerTool)
         id = self.getId()
         if old_id != id:
             if hasattr(aq_base(self), 'actions'):
@@ -82,13 +85,13 @@ class ControllerBase:
     security.declareProtected(ManagePortal, 'listActionTypes')
     def listActionTypes(self):
         """Return a list of available action types."""
-        return getToolByName(self, 'portal_form_controller').listActionTypes()
+        return getUtility(IFormControllerTool).listActionTypes()
 
     security.declareProtected(ManagePortal, 'listFormValidators')
     def listFormValidators(self, override, **kwargs):
         """Return a list of existing validators.  Validators can be filtered by
            specifying required attributes via kwargs"""
-        controller = getToolByName(self, 'portal_form_controller')
+        controller = getUtility(IFormControllerTool)
         if override:
             return controller.validators.getFiltered(**kwargs)
         else:
@@ -99,7 +102,7 @@ class ControllerBase:
     def listFormActions(self, override, **kwargs):
         """Return a list of existing actions.  Actions can be filtered by
            specifying required attributes via kwargs"""
-        controller = getToolByName(self, 'portal_form_controller')
+        controller = getUtility(IFormControllerTool)
         if override:
             return controller.actions.getFiltered(**kwargs)
         else:
@@ -109,13 +112,13 @@ class ControllerBase:
     security.declareProtected(ManagePortal, 'listContextTypes')
     def listContextTypes(self):
         """Return list of possible types for template context objects"""
-        return getToolByName(self, 'portal_form_controller').listContextTypes()
+        return getUtility(IFormControllerTool).listContextTypes()
 
 
     security.declareProtected(ManagePortal, 'manage_editFormValidators')
     def manage_editFormValidators(self, REQUEST):
         """Process form validator edit form"""
-        controller = getToolByName(self, 'portal_form_controller')
+        controller = getUtility(IFormControllerTool)
         if REQUEST.form.get('override', 0):
             container = controller.validators
         else:
@@ -127,7 +130,7 @@ class ControllerBase:
     security.declareProtected(ManagePortal, 'manage_addFormValidators')
     def manage_addFormValidators(self, REQUEST):
         """Process form validator add form"""
-        controller = getToolByName(self, 'portal_form_controller')
+        controller = getUtility(IFormControllerTool)
         if REQUEST.form.get('override', 0):
             container = controller.validators
         else:
@@ -139,7 +142,7 @@ class ControllerBase:
     security.declareProtected(ManagePortal, 'manage_delFormValidators')
     def manage_delFormValidators(self, REQUEST):
         """Process form validator delete form"""
-        controller = getToolByName(self, 'portal_form_controller')
+        controller = getUtility(IFormControllerTool)
         if REQUEST.form.get('override', 0):
             container = controller.validators
         else:
@@ -151,7 +154,7 @@ class ControllerBase:
     security.declareProtected(ManagePortal, 'manage_editFormActions')
     def manage_editFormActions(self, REQUEST):
         """Process form action edit form"""
-        controller = getToolByName(self, 'portal_form_controller')
+        controller = getUtility(IFormControllerTool)
         if REQUEST.form.get('override', 0):
             container = controller.actions
         else:
@@ -163,7 +166,7 @@ class ControllerBase:
     security.declareProtected(ManagePortal, 'manage_addFormAction')
     def manage_addFormAction(self, REQUEST):
         """Process form action add form"""
-        controller = getToolByName(self, 'portal_form_controller')
+        controller = getUtility(IFormControllerTool)
         if REQUEST.form.get('override', 0):
             container = controller.actions
         else:
@@ -175,7 +178,7 @@ class ControllerBase:
     security.declareProtected(ManagePortal, 'manage_delFormActions')
     def manage_delFormActions(self, REQUEST):
         """Process form action delete form"""
-        controller = getToolByName(self, 'portal_form_controller')
+        controller = getUtility(IFormControllerTool)
         if REQUEST.form.get('override', 0):
             container = controller.actions
         else:
@@ -198,7 +201,7 @@ class ControllerBase:
                 context_type = getattr(context_type, '__name__', None)
 
         button = controller_state.getButton()
-        controller = getToolByName(self, 'portal_form_controller')
+        controller = getUtility(IFormControllerTool)
 
         next_action = None
         try:
@@ -254,7 +257,7 @@ class ControllerBase:
     def getValidators(self, controller_state, REQUEST):
         __traceback_info__ = str(controller_state).split('\n')
         
-        controller = getToolByName(self, 'portal_form_controller')
+        controller = getUtility(IFormControllerTool)
         context = controller_state.getContext()
         context_type = controller._getTypeName(context)
         button = controller_state.getButton()
@@ -290,7 +293,7 @@ class ControllerBase:
         if os.path.exists(filepath + '.metadata'):
             cfg.read(filepath + '.metadata')
             try:
-                controller = getToolByName(self, 'portal_form_controller')
+                controller = getUtility(IFormControllerTool)
             except AttributeError:
                 controller = None
 
@@ -347,7 +350,7 @@ class ControllerBase:
         if os.path.exists(filepath + '.metadata'):
             cfg.read(filepath + '.metadata')
             try:
-                controller = getToolByName(self, 'portal_form_controller')
+                controller = getUtility(IFormControllerTool)
             except AttributeError:
                 controller = None
 
