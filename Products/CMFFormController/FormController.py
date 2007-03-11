@@ -13,8 +13,8 @@ from ZPublisher.mapply import mapply
 from Products.CMFFormController import GLOBALS as fc_globals
 from Products.CMFCore.utils import UniqueObject, SimpleItemWithProperties
 from Products.CMFCore.interfaces import ICatalogTool
+from Products.CMFCore.interfaces import ISiteRoot
 from Products.CMFCore.interfaces import ITypesTool
-from Products.CMFCore.interfaces import IURLTool
 from Products.CMFCore.permissions import ManagePortal
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 
@@ -108,7 +108,7 @@ class FormController(UniqueObject, SimpleItemWithProperties):
 
     def _checkId(self, id):
         """See if an id is valid CMF/Plone id"""
-        portal = getUtility(IURLTool).getPortalObject()
+        portal = getUtility(ISiteRoot)
         if not id:
             return 'Empty id'
         s = bad_id(id)
@@ -443,7 +443,7 @@ class FormController(UniqueObject, SimpleItemWithProperties):
         def fn(obj, dict):
             dict[obj.getId()] = 0
         meta_types = ['Controller Page Template', 'Controller Page Template (File)', 'Filesystem Controller Page Template', 'Controller Python Script', 'Filesystem Controller Python Script']
-        portal = getUtility(IURLTool).getPortalObject()
+        portal = getUtility(ISiteRoot)
         catalog = getUtility(ICatalogTool)
         result = catalog.ZopeFindAndApply(portal, obj_metatypes=meta_types, search_sub=1, result=[])
         for (path, r) in result:

@@ -293,10 +293,8 @@ class ControllerBase:
         cfg = CMFConfigParser()
         if os.path.exists(filepath + '.metadata'):
             cfg.read(filepath + '.metadata')
-            controller = queryUtility(IFormControllerTool)
-
             _buttons_for_status = {}
-                
+
             actions = metadata._getSectionDict(cfg, 'actions')
             if actions is None:
                 actions = {}
@@ -313,14 +311,7 @@ class ControllerBase:
                     act.append('')
 
                 context_type = component[2]
-                if controller:
-                    if context_type and (not context_type in controller.listContextTypes()):
-                        # Don't raise an exception because sometimes full list of
-                        # types may be unavailable (e.g. when moving a site)
-                        # raise ValueError, 'Illegal context type %s' % context_type
-                        log('Unknown context type %s for template %s' % (str(context_type), str(id)))
-
-                self.actions.set(FormAction(id, component[1], component[2], component[3], act[0], act[1], controller))
+                self.actions.set(FormAction(id, component[1], component[2], component[3], act[0], act[1]))
 
                 status_key = str(component[1])+'.'+str(context_type)
                 if _buttons_for_status.has_key(status_key):
@@ -347,8 +338,6 @@ class ControllerBase:
         cfg = CMFConfigParser()
         if os.path.exists(filepath + '.metadata'):
             cfg.read(filepath + '.metadata')
-            controller = queryUtility(IFormControllerTool)
-
             _buttons_for_status = {}
 
             validators = metadata._getSectionDict(cfg, 'validators')
@@ -363,14 +352,7 @@ class ControllerBase:
                     raise ValueError, '%s: Format for .metadata validators is validators.CONTEXT_TYPE.BUTTON = LIST (not %s)' % (filepath, k)
 
                 context_type = component[1]
-                if controller:
-                    if context_type and not context_type in controller.listContextTypes():
-                        # Don't raise an exception because sometimes full list of
-                        # types may be unavailable (e.g. when moving a site)
-                        # raise ValueError, 'Illegal context type %s' % context_type
-                        log('Unknown context type %s for template %s' % (str(context_type), str(id)))
-
-                self.validators.set(FormValidator(id, component[1], component[2], v, controller))
+                self.validators.set(FormValidator(id, component[1], component[2], v))
 
                 status_key = str(context_type)
                 if _buttons_for_status.has_key(status_key):
