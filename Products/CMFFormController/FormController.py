@@ -11,7 +11,9 @@ from StructuredText.StructuredText import HTML
 from ZPublisher.Publish import call_object, missing_name, dont_publish_class
 from ZPublisher.mapply import mapply
 from Products.CMFFormController import GLOBALS as fc_globals
-from Products.CMFCore.utils import UniqueObject, SimpleItemWithProperties
+from Products.CMFCore.utils import registerToolInterface
+from Products.CMFCore.utils import SimpleItemWithProperties
+from Products.CMFCore.utils import UniqueObject
 from Products.CMFCore.interfaces import ICatalogTool
 from Products.CMFCore.interfaces import ISiteRoot
 from Products.CMFCore.interfaces import ITypesTool
@@ -468,3 +470,4 @@ class FormController(UniqueObject, SimpleItemWithProperties):
         return '%d action overrides deleted, %d validator overrides deleted' % (n_actions, n_validators)
 
 Globals.InitializeClass(FormController)
+registerToolInterface('portal_form_controller', IFormControllerTool)
