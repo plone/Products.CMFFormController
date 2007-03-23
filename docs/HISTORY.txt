@@ -2,6 +2,19 @@ Changelog for CMFFormController
 
     (name of developer listed in brackets)
 
+CMFFormController 2.1b2 - Released March 23, 2007
+
+    - Converted installation code to be based on a GenericSetup extension
+      profile.
+      [hannosch]
+
+    - Let the form controller tool implement and interface and added a bbb
+      registerToolInterface call.
+      [hannosch]
+
+    - Replaced getToolByName by getUtility calls.
+      [hannosch]
+
 CMFFormController 2.1b1 - Released March 5, 2007
 
     - Converted to a regular Python package in the Products namespace.
