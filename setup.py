@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '2.1b2'
+version = '2.1b3'
 
 setup(name='Products.CMFFormController',
       version=version,
@@ -28,7 +28,4 @@ setup(name='Products.CMFFormController',
       install_requires=[
         'setuptools',
       ],
-      entry_points="""
-      # -*- Entry points: -*-
-      """,
 )
