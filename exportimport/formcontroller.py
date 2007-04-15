@@ -69,6 +69,9 @@ def importCMFFormController(context):
                                   action.get('button', ''),
                                   action['action_type'],
                                   str(action['action_arg'])))
+    require_post = fc_info.get('require_post', None)
+    if require_post is not None:
+        fc.require_post = require_post
 
     return 'CMFFormController settings imported.'
 

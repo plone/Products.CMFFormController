@@ -150,7 +150,15 @@ Python Script is executed.  <a href="#docs">Learn more</a>.</p>
 
 <p tal:condition="not:form_validators"><i>No validators have been specified</i></p>
 
-<table tal:condition="form_validators">
+<table>
+   <tr>
+       <td class="form-element">
+          <input type="checkbox" name="require_post:bool"
+                 value="True"
+                 tal:attributes="checked python:context.getPOSTRequired() or None"/>
+       </td>
+       <td class="form-label">Require POST Requests</td>
+   </tr>
 <tr>
    <td class="form-element"><input type="submit" name="manage_editFormValidators:method" value="Save"/></td>
    <td class="form-element"><input type="submit" name="manage_delFormValidators:method" value="Delete"/></td>

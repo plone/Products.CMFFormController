@@ -4,14 +4,13 @@
 
 import unittest
 
-from Products.PloneTestCase import PloneTestCase
-PloneTestCase.setupPloneSite()
+from Products.CMFFormController.tests import CMFFormControllerTestCase
 
 from Products.CMFFormController.FormAction import FormAction
 from Products.CMFFormController.FormValidator import FormValidator
 import transaction
 
-class TestCopyRename(PloneTestCase.PloneTestCase):
+class TestCopyRename(CMFFormControllerTestCase):
 
     def testRename(self):
         formcontroller = self.portal.portal_form_controller
@@ -34,6 +33,9 @@ class TestCopyRename(PloneTestCase.PloneTestCase):
         self.assertEqual(len(formcontroller.validators.getFiltered(object_id='test')), 1)
         self.assertEqual(formcontroller.validators.match('test', 'Document', 'submit').getValidators(), ['d','e','f'])
 
+        pt.require_post = True
+        self.assertEqual(pt.getPOSTRequired(), True)
+
         transaction.savepoint(optimistic=True)
 
         self.loginAsPortalOwner()
@@ -48,6 +50,7 @@ class TestCopyRename(PloneTestCase.PloneTestCase):
         self.assertEqual(len(pt2.validators.getFiltered(object_id='test2')), 1)
         self.assertEqual(formcontroller.validators.match('test2', 'Document', 'submit').getValidators(), ['d','e','f'])
         self.assertEqual(formcontroller.validators.match('test', 'Document', 'submit').getValidators(), ['d','e','f'])
+        self.assertEqual(pt2.getPOSTRequired(), True)
 
         formcontroller._purge()
         self.assertEqual(formcontroller.validators.match('test2', 'Document', 'submit').getValidators(), ['d','e','f'])
@@ -74,6 +77,9 @@ class TestCopyRename(PloneTestCase.PloneTestCase):
         self.assertEqual(len(formcontroller.validators.getFiltered(object_id='test')), 1)
         self.assertEqual(formcontroller.validators.match('test', 'Document', 'submit').getValidators(), ['d','e','f'])
 
+        pt.require_post = True
+        self.assertEqual(pt.getPOSTRequired(), True)
+
         transaction.savepoint(optimistic=True)
 
         self.loginAsPortalOwner()
@@ -89,6 +95,7 @@ class TestCopyRename(PloneTestCase.PloneTestCase):
         self.assertEqual(len(pt2.validators.getFiltered(object_id='copy_of_test')), 1)
         self.assertEqual(formcontroller.validators.match('copy_of_test', 'Document', 'submit').getValidators(), ['d','e','f'])
         self.assertEqual(formcontroller.validators.match('test', 'Document', 'submit').getValidators(), ['d','e','f'])
+        self.assertEqual(pt2.getPOSTRequired(), True)
 
         formcontroller._purge()
         self.assertEqual(formcontroller.actions.match('test', 'success', 'Document', 'submit').getActionArg(), 'test4')

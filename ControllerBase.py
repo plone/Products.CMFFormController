@@ -1,6 +1,7 @@
 import os
 from Acquisition import aq_base
 from Globals import InitializeClass
+from zExceptions import Forbidden
 from AccessControl import ClassSecurityInfo
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from Products.CMFCore.permissions import View, ManagePortal
@@ -10,6 +11,7 @@ from FormAction import FormAction, FormActionContainer
 from FormValidator import FormValidator, FormValidatorContainer
 from globalVars import ANY_CONTEXT, ANY_BUTTON
 from utils import log
+from logging import WARNING
 
 class ControllerBase:
     """Common functions for objects controlled by portal_form_controller"""
@@ -24,6 +26,7 @@ class ControllerBase:
     security.declareProtected(ManagePortal, 'manage_formValidatorsForm')
     manage_formValidatorsForm = PageTemplateFile('www/manage_formValidatorsForm', globals())
     manage_formValidatorsForm.__name__ = 'manage_formValidatorsForm'
+    require_post = False
 
     def _updateActions(self, container, old_id, new_id, move):
         """Copy action overrides stored in portal_form_controller from one 
@@ -115,6 +118,7 @@ class ControllerBase:
     security.declareProtected(ManagePortal, 'manage_editFormValidators')
     def manage_editFormValidators(self, REQUEST):
         """Process form validator edit form"""
+        self._setPOSTRequired(REQUEST)
         controller = getToolByName(self, 'portal_form_controller')
         if REQUEST.form.get('override', 0):
             container = controller.validators
@@ -139,6 +143,7 @@ class ControllerBase:
     security.declareProtected(ManagePortal, 'manage_delFormValidators')
     def manage_delFormValidators(self, REQUEST):
         """Process form validator delete form"""
+        self._setPOSTRequired(REQUEST)
         controller = getToolByName(self, 'portal_form_controller')
         if REQUEST.form.get('override', 0):
             container = controller.validators
@@ -183,6 +188,14 @@ class ControllerBase:
         controller._delFormActions(container, REQUEST)
         return REQUEST.RESPONSE.redirect(self.absolute_url()+'/manage_formActionsForm')
 
+    def _setPOSTRequired(self, REQUEST):
+        self.require_post = bool(REQUEST.get('require_post', False))
+
+    security.declareProtected(ManagePortal, 'getPostRequired')
+    def getPOSTRequired(self):
+        """Returns a boolean indicating whether or not to require POST requests
+        """
+        return self.require_post
 
     def getNext(self, controller_state, REQUEST):
         __traceback_info__ = str(controller_state).split('\n')
@@ -253,7 +266,17 @@ class ControllerBase:
 
     def getValidators(self, controller_state, REQUEST):
         __traceback_info__ = str(controller_state).split('\n')
-        
+        if REQUEST.get('REQUEST_METHOD', 'GET') == 'GET':
+            form_id = getattr(self, 'id', 'Unknown')
+            if not self.require_post:
+                log('You have triggered the form controller action "%s" using '
+                    'a GET REQUEST.  This is a potential security hazard.  In '
+                    'Plone 3.0 this will FAIL unless you explicitly enable '
+                    'your form to support GET requests in the ZMI (or '
+                    'using the .metadata file).'%form_id, WARNING)
+            else:
+                raise Forbidden, ("This form's actions can not be triggered "
+                                  "using a GET request.")
         controller = getToolByName(self, 'portal_form_controller')
         context = controller_state.getContext()
         context_type = controller._getTypeName(context)
@@ -361,6 +384,12 @@ class ControllerBase:
                 validators = {}
             for (k, v) in validators.items():
                 # validators.CONTEXT_TYPE.BUTTON = LIST
+                if k == 'require_post':
+                    # Set to False if the value is False or 'False' or '0'
+                    require_post =  not (not v or v in ['False', '0']) and \
+                                   True or False
+                    self.require_post = require_post
+                    continue
                 component = k.split('.')
                 while len(component) < 3:
                     component.append('')
