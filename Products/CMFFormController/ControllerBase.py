@@ -1,15 +1,11 @@
 import os
-from zope.component import getUtility
-from zope.component import queryUtility
-
 from Acquisition import aq_base
 from Globals import InitializeClass
 from AccessControl import ClassSecurityInfo
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from Products.CMFCore.permissions import View, ManagePortal
+from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.FSMetadata import FSMetadata, CMFConfigParser
-from Products.CMFFormController.interfaces import IFormControllerTool
-
 from FormAction import FormAction, FormActionContainer
 from FormValidator import FormValidator, FormValidatorContainer
 from globalVars import ANY_CONTEXT, ANY_BUTTON
@@ -58,7 +54,7 @@ class ControllerBase:
             self._cloned_object_path = self.getPhysicalPath()
 
     def _fixup_old_ids(self, old_id):
-        fc = getUtility(IFormControllerTool)
+        fc = getToolByName(self, 'portal_form_controller')
         id = self.getId()
         if old_id != id:
             if hasattr(aq_base(self), 'actions'):
@@ -86,13 +82,13 @@ class ControllerBase:
     security.declareProtected(ManagePortal, 'listActionTypes')
     def listActionTypes(self):
         """Return a list of available action types."""
-        return getUtility(IFormControllerTool).listActionTypes()
+        return getToolByName(self, 'portal_form_controller').listActionTypes()
 
     security.declareProtected(ManagePortal, 'listFormValidators')
     def listFormValidators(self, override, **kwargs):
         """Return a list of existing validators.  Validators can be filtered by
            specifying required attributes via kwargs"""
-        controller = getUtility(IFormControllerTool)
+        controller = getToolByName(self, 'portal_form_controller')
         if override:
             return controller.validators.getFiltered(**kwargs)
         else:
@@ -103,7 +99,7 @@ class ControllerBase:
     def listFormActions(self, override, **kwargs):
         """Return a list of existing actions.  Actions can be filtered by
            specifying required attributes via kwargs"""
-        controller = getUtility(IFormControllerTool)
+        controller = getToolByName(self, 'portal_form_controller')
         if override:
             return controller.actions.getFiltered(**kwargs)
         else:
@@ -113,13 +109,13 @@ class ControllerBase:
     security.declareProtected(ManagePortal, 'listContextTypes')
     def listContextTypes(self):
         """Return list of possible types for template context objects"""
-        return getUtility(IFormControllerTool).listContextTypes()
+        return getToolByName(self, 'portal_form_controller').listContextTypes()
 
 
     security.declareProtected(ManagePortal, 'manage_editFormValidators')
     def manage_editFormValidators(self, REQUEST):
         """Process form validator edit form"""
-        controller = getUtility(IFormControllerTool)
+        controller = getToolByName(self, 'portal_form_controller')
         if REQUEST.form.get('override', 0):
             container = controller.validators
         else:
@@ -131,7 +127,7 @@ class ControllerBase:
     security.declareProtected(ManagePortal, 'manage_addFormValidators')
     def manage_addFormValidators(self, REQUEST):
         """Process form validator add form"""
-        controller = getUtility(IFormControllerTool)
+        controller = getToolByName(self, 'portal_form_controller')
         if REQUEST.form.get('override', 0):
             container = controller.validators
         else:
@@ -143,7 +139,7 @@ class ControllerBase:
     security.declareProtected(ManagePortal, 'manage_delFormValidators')
     def manage_delFormValidators(self, REQUEST):
         """Process form validator delete form"""
-        controller = getUtility(IFormControllerTool)
+        controller = getToolByName(self, 'portal_form_controller')
         if REQUEST.form.get('override', 0):
             container = controller.validators
         else:
@@ -155,7 +151,7 @@ class ControllerBase:
     security.declareProtected(ManagePortal, 'manage_editFormActions')
     def manage_editFormActions(self, REQUEST):
         """Process form action edit form"""
-        controller = getUtility(IFormControllerTool)
+        controller = getToolByName(self, 'portal_form_controller')
         if REQUEST.form.get('override', 0):
             container = controller.actions
         else:
@@ -167,7 +163,7 @@ class ControllerBase:
     security.declareProtected(ManagePortal, 'manage_addFormAction')
     def manage_addFormAction(self, REQUEST):
         """Process form action add form"""
-        controller = getUtility(IFormControllerTool)
+        controller = getToolByName(self, 'portal_form_controller')
         if REQUEST.form.get('override', 0):
             container = controller.actions
         else:
@@ -179,7 +175,7 @@ class ControllerBase:
     security.declareProtected(ManagePortal, 'manage_delFormActions')
     def manage_delFormActions(self, REQUEST):
         """Process form action delete form"""
-        controller = getUtility(IFormControllerTool)
+        controller = getToolByName(self, 'portal_form_controller')
         if REQUEST.form.get('override', 0):
             container = controller.actions
         else:
@@ -202,7 +198,7 @@ class ControllerBase:
                 context_type = getattr(context_type, '__name__', None)
 
         button = controller_state.getButton()
-        controller = getUtility(IFormControllerTool)
+        controller = getToolByName(self, 'portal_form_controller')
 
         next_action = None
         try:
@@ -258,7 +254,7 @@ class ControllerBase:
     def getValidators(self, controller_state, REQUEST):
         __traceback_info__ = str(controller_state).split('\n')
         
-        controller = getUtility(IFormControllerTool)
+        controller = getToolByName(self, 'portal_form_controller')
         context = controller_state.getContext()
         context_type = controller._getTypeName(context)
         button = controller_state.getButton()

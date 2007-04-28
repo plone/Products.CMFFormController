@@ -1,8 +1,7 @@
 from BaseFormAction import BaseFormAction
 import TraverseTo
 
-from zope.component import getUtility
-from Products.CMFCore.interfaces import IActionsTool
+from Products.CMFCore.utils import getToolByName
 from Products.CMFFormController.FormController import registerFormAction
 from urlparse import urlsplit
 
@@ -19,7 +18,7 @@ class TraverseToAction(BaseFormAction):
         haveAction = False
 
         context = controller_state.getContext()
-        actions_tool = getUtility(IActionsTool)
+        actions_tool = getToolByName(context, 'portal_actions')
         fti = context.getTypeInfo()
         REQUEST = getattr(context, 'REQUEST', None)
 

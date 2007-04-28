@@ -14,23 +14,19 @@
 """ Customizable controlled python scripts that come from the filesystem.
 """
 
-from zope.component import getUtility
-from zope.interface import implements
-
 import Globals
 from AccessControl import ClassSecurityInfo
 from OFS.Cache import Cacheable
 from Products.CMFCore.DirectoryView import registerFileExtension, registerMetaType
 from Products.CMFCore.permissions import View
+from Products.CMFCore.utils import getToolByName
 from Script import FSPythonScript as BaseClass
 from ControllerValidator import ControllerValidator
 from ControllerBase import ControllerBase
-
-from Products.CMFFormController.interfaces import IFormControllerTool
-
 from utils import logException
 from interfaces import IControllerValidator
 
+from zope.interface import implements
 
 class FSControllerValidator (BaseClass, ControllerBase):
     """FSControllerValidators act like Controller Python Scripts but are not
@@ -85,7 +81,7 @@ class FSControllerValidator (BaseClass, ControllerBase):
         return 0
 
     def _getState(self):
-        return getUtility(IFormControllerTool).getState(self, is_validator=1)
+        return getToolByName(self, 'portal_form_controller').getState(self, is_validator=1)
 
 Globals.InitializeClass(FSControllerValidator)
 

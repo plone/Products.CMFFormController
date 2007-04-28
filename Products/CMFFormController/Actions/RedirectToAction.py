@@ -1,8 +1,7 @@
 from BaseFormAction import BaseFormAction
 import RedirectTo
 
-from zope.component import getUtility
-from Products.CMFCore.interfaces import IActionsTool
+from Products.CMFCore.utils import getToolByName
 from Products.CMFFormController.FormController import registerFormAction
 
 def factory(arg):
@@ -29,7 +28,7 @@ class RedirectToAction(BaseFormAction):
             action_url = action_ob.getActionExpression()
             haveAction = True
         except (ValueError, AttributeError):
-            actions_tool = getUtility(IActionsTool)
+            actions_tool = getToolByName(context, 'portal_actions')
             actions = actions_tool.listFilteredActionsFor(
                                                 controller_state.getContext())
             # flatten the actions as we don't care where they are

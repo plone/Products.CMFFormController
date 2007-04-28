@@ -12,11 +12,7 @@ from ZPublisher.Publish import call_object, missing_name, dont_publish_class
 from ZPublisher.mapply import mapply
 from Products.CMFFormController import GLOBALS as fc_globals
 from Products.CMFCore.utils import registerToolInterface
-from Products.CMFCore.utils import SimpleItemWithProperties
-from Products.CMFCore.utils import UniqueObject
-from Products.CMFCore.interfaces import ICatalogTool
-from Products.CMFCore.interfaces import ISiteRoot
-from Products.CMFCore.interfaces import ITypesTool
+from Products.CMFCore.utils import getToolByName, UniqueObject, SimpleItemWithProperties
 from Products.CMFCore.permissions import ManagePortal
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 
@@ -110,7 +106,7 @@ class FormController(UniqueObject, SimpleItemWithProperties):
 
     def _checkId(self, id):
         """See if an id is valid CMF/Plone id"""
-        portal = getUtility(ISiteRoot)
+        portal = getToolByName(self, 'portal_url').getPortalObject()
         if not id:
             return 'Empty id'
         s = bad_id(id)
@@ -144,7 +140,7 @@ class FormController(UniqueObject, SimpleItemWithProperties):
     security.declareProtected(ManagePortal, 'listContextTypes')
     def listContextTypes(self):
         """Return list of possible types for template context objects"""
-        types_tool = getUtility(ITypesTool)
+        types_tool = getToolByName(self, 'portal_types')
         return types_tool.listContentTypes()
 
 
@@ -445,8 +441,8 @@ class FormController(UniqueObject, SimpleItemWithProperties):
         def fn(obj, dict):
             dict[obj.getId()] = 0
         meta_types = ['Controller Page Template', 'Controller Page Template (File)', 'Filesystem Controller Page Template', 'Controller Python Script', 'Filesystem Controller Python Script']
-        portal = getUtility(ISiteRoot)
-        catalog = getUtility(ICatalogTool)
+        portal = getToolByName(self, 'portal_url').getPortalObject()
+        catalog = getToolByName(self, 'portal_catalog')
         result = catalog.ZopeFindAndApply(portal, obj_metatypes=meta_types, search_sub=1, result=[])
         for (path, r) in result:
             if action_dict.has_key(r.getId()):
