@@ -5,21 +5,15 @@ CMFFormController
 
 Requires
 
-    CMF 1.5+
-    Zope 2.8.5+
+    CMF 1.6+
+    Zope 2.8.9+
 
 Quickstart
 
-    For CMF 1.5:
+    For CMF 1.6:
     1) Create an external method, module CMFFormController.Install,
        function: install
     2) Run it
-
-    Profiling CMFFormController scripts:
-    * If you want to use CallProfiler with CMFFormController, you will
-      need to download and install the CMFFormControllerPatch product
-      from the Collective.
-      (Thanks to Andy McKay)
 
 Documentation
 
