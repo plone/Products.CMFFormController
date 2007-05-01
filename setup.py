@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '2.1b3'
+version = '2.1b4'
 
 setup(name='Products.CMFFormController',
       version=version,
