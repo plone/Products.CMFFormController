@@ -8,8 +8,4 @@
   <five:deprecatedManageAddDelete
       class=".FSControllerPageTemplate.FSControllerPageTemplate" />
 
-  <five:registerPackage
-      package="."
-      initialize=".initialize" />
-
 </configure>
