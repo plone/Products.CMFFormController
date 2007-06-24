@@ -2,6 +2,10 @@ Changelog for CMFFormController
 
     (name of developer listed in brackets)
 
+   - remove utility registration - the formcontroller tool uses self.REQUEST
+     which is not available in utilities.
+     [wichert[
+
 CMFFormController 2.1b4 - Released May 5, 2007
 
     - Removed five:registerPackage again, as it is causing problems in ZEO

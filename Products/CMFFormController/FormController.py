@@ -466,4 +466,3 @@ class FormController(UniqueObject, SimpleItemWithProperties):
         return '%d action overrides deleted, %d validator overrides deleted' % (n_actions, n_validators)
 
 Globals.InitializeClass(FormController)
-registerToolInterface('portal_form_controller', IFormControllerTool)
