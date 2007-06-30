@@ -1,7 +1,6 @@
 from __future__ import nested_scopes
 import os
 from zope.interface import implements
-from zope.component import getUtility
 
 
 from AccessControl import ClassSecurityInfo
