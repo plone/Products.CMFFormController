@@ -2,7 +2,9 @@ Changelog for CMFFormController
 
     (name of developer listed in brackets)
 
-   - remove utility registration - the formcontroller tool uses self.REQUEST
+CMFFormController 2.1rc1 - Released July 9, 2007
+
+   - Removed utility registration - the formcontroller tool uses self.REQUEST
      which is not available in utilities.
      [wichert[
 
