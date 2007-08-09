@@ -2,6 +2,11 @@ Changelog for CMFFormController
 
     (name of developer listed in brackets)
 
+CMFFormController 2.1 - Released August 9, 2007
+
+    - No changes.
+      [hannosch]
+
 CMFFormController 2.1rc1 - Released July 9, 2007
 
    - Removed utility registration - the formcontroller tool uses self.REQUEST
