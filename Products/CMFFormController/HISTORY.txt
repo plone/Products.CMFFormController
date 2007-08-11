@@ -2,6 +2,11 @@ Changelog for CMFFormController
 
     (name of developer listed in brackets)
 
+CMFFormController 2.1.1 - Unreleased
+
+    - Made tests pass without Plone being installed.
+      [hannosch]
+
 CMFFormController 2.1 - Released August 9, 2007
 
     - No changes.
