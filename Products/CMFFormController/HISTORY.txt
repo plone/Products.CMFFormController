@@ -4,6 +4,9 @@ Changelog for CMFFormController
 
 CMFFormController 2.1.1 - Unreleased
 
+    - Fixed #7027 : ControllerState.__str__ loaded files in memory
+      [zegor]
+
     - Made tests pass without Plone being installed.
       [hannosch]
 
