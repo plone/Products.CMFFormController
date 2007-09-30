@@ -7,7 +7,7 @@ CMFFormController 2.0.9 - Released September 30, 2007
     - No longer render the contents of the context (when the context is a
       file) when calculating the state representation.  Fixes
       http://dev.plone.org/plone/ticket/7027
-      [alecm]
+      [zegor]
 
 CMFFormController 2.0.8 - Released April 28, 2007
 
