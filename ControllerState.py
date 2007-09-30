@@ -245,7 +245,7 @@ class ControllerState(AccessControl.Role.RoleManager):
     def __str__(self):
         return 'id = %s\nstatus = %s\nbutton=%s\nerrors=%s\ncontext=%s\nkwargs=%s\nnext_action=%s\n' % \
             (self.id, str(self.getStatus()), str(self.getButton()),
-             str(self.getErrors()), str(self.getContext()),
+             str(self.getErrors()), repr(self.getContext()),
              str(self.kwargs), str(self.next_action))
 
 Globals.InitializeClass(ControllerState)
