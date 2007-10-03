@@ -4,6 +4,10 @@ Changelog for CMFFormController
 
 CMFFormController 2.1.1 - Unreleased
 
+    - Removed two __traceback_info__'s from ControllerBase which where both
+      causing too much speed cost and optimized some Acquisition handling.
+      [hannosch]
+
     - Fixed #7027 : ControllerState.__str__ loaded files in memory
       [zegor]
 
