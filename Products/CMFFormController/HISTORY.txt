@@ -2,7 +2,7 @@ Changelog for CMFFormController
 
     (name of developer listed in brackets)
 
-CMFFormController 2.1.1 - Unreleased
+CMFFormController 2.1.1 - Released October 7, 2007
 
     - Removed two __traceback_info__'s from ControllerBase which where both
       causing too much speed cost and optimized some Acquisition handling.
