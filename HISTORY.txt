@@ -2,6 +2,12 @@ Changelog for CMFFormController
 
     (name of developer listed in brackets)
 
+CMFFormController 2.0.10 - Unreleased
+
+    - Removed two __traceback_info__'s from ControllerBase which where both
+      causing too much speed cost and optimized some Acquisition handling.
+      [hannosch]
+
 CMFFormController 2.0.9 - Released September 30, 2007
 
     - No longer render the contents of the context (when the context is a
