@@ -2,7 +2,7 @@ Changelog for CMFFormController
 
     (name of developer listed in brackets)
 
-CMFFormController 2.1.2 - Unreleased
+CMFFormController 2.1.2 - Released March 26, 2008
 
     - Added metadata.xml to GenericSetup profile.
       [hannosch]
