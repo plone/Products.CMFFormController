@@ -1,4 +1,5 @@
 from zope.tales.tales import CompilerError
+from zope.interface import implements
 
 from AccessControl import Role, ClassSecurityInfo
 from Acquisition import aq_base, aq_parent, aq_inner
@@ -13,7 +14,7 @@ from IFormAction import IFormAction
 from ZTUtils.Zope import make_query
 
 class BaseFormAction(Role.RoleManager):
-    __implements__ = IFormAction,
+    implements(IFormAction,)
 
     security = ClassSecurityInfo()
     security.declareObjectPublic()

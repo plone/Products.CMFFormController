@@ -1,8 +1,8 @@
-from Interface import Base
+from zope.interface import Interface
 
-class IFormAction(Base):
+class IFormAction(Interface):
 
-    def __call__(self, controller_state, REQUEST):
+    def __call__(controller_state, REQUEST):
         """Executes the action. Returns either a new controller_state or
            something that should be handed off to the publication machinery.
         """
