@@ -1,12 +1,11 @@
 from __future__ import nested_scopes
 import os
 from zope.interface import implements
-
+from zope.structuredtext import stx2html
 
 from AccessControl import ClassSecurityInfo
 import Globals
 from OFS.ObjectManager import bad_id
-from StructuredText.StructuredText import HTML
 from ZPublisher.Publish import call_object, missing_name, dont_publish_class
 from ZPublisher.mapply import mapply
 from Products.CMFFormController import GLOBALS as fc_globals
@@ -78,7 +77,7 @@ class FormController(UniqueObject, SimpleItemWithProperties):
     f = open(os.path.join(wwwpath, 'docs.stx'), 'r')
     _docs = f.read()
     f.close()
-    _docs = HTML(_docs)
+    _docs = stx2html(_docs)
 
 
     def __init__(self):
