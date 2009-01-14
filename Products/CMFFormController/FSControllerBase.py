@@ -13,6 +13,7 @@
 
 import os
 from AccessControl import ClassSecurityInfo
+from App.class_init import InitializeClass
 import Globals
 from Products.CMFCore.FSMetadata import FSMetadata
 from ControllerBase import ControllerBase
@@ -28,9 +29,6 @@ class FSControllerBase(ControllerBase):
             # Since props come from the filesystem, this should be
             # safe.
             self.__dict__.update(properties)
-            if fullname and properties.get('keep_extension', 0):
-                id = fullname
-
             cache = properties.get('cache')
             if cache:
                 self.ZCacheable_setManagerId(cache)
@@ -79,4 +77,4 @@ class FSControllerBase(ControllerBase):
             self._read_action_metadata(self.getId(), self._filepath)
             self._read_validator_metadata(self.getId(), self._filepath)
 
-Globals.InitializeClass(FSControllerBase)
+InitializeClass(FSControllerBase)

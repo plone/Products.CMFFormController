@@ -19,7 +19,7 @@ Python code.
 """
 
 import os, re
-from Globals import package_home
+from App.Common import package_home
 import AccessControl
 from OFS.SimpleItem import SimpleItem
 from urllib import quote

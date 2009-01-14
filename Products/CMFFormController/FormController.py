@@ -4,12 +4,12 @@ from zope.interface import implements
 from zope.structuredtext import stx2html
 
 from AccessControl import ClassSecurityInfo
-import Globals
+from App.class_init import InitializeClass
+from App.Common import package_home
 from OFS.ObjectManager import bad_id
 from ZPublisher.Publish import call_object, missing_name, dont_publish_class
 from ZPublisher.mapply import mapply
 from Products.CMFFormController import GLOBALS as fc_globals
-from Products.CMFCore.utils import registerToolInterface
 from Products.CMFCore.utils import getToolByName, UniqueObject, SimpleItemWithProperties
 from Products.CMFCore.permissions import ManagePortal
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
@@ -73,7 +73,7 @@ class FormController(UniqueObject, SimpleItemWithProperties):
     security.declareProtected(ManagePortal, 'index_html')
     index_html = None
 
-    wwwpath = os.path.join(Globals.package_home(fc_globals), 'www')
+    wwwpath = os.path.join(package_home(fc_globals), 'www')
     f = open(os.path.join(wwwpath, 'docs.stx'), 'r')
     _docs = f.read()
     f.close()
@@ -463,4 +463,4 @@ class FormController(UniqueObject, SimpleItemWithProperties):
                 self.validators.delete(v.getKey())
         return '%d action overrides deleted, %d validator overrides deleted' % (n_actions, n_validators)
 
-Globals.InitializeClass(FormController)
+InitializeClass(FormController)

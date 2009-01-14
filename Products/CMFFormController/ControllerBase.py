@@ -1,6 +1,6 @@
 import os
 from Acquisition import aq_base, aq_inner
-from Globals import InitializeClass
+from App.class_init import InitializeClass
 from AccessControl import ClassSecurityInfo
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from Products.CMFCore.permissions import View, ManagePortal

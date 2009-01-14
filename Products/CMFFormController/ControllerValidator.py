@@ -19,7 +19,7 @@ Python code.
 """
 
 import os
-from Globals import package_home
+from App.Common import package_home
 import AccessControl
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from OFS.SimpleItem import SimpleItem

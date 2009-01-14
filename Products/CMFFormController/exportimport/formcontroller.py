@@ -17,8 +17,8 @@ $Id$
 
 import os
 from AccessControl import ClassSecurityInfo
-from Globals import InitializeClass
-from Globals import package_home
+from App.class_init import InitializeClass
+from App.Common import package_home
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 
 from Products.CMFCore.utils import getToolByName

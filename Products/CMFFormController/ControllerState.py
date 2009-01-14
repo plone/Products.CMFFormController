@@ -1,6 +1,6 @@
-import Globals
 import AccessControl
 from AccessControl import ClassSecurityInfo
+from App.class_init import InitializeClass
 from Products.CMFCore.utils import getToolByName
 from FormAction import FormAction
 from globalVars import ANY_CONTEXT, ANY_BUTTON
@@ -245,4 +245,4 @@ class ControllerState(AccessControl.Role.RoleManager):
              str(self.getErrors()), repr(self.getContext()),
              str(self.kwargs), str(self.next_action))
 
-Globals.InitializeClass(ControllerState)
+InitializeClass(ControllerState)

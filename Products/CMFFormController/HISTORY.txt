@@ -4,6 +4,10 @@ Changelog for CMFFormController
 
 CMFFormController 2.1.3 - Unreleased
 
+    - Declare package dependencies and fixed deprecation warnings for use
+      of Globals.
+      [hannosch]
+
     - Correct license in egg metadata.
       [wichert]
 

@@ -15,7 +15,7 @@
 import logging
 import re
 
-import Globals
+from App.class_init import InitializeClass
 from Shared.DC.Scripts.Bindings import NameAssignments as BaseNameAssignments
 from Products.PythonScripts.PythonScript import PythonScript as BasePythonScript
 from Products.CMFCore.FSPythonScript import FSPythonScript as BaseFSPythonScript, bad_func_code
@@ -129,7 +129,7 @@ class PythonScript(BasePythonScript):
             logger.exception('%s write failed' % self.meta_type)
             raise
 
-Globals.InitializeClass(PythonScript)
+InitializeClass(PythonScript)
 
 
 class FSPythonScript(BaseFSPythonScript, PythonScript):
@@ -183,4 +183,4 @@ class FSPythonScript(BaseFSPythonScript, PythonScript):
     _metadata_map = PythonScript._metadata_map
     write = PythonScript.write
 
-Globals.InitializeClass(FSPythonScript)
+InitializeClass(FSPythonScript)

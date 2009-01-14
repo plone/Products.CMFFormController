@@ -1,5 +1,4 @@
 from setuptools import setup, find_packages
-import sys, os
 
 version = '2.1.3'
 
@@ -19,14 +18,26 @@ setup(name='Products.CMFFormController',
       keywords='Zope CMF Plone form validation',
       author='Geoff Davis',
       author_email='plone-developers@lists.sourceforge.net',
-      url='http://svn.plone.org/svn/collective/CMFFormController/trunk',
+      url='http://plone.org/products/cmfformcontroller',
       license='BSD',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['Products'],
       include_package_data=True,
       zip_safe=False,
-      download_url='http://plone.org/products/cmfformcontroller/releases',
+      extras_require=dict(
+        test=[
+            'Products.PloneTestCase',
+        ]
+      ),
       install_requires=[
         'setuptools',
+        'zope.interface',
+        'zope.structuredtext',
+        'zope.tales',
+        'Products.CMFCore',
+        'Products.GenericSetup',
+        # 'Acquisition',
+        # 'transaction',
+        # 'Zope2',
       ],
 )

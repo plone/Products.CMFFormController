@@ -14,8 +14,8 @@
 """ Customizable controlled python scripts that come from the filesystem.
 """
 
-import Globals
 from AccessControl import ClassSecurityInfo
+from App.class_init import InitializeClass
 from OFS.Cache import Cacheable
 from Products.CMFCore.DirectoryView import registerFileExtension, registerMetaType
 from Products.CMFCore.permissions import View
@@ -83,7 +83,7 @@ class FSControllerValidator (BaseClass, ControllerBase):
     def _getState(self):
         return getToolByName(self, 'portal_form_controller').getState(self, is_validator=1)
 
-Globals.InitializeClass(FSControllerValidator)
+InitializeClass(FSControllerValidator)
 
 registerFileExtension('vpy', FSControllerValidator)
 registerMetaType('Controller Validator', FSControllerValidator)

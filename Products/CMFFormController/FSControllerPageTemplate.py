@@ -17,7 +17,8 @@
 import copy
 from zope.tales.tales import CompilerError
 
-import Globals, Acquisition
+import Acquisition
+from App.class_init import InitializeClass
 from AccessControl import ClassSecurityInfo
 from OFS.Cache import Cacheable
 from Products.PageTemplates.ZopePageTemplate import Src
@@ -112,7 +113,7 @@ setattr(FSControllerPageTemplate, 'source.html', _s)
 
 del _s
 
-Globals.InitializeClass(FSControllerPageTemplate)
+InitializeClass(FSControllerPageTemplate)
 
 registerFileExtension('cpt', FSControllerPageTemplate)
 registerMetaType('Controller Page Template', FSControllerPageTemplate)

@@ -17,8 +17,9 @@
 import copy
 from zope.tales.tales import CompilerError
 
-import Globals, Acquisition
+import Acquisition
 from AccessControl import ClassSecurityInfo
+from App.class_init import InitializeClass
 from OFS.Cache import Cacheable
 from Products.CMFCore.DirectoryView import registerFileExtension, registerMetaType
 from Products.CMFCore.permissions import View
@@ -141,7 +142,7 @@ class FSControllerPythonScript (FSControllerBase, BaseClass):
         return getToolByName(self, 'portal_form_controller').getState(self, is_validator=0)
 
 
-Globals.InitializeClass(FSControllerPythonScript)
+InitializeClass(FSControllerPythonScript)
 
 
 registerFileExtension('cpy', FSControllerPythonScript)

@@ -1,6 +1,7 @@
 import os
-import Globals
 from AccessControl import ClassSecurityInfo
+from App.class_init import InitializeClass
+from App.Common import package_home
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from Products.PageTemplates.ZopePageTemplate import ZopePageTemplate as BaseClass
 from Products.CMFCore.permissions import View
@@ -62,7 +63,7 @@ class ControllerPageTemplate(BaseClass, BaseControllerPageTemplate):
 
     meta_type = 'Controller Page Template'
 
-    _default_content_fn = os.path.join(Globals.package_home(globals()),
+    _default_content_fn = os.path.join(package_home(globals()),
                                        'www', 'default.html')
 
     def __init__(self, *args, **kwargs):
@@ -86,4 +87,4 @@ class ControllerPageTemplate(BaseClass, BaseControllerPageTemplate):
         self._base_manage_afterClone(object)
 
 
-Globals.InitializeClass(ControllerPageTemplate)
+InitializeClass(ControllerPageTemplate)
