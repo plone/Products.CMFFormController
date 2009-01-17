@@ -1,24 +1,23 @@
 from setuptools import setup, find_packages
 
-version = '2.1.3'
+version = '3.0'
 
 setup(name='Products.CMFFormController',
       version=version,
       description="CMFFormController provides a form validation mechanism for CMF.",
-      long_description="""\
-      """,
+      long_description=open("README.txt").read() +  "\n" +
+                       open("CHANGES.txt").read(),
       classifiers=[
         "Framework :: Plone",
         "Framework :: Zope2",
         "License :: OSI Approved :: BSD License",
         "License :: OSI Approved :: Zope Public License",
         "Programming Language :: Python",
-        "Topic :: Software Development :: Libraries :: Python Modules",
       ],
       keywords='Zope CMF Plone form validation',
       author='Geoff Davis',
       author_email='plone-developers@lists.sourceforge.net',
-      url='http://plone.org/products/cmfformcontroller',
+      url='http://pypi.python.org/pypi/Products.CMFFormController',
       license='BSD',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['Products'],
@@ -36,8 +35,8 @@ setup(name='Products.CMFFormController',
         'zope.tales',
         'Products.CMFCore',
         'Products.GenericSetup',
-        # 'Acquisition',
+        'Acquisition',
         # 'transaction',
-        # 'Zope2',
+        'Zope2',
       ],
 )
