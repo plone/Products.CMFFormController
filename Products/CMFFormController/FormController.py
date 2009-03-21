@@ -112,11 +112,12 @@ class FormController(UniqueObject, SimpleItemWithProperties):
             return '\'%s\' is not a valid id' % (id)
         # extra checks for Plone sites
         if portal.__class__.__name__ == 'PloneSite':
-            if hasattr(portal, 'portal_properties') and \
-                hasattr(portal.portal_properties, 'site_properties') and \
-                hasattr(portal.portal_properties.site_properties, 'invalid_ids'):
-                if id in portal.portal_properties.site_properties.invalid_ids:
-                    return '\'%s\' is a reserved id' % (id)
+            props = getToolByName(portal, 'portal_properties', None)
+            if props is not None:
+                if hasattr(props, 'site_properties') and \
+                   hasattr(props.site_properties, 'invalid_ids'):
+                    if id in props.site_properties.invalid_ids:
+                        return '\'%s\' is a reserved id' % (id)
 
 
     # Web-accessible methods
