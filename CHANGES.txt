@@ -4,6 +4,9 @@ Changelog
 3.0 - Unreleased
 ----------------
 
+- Silence more warnings for calling `manage_*` methods.
+  [hannosch]
+
 - Avoid acquiring `portal_properties` and call it via a proper API.
   [hannosch]
 

@@ -6,6 +6,15 @@
   <include package=".exportimport" />
 
   <five:deprecatedManageAddDelete
+      class=".ControllerPageTemplate.ControllerPageTemplate" />
+
+  <five:deprecatedManageAddDelete
+      class=".ControllerPythonScript.ControllerPythonScript" />
+
+  <five:deprecatedManageAddDelete
+      class=".ControllerValidator.ControllerValidator" />
+
+  <five:deprecatedManageAddDelete
       class=".FSControllerPageTemplate.FSControllerPageTemplate" />
 
 </configure>
