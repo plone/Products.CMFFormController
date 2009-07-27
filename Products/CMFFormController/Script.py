@@ -18,7 +18,7 @@ import re
 from App.class_init import InitializeClass
 from Shared.DC.Scripts.Bindings import NameAssignments as BaseNameAssignments
 from Products.PythonScripts.PythonScript import PythonScript as BasePythonScript
-from Products.CMFCore.FSPythonScript import FSPythonScript as BaseFSPythonScript, bad_func_code
+from Products.CMFCore.FSPythonScript import FSPythonScript as BaseFSPythonScript
 from ZODB.POSException import ConflictError
 
 logger = logging.getLogger('CMFFormController')
@@ -153,16 +153,10 @@ class FSPythonScript(BaseFSPythonScript, PythonScript):
         ps = PythonScript(self.id, filepath=self._filepath)
         ps.write(text)
         if compile:
-            ps._makeFunction(1)
-            self._v_f = f = ps._v_f
-            if f is not None:
-                self.func_code = f.func_code
-                self.func_defaults = f.func_defaults
-            else:
-                # There were errors in the compile.
-                # No signature.
-                self.func_code = bad_func_code()
-                self.func_defaults = None
+            ps._makeFunction()
+            self._v_ft = ps._v_ft
+            self.func_code = ps.func_code
+            self.func_defaults = ps.func_defaults
         self._body = ps._body
         self._params = ps._params
         self.title = ps.title

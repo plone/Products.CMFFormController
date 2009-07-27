@@ -4,6 +4,10 @@ Changelog
 3.0 - Unreleased
 ----------------
 
+- Adjust this package's FSPythonScript subclass to reflect cleanup in Zope2
+  and CMF.
+  [davisagli]
+
 - Silence more warnings for calling `manage_*` methods.
   [hannosch]
 
