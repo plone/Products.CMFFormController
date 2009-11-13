@@ -1,11 +1,11 @@
 from setuptools import setup, find_packages
 
-version = '3.0'
+version = '3.0a1'
 
 setup(name='Products.CMFFormController',
       version=version,
       description="CMFFormController provides a form validation mechanism for CMF.",
-      long_description=open("README.txt").read() +  "\n" +
+      long_description=open("README.txt").read() + "\n" +
                        open("CHANGES.txt").read(),
       classifiers=[
         "Framework :: Plone",
@@ -36,7 +36,7 @@ setup(name='Products.CMFFormController',
         'Products.CMFCore',
         'Products.GenericSetup',
         'Acquisition',
-        # 'transaction',
+        'transaction',
         'Zope2',
       ],
 )
