@@ -94,7 +94,7 @@ returns.  <a href="#docs">Learn more</a>.</p>
                                  value action/getActionArg" />
        </td>
    </tr>
-   <tr>
+   <tr/>
 </table>
 
 <p tal:condition="not:form_actions"><i>No actions have been specified</i></p>
