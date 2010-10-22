@@ -4,13 +4,13 @@
     tal:replace="structure here/manage_form_title">Form Title</h2>
 
 <p class="form-help">
-Controller Validator allow you to add functionality to Zope by writing 
-scripts in the Python programming language that are exposed as callable Zope 
+Controller Validator allow you to add functionality to Zope by writing
+scripts in the Python programming language that are exposed as callable Zope
 objects.  Controller Validators enable you to override form and script validators
-without changing code.  You may choose to upload the script from a local file 
+without changing code.  You may choose to upload the script from a local file
 by typing the file name or using the browse button.</p>
 
-<form action="manage_addControllerValidator" method="post" 
+<form action="manage_addControllerValidator" method="post"
  enctype="multipart/form-data">
 <table cellspacing="0" cellpadding="2" border="0">
   <tr>
@@ -38,9 +38,9 @@ by typing the file name or using the browse button.</p>
     </td>
     <td align="left" valign="top">
     <div class="form-element">
-    <input class="form-element" type="submit" name="submit" 
-     value=" Add " /> 
-    <input class="form-element" type="submit" name="submit" 
+    <input class="form-element" type="submit" name="submit"
+     value=" Add " />
+    <input class="form-element" type="submit" name="submit"
      value=" Add and Edit " />
     </div>
     </td>

@@ -35,7 +35,7 @@ class FSControllerBase(ControllerBase):
 
     # Refresh our contents from the filesystem if that is newer and we are
     # running in debug mode.
-    # This method replaces FSObject's _updateFromFS.  Because multiple inheritance in 
+    # This method replaces FSObject's _updateFromFS.  Because multiple inheritance in
     # Python 2.1 is lame (Zope 2.6.x), I'm renaming this method _baseUpdateFromFS and am
     # delegating via an explicit _updateFromFS override in classes that inherit from
     # FSControllerBase
@@ -61,7 +61,7 @@ class FSControllerBase(ControllerBase):
                 self._file_mod_time = mtime
                 self._parsed = 1
 
-    # This method replaces FSMetadata's _readMetadata.  Because multiple inheritance in 
+    # This method replaces FSMetadata's _readMetadata.  Because multiple inheritance in
     # Python 2.1 is lame (Zope 2.6.x), I'm renaming this method _baseReadMetadata and am
     # delegating via an explicit _readMetadata override in classes that inherit from
     # FSControllerBase
@@ -72,7 +72,7 @@ class FSControllerBase(ControllerBase):
             metadata = FSMetadata(e_fp)
             metadata.read()
             self._setProperties(metadata.getProperties())
-    
+
             # re-read actions and validators whenever we re-read the file
             self._read_action_metadata(self.getId(), self._filepath)
             self._read_validator_metadata(self.getId(), self._filepath)

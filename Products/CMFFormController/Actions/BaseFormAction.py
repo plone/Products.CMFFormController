@@ -117,12 +117,12 @@ class BaseFormAction(Role.RoleManager):
         url encodes
         and updates the query string using the values in kwargs"""
         d = self.combineArgs(url, kwargs)
-        
+
         import urlparse
 
         # parse the existing URL
         parsed_url = list(urlparse.urlparse(url))
-            
+
         # re-encode the string
         # We use ZTUtils.make_query here because it
         # does Zope-specific marshalling of lists,

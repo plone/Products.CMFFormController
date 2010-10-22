@@ -30,7 +30,7 @@ if HAS_PLONE:
             pt.validators.set(FormValidator(pt.getId(), None, None, 'a,b,c', self.portal.portal_form_controller))
             self.assertEqual(len(pt.validators.getFiltered(object_id='test')), 1)
             self.assertEqual(pt.validators.match('test', 'Document', 'submit').getValidators(), ['a','b','c'])
-        
+
             formcontroller.actions.set(FormAction(pt.getId(), 'success', None, None, 'traverse_to', 'test4', self.portal.portal_form_controller))
             self.assertEqual(len(formcontroller.actions.getFiltered(object_id='test')), 1)
             self.assertEqual(formcontroller.actions.match('test', 'success', 'Document', 'submit').getActionArg(), 'test4')
@@ -70,7 +70,7 @@ if HAS_PLONE:
             pt.validators.set(FormValidator(pt.getId(), None, None, 'a,b,c', self.portal.portal_form_controller))
             self.assertEqual(len(pt.validators.getFiltered(object_id='test')), 1)
             self.assertEqual(pt.validators.match('test', 'Document', 'submit').getValidators(), ['a','b','c'])
-        
+
             formcontroller.actions.set(FormAction(pt.getId(), 'success', None, None, 'traverse_to', 'test4', self.portal.portal_form_controller))
             self.assertEqual(len(pt.actions.getFiltered()), 1)
             self.assertEqual(formcontroller.actions.match('test', 'success', 'Document', 'submit').getActionArg(), 'test4')

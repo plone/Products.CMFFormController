@@ -26,7 +26,7 @@ class ControllerBase:
     manage_formValidatorsForm.__name__ = 'manage_formValidatorsForm'
 
     def _updateActions(self, container, old_id, new_id, move):
-        """Copy action overrides stored in portal_form_controller from one 
+        """Copy action overrides stored in portal_form_controller from one
         object id to another"""
         actions = container.getFiltered(object_id=old_id)
         for a in actions:
@@ -36,9 +36,9 @@ class ControllerBase:
         if move:
             for a in actions:
                 container.delete(a.getKey())
-                
+
     def _updateValidators(self, container, old_id, new_id, move):
-        """Copy validator overrides stored in portal_form_controller from one 
+        """Copy validator overrides stored in portal_form_controller from one
         object id to another"""
         validators = container.getFiltered(object_id=old_id)
         for v in validators:
@@ -47,7 +47,7 @@ class ControllerBase:
         if move:
             for v in validators:
                 container.delete(v.getKey())
-        
+
     def _base_notifyOfCopyTo(self, container, op=0):
         self._old_id = self.getId()
         if op==0:  # copy
@@ -322,7 +322,7 @@ class ControllerBase:
                     if not content_type:
                         content_type = 'ANY'
                     log('%s: No default action specified for status %s, content type %s.  Users of IE can submit pages using the return key, resulting in no button in the REQUEST.  Please specify a default action for this case.' % (str(filepath), status, content_type))
-                    
+
 
     def _read_validator_metadata(self, id, filepath):
         self.validators = FormValidatorContainer()

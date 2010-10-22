@@ -8,7 +8,7 @@
 
 <h3>Form and Script Validators</h3>
 
-<p>This tool lets you set or override the default sequence of validators that are 
+<p>This tool lets you set or override the default sequence of validators that are
 executed when a Controller Page Template is submitted or before a Controller
 Python Script is executed.  <a href="#docs">Learn more</a>.</p>
 
@@ -17,7 +17,7 @@ Python Script is executed.  <a href="#docs">Learn more</a>.</p>
 <h3 class="form-help">Edit Form / Script Validator Overrides</h3>
 
 <form method="POST"
-      tal:attributes="action here/absolute_url" 
+      tal:attributes="action here/absolute_url"
       tal:define="form_validators python:here.listFormValidators(1, **filters);">
    <input type="hidden" name="override:int" value="1" />
 <table border="0" tal:condition="form_validators" metal:define-macro="edit_validators">
@@ -30,26 +30,26 @@ Python Script is executed.  <a href="#docs">Learn more</a>.</p>
    </tr>
    <tr tal:repeat="validator form_validators">
        <td class="form-element">
-          <input type="checkbox" 
+          <input type="checkbox"
                  tal:attributes="name python:'del_id_'+str(repeat['validator'].index);" />
-          <input type="hidden" 
+          <input type="hidden"
                  tal:attributes="name python:'old_object_id_'+str(repeat['validator'].index);
                                  value validator/getObjectId;" />
-          <input type="hidden" 
+          <input type="hidden"
                  tal:attributes="name python:'old_context_type_'+str(repeat['validator'].index);
                                  value validator/getContextType;" />
-          <input type="hidden" 
+          <input type="hidden"
                  tal:attributes="name python:'old_button_'+str(repeat['validator'].index);
                                  value validator/getButton;" />
        </td>
        <td tal:condition="fixed_object">
           <span tal:replace="validator/getObjectId" />
-          <input type="hidden" 
+          <input type="hidden"
                  tal:attributes="name python:'object_id_'+str(repeat['validator'].index);
                                  value validator/getObjectId" />
        </td>
        <td tal:condition="not:fixed_object" class="form-element">
-          <input type="text" 
+          <input type="text"
                  tal:attributes="name python:'object_id_'+str(repeat['validator'].index);
                                  value validator/getObjectId" size="15" />
        </td>
@@ -64,12 +64,12 @@ Python Script is executed.  <a href="#docs">Learn more</a>.</p>
           </select>
        </td>
        <td class="form-element">
-          <input type="text" 
+          <input type="text"
                  tal:attributes="name python:'button_'+str(repeat['validator'].index);
                                  value validator/getButton" size="10" />
        </td>
        <td class="form-element">
-          <input type="text" 
+          <input type="text"
                  tal:attributes="name python:'validators_'+str(repeat['validator'].index);
                                  value python:', '.join(validator.getValidators());" size="50" />
        </td>
@@ -143,7 +143,7 @@ Python Script is executed.  <a href="#docs">Learn more</a>.</p>
 <h3 class="form-help">Edit Default Validators</h3>
 
 <form method="POST"
-      tal:attributes="action here/absolute_url" 
+      tal:attributes="action here/absolute_url"
       tal:define="form_validators python:here.listFormValidators(0, **filters);">
    <input type="hidden" name="override:int" value="0" />
 <table border="0" tal:condition="form_validators" metal:use-macro="template/macros/edit_validators" />
@@ -217,15 +217,15 @@ Python Script is executed.  <a href="#docs">Learn more</a>.</p>
 <a name="docs"></a>
 <h3>Definitions</h3>
 <ul>
-   <li><b>Template</b>: The Controller Page Template / Controller Python Script 
-       for which you are setting validators.  The form/script in question 
+   <li><b>Template</b>: The Controller Page Template / Controller Python Script
+       for which you are setting validators.  The form/script in question
        <i>must</i> be a Controller Page Template / Controller Python Script.
-       If it is an ordinary Python Script, Page Template, a DTML Method, or a 
+       If it is an ordinary Python Script, Page Template, a DTML Method, or a
        DTML Document <i>these validators will be ignored!</i></li>
    <li><b>Context</b>: The type of context object for which the given sequence
        of validating scripts is executed.  This lets you set different validators
        for different types of content objects.</li>
-   <li><b>Button</b>: The button for which the given sequence of validating 
+   <li><b>Button</b>: The button for which the given sequence of validating
        scripts is executed.  This lets you set different validators depending
        on which button on a form is pressed.  Leave the button field blank
        to use the same validators for any button.  To use this functionality, you must name each button in the template
@@ -234,7 +234,7 @@ Python Script is executed.  <a href="#docs">Learn more</a>.</p>
        entering <i>button1</i> in the button field.</li>
    <li><b>Validators</b>: A comma-delimited sequence of Controller Validator script ids.</li>
 </ul>
-       
+
 <a tal:attributes="href python:here.portal_url()+'/portal_form_controller/manage_docs'">Documentation</a>
 <hr />
 </div>

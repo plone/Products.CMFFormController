@@ -6,12 +6,12 @@
 <p class="form-help">
 Controller Page Templates allow you to use simple HTML or XML attributes to
 create dynamic templates.  Controller Page Templates make it easy to add form
-validation and let you override default validation scripts and form actions.  
-You may choose to upload the template text from a local file by typing the file 
+validation and let you override default validation scripts and form actions.
+You may choose to upload the template text from a local file by typing the file
 name or using the <em>browse</em> button.
 </p>
 
-<form action="manage_addControllerPageTemplate" method="post" 
+<form action="manage_addControllerPageTemplate" method="post"
  enctype="multipart/form-data">
 <table cellspacing="0" cellpadding="2" border="0">
   <tr>
@@ -39,9 +39,9 @@ name or using the <em>browse</em> button.
     </td>
     <td align="left" valign="top">
     <div class="form-element">
-    <input class="form-element" type="submit" name="submit" 
-     value=" Add " /> 
-    <input class="form-element" type="submit" name="submit" 
+    <input class="form-element" type="submit" name="submit"
+     value=" Add " />
+    <input class="form-element" type="submit" name="submit"
      value=" Add and Edit " />
     </div>
     </td>

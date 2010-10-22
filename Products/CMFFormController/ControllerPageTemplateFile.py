@@ -61,12 +61,12 @@ class ControllerPageTemplateFile(BaseClass, BaseControllerPageTemplate, FSContro
         # workaround for Python 2.1 multiple inheritance lameness
         return self._baseUpdateFromFS()
 
-    
+
     def _readMetadata(self):
         # workaround for Python 2.1 multiple inheritance lameness
         return self._baseReadMetadata()
 
-        
+
     def _readFile(self, reparse):
         BaseClass._readFile(self, reparse)
         self._readMetadata()

@@ -7,7 +7,7 @@ if not n:
    state.setError('n', 'Please enter a value for n')
 
 if state.getErrors():
-   # An error has occurred.  Set the status to 'failure' 
+   # An error has occurred.  Set the status to 'failure'
    # (the default initial status is 'success')
    state.setStatus('failure')
 

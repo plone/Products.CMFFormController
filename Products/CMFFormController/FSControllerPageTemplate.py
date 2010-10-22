@@ -56,12 +56,12 @@ class FSControllerPageTemplate(FSControllerBase, BaseClass, BaseControllerPageTe
             log(summary='metadata error', text='file = %s' % filepath)
             raise
 
-        
+
     def _updateFromFS(self):
         # workaround for Python 2.1 multiple inheritance lameness
         return self._baseUpdateFromFS()
 
-    
+
     def _readMetadata(self):
         # workaround for Python 2.1 multiple inheritance lameness
         return self._baseReadMetadata()

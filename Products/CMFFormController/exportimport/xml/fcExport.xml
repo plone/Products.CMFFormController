@@ -9,7 +9,7 @@
 		   action_type action/action_type;
 		   action_arg action/action_arg;"
   />
-  <validator 
+  <validator
    tal:repeat="validator context/listValidators"
    tal:attributes="object_id validator/object_id;
                    context_type validator/context_type;

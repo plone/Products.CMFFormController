@@ -10,8 +10,8 @@
 
 <h3>Form and Script Actions</h3>
 
-<p>This tool lets you set or override the default actions that are 
-executed when a Controller Page Template is submitted or a Controller Python Script 
+<p>This tool lets you set or override the default actions that are
+executed when a Controller Page Template is submitted or a Controller Python Script
 returns.  <a href="#docs">Learn more</a>.</p>
 
 <hr/>
@@ -19,7 +19,7 @@ returns.  <a href="#docs">Learn more</a>.</p>
 <h3 class="form-help">Edit Form/Script Action Overrides</h3>
 
 <form method="post"
-      tal:attributes="action here/absolute_url" 
+      tal:attributes="action here/absolute_url"
       tal:define="form_actions python:here.listFormActions(1, **filters);">
    <input type="hidden" name="override:int" value="1" />
 <table border="0" tal:condition="form_actions" metal:define-macro="edit_actions">
@@ -34,24 +34,24 @@ returns.  <a href="#docs">Learn more</a>.</p>
    </tr>
    <tr tal:repeat="action form_actions">
        <td class="form-element">
-          <input type="checkbox" 
+          <input type="checkbox"
                  tal:attributes="name python:'del_id_'+str(repeat['action'].index);" />
-          <input type="hidden" 
+          <input type="hidden"
                  tal:attributes="name python:'old_object_id_'+str(repeat['action'].index);
                                  value action/getObjectId;" />
-          <input type="hidden" 
+          <input type="hidden"
                  tal:attributes="name python:'old_status_'+str(repeat['action'].index);
                                  value action/getStatus;" />
-          <input type="hidden" 
+          <input type="hidden"
                  tal:attributes="name python:'old_context_type_'+str(repeat['action'].index);
                                  value action/getContextType;" />
-          <input type="hidden" 
+          <input type="hidden"
                  tal:attributes="name python:'old_button_'+str(repeat['action'].index);
                                  value action/getButton;" />
        </td>
        <td tal:condition="fixed_object">
           <span tal:replace="action/getObjectId" />
-          <input type="hidden" 
+          <input type="hidden"
                  tal:attributes="name python:'object_id_'+str(repeat['action'].index);
                                  value action/getObjectId" />
        </td>
@@ -181,7 +181,7 @@ returns.  <a href="#docs">Learn more</a>.</p>
 <h3 class="form-help">Edit Default Actions</h3>
 
 <form method="POST"
-      tal:attributes="action here/absolute_url" 
+      tal:attributes="action here/absolute_url"
       tal:define="form_actions python:here.listFormActions(0, **filters);">
     <input type="hidden" name="override:int" value="0" />
 <table border="0" tal:condition="form_actions" metal:use-macro="template/macros/edit_actions" />
@@ -264,21 +264,21 @@ returns.  <a href="#docs">Learn more</a>.</p>
    <li><b>Template/Script</b>: The Controller Page Template or Controller Python
        Script for which you are setting actions.  Note that these <i>will only
        affect</i> Controller Page Templates and Controller Python Scripts that return a
-       ControllerState object.  These actions <i>will be ignored</i> for ordinary 
+       ControllerState object.  These actions <i>will be ignored</i> for ordinary
        PageTemplates, ordinary Python Scripts, DTML Methods and DTML Documents.</li>
-   <li><b>Status</b>: The status for which the given action is executed.  
+   <li><b>Status</b>: The status for which the given action is executed.
        Validators typically return 'success' or 'failure' as their status.</li>
-   <li><b>Context</b>: The type of context object for which the given action is 
-       executed.  This lets you set different actions for different types 
+   <li><b>Context</b>: The type of context object for which the given action is
+       executed.  This lets you set different actions for different types
        of content objects.</li>
-   <li><b>Button</b>: The button for which the given action is executed.  This 
-       lets you set different actions depending on which button on a form is 
-       pressed.  Leave the button field blank to use the same action for any 
+   <li><b>Button</b>: The button for which the given action is executed.  This
+       lets you set different actions depending on which button on a form is
+       pressed.  Leave the button field blank to use the same action for any
        button.  To use this functionality, you must name each button in the template
        <tt>form.button.NAME</tt>.  For example, if you have <tt>&lt;input name="form.button.button1" type="submit"&gt;</tt>
        in your Controller Page Template, you can specify what happens when this button is pressed by
        entering <tt>button1</tt> in the button field.</li>
-   <li><b>Action</b>: The type of action to execute.  The available types of 
+   <li><b>Action</b>: The type of action to execute.  The available types of
        actions are as follows:
        <ul>
            <li tal:repeat="action_type action_types">
