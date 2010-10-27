@@ -4,9 +4,8 @@ Changelog
 3.0.1 - unreleased
 ------------------
 
-- fix template with chameleon error
+- Fixed template with chameleon incompatibility.
   [swampmonkey]
-
 
 3.0 - 2010-07-18
 ----------------

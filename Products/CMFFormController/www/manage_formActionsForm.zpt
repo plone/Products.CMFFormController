@@ -72,7 +72,7 @@ returns.  <a href="#docs">Learn more</a>.</p>
              <option tal:repeat="context_type availableContextTypes"
                      tal:attributes="value context_type;
                                      selected python:test(action.getContextType() == context_type, 'selected', None);"
-  		             tal:content="context_type" />
+                     tal:content="context_type" />
           </select>
        </td>
        <td class="form-element">
@@ -85,7 +85,7 @@ returns.  <a href="#docs">Learn more</a>.</p>
              <option tal:repeat="action_type action_types"
                      tal:attributes="value action_type/getId;
                                      selected python:test(action.getActionType() == action_type.getId(), 'selected', None);"
-  		             tal:content="action_type/getId" />
+                     tal:content="action_type/getId" />
           </select>
        </td>
        <td class="form-element">
@@ -94,7 +94,6 @@ returns.  <a href="#docs">Learn more</a>.</p>
                                  value action/getActionArg" />
        </td>
    </tr>
-   <tr/>
 </table>
 
 <p tal:condition="not:form_actions"><i>No actions have been specified</i></p>
@@ -139,7 +138,7 @@ returns.  <a href="#docs">Learn more</a>.</p>
              <option value="">Any</option>
              <option tal:repeat="context_type availableContextTypes"
                      tal:attributes="value context_type;"
-  		             tal:content="context_type" />
+                     tal:content="context_type" />
           </select>
        </td>
    </tr>
@@ -155,7 +154,7 @@ returns.  <a href="#docs">Learn more</a>.</p>
           <select name="new_action_type">
              <option tal:repeat="action_type action_types"
                      tal:attributes="value action_type/getId;"
-  		             tal:content="action_type/getId" />
+                     tal:content="action_type/getId" />
           </select>
        </td>
    </tr>
