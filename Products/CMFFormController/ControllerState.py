@@ -1,11 +1,17 @@
-import AccessControl
 from AccessControl import ClassSecurityInfo
 from App.class_init import InitializeClass
 from Products.CMFCore.utils import getToolByName
 from FormAction import FormAction
 from globalVars import ANY_CONTEXT, ANY_BUTTON
 
-class ControllerState(AccessControl.Role.RoleManager):
+try:
+    from OFS.role import RoleManager
+except ImportError:
+    # Zope <=2.12
+    from AccessControl.Role import RoleManager
+
+
+class ControllerState(RoleManager):
     security = ClassSecurityInfo()
     security.declareObjectPublic()
     security.setDefaultAccess('allow')

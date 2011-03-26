@@ -1,7 +1,7 @@
 from zope.tales.tales import CompilerError
 from zope.interface import implements
 
-from AccessControl import Role, ClassSecurityInfo
+from AccessControl import ClassSecurityInfo
 from Acquisition import aq_base, aq_parent, aq_inner
 from Products.CMFCore.Expression import Expression
 from Products.PageTemplates.Expressions import getEngine
@@ -13,7 +13,14 @@ from Products.CMFFormController.utils import log
 from IFormAction import IFormAction
 from ZTUtils.Zope import make_query
 
-class BaseFormAction(Role.RoleManager):
+try:
+    from OFS.role import RoleManager
+except ImportError:
+    # Zope <=2.12
+    from AccessControl.Role import RoleManager
+
+
+class BaseFormAction(RoleManager):
     implements(IFormAction,)
 
     security = ClassSecurityInfo()
