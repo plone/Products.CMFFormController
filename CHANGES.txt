@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.2 - unreleased
+3.0.2 - 2011-04-03
 ------------------
 
 - Update RoleManager imports to avoid deprecation warning on Zope 2.13.
