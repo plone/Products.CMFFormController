@@ -4,6 +4,9 @@ Changelog
 3.0.3 - unreleased
 ------------------
 
+- Use obj.__parent__ instead of obj getParentNode() for Zope trunk
+  compatibility.
+  [elro]
 
 3.0.2 - 2011-04-03
 ------------------

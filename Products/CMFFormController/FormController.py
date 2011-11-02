@@ -328,7 +328,7 @@ class FormController(UniqueObject, SimpleItemWithProperties):
                 controller_state.setStatus('success')
                 controller_state.setNextAction(None)
                 #controller_state.setButton(None)
-            controller_state.set(id=id, context=obj.getParentNode())
+            controller_state.set(id=id, context=obj.__parent__)
         else:
             if controller_state is None:
                 raise ValueError, 'No controller state available.  ' + \
