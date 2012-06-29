@@ -229,7 +229,7 @@ class ControllerState(RoleManager):
         self._validators = {}
 
     # see if given validators have been executed
-    def hasValidated(self, validators=[]):
+    def hasValidated(self, validators=None):
         if validators is None:
             validators = []
         elif not isinstance(validators, list):
