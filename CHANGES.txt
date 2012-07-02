@@ -8,6 +8,9 @@ Changelog
   compatibility.
   [elro]
 
+- ControllerState.py: Don't use list as default parameter value.
+  [kleist]
+
 3.0.2 - 2011-04-03
 ------------------
 
