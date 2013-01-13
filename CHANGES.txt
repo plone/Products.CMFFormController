@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.3 - unreleased
+3.0.3 (2013-01-13)
 ------------------
 
 - Use obj.__parent__ instead of obj getParentNode() for Zope trunk
