@@ -1,3 +1,4 @@
+import logging
 import os
 from Acquisition import aq_base, aq_inner
 from App.class_init import InitializeClass
@@ -321,7 +322,7 @@ class ControllerBase:
                         status = 'ANY'
                     if not content_type:
                         content_type = 'ANY'
-                    log('%s: No default action specified for status %s, content type %s.  Users of IE can submit pages using the return key, resulting in no button in the REQUEST.  Please specify a default action for this case.' % (str(filepath), status, content_type))
+                    log('%s: No default action specified for status %s, content type %s.  Users of IE can submit pages using the return key, resulting in no button in the REQUEST.  Please specify a default action for this case.' % (str(filepath), status, content_type), log_level=logging.DEBUG)
 
 
     def _read_validator_metadata(self, id, filepath):
@@ -358,7 +359,7 @@ class ControllerBase:
                     content_type = k
                     if not content_type:
                         content_type = 'ANY'
-                    log('%s: No default validators specified for content type %s.  Users of IE can submit pages using the return key, resulting in no button in the REQUEST.  Please specify default validators for this case.' % (str(filepath), content_type))
+                    log('%s: No default validators specified for content type %s.  Users of IE can submit pages using the return key, resulting in no button in the REQUEST.  Please specify default validators for this case.' % (str(filepath), content_type), log_level=logging.DEBUG)
 
 
     security.declarePublic('writableDefaults')
