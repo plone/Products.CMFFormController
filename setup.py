@@ -9,10 +9,12 @@ setup(name='Products.CMFFormController',
                        open("CHANGES.txt").read(),
       classifiers=[
         "Framework :: Plone",
+        "Framework :: Plone :: 5.0",
         "Framework :: Zope2",
         "License :: OSI Approved :: BSD License",
         "License :: OSI Approved :: Zope Public License",
         "Programming Language :: Python",
+        "Programming Language :: Python :: 2.7",
       ],
       keywords='Zope CMF Plone form validation',
       author='Geoff Davis',
@@ -25,7 +27,7 @@ setup(name='Products.CMFFormController',
       zip_safe=False,
       extras_require=dict(
         test=[
-            'Products.PloneTestCase',
+            'plone.app.testing',
         ]
       ),
       install_requires=[

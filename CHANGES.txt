@@ -7,6 +7,9 @@ Changelog
 - Reduce verbosity of _read_action_metadata and _read_validator_metadata when there are no default action or default validator assigned.
   [ericof]
 
+- Ported to plone.app.testing
+  [tomgross]
+
 
 3.0.3 (2013-01-13)
 ------------------
