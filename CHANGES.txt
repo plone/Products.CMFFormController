@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.4 (unreleased)
+3.0.4 (2015-03-08)
 ------------------
 
 - Reduce verbosity of _read_action_metadata and _read_validator_metadata when there are no default action or default validator assigned.
