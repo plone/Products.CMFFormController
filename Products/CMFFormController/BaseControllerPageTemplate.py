@@ -24,7 +24,8 @@ class BaseControllerPageTemplate(ControllerBase):
             controller_state = self.getButton(controller_state, REQUEST)
             validators = self.getValidators(controller_state, REQUEST).getValidators()
             controller_state = controller.validate(controller_state, REQUEST, validators)
-            del REQUEST.form['form.submitted']
+            if 'form.submitted' in REQUEST.form:
+                del REQUEST.form['form.submitted']
             return self.getNext(controller_state, REQUEST)
 
         kwargs['state'] = controller_state

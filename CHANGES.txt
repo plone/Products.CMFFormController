@@ -4,7 +4,8 @@ Changelog
 3.0.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Additional check in BaseControllerPageTemplate when we try to delete an entry
+  from the request, that has already been deleted [cekk]
 
 
 3.0.4 (2015-03-08)
