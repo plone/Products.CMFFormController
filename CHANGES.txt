@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.5 (unreleased)
+3.0.5 (2015-06-05)
 ------------------
 
 - Additional check in BaseControllerPageTemplate when we try to delete an entry
