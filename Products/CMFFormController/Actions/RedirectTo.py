@@ -16,7 +16,19 @@ class RedirectTo(BaseFormAction):
             # No host specified, so url is relative.  Get an absolute url.
             url = urljoin(context.absolute_url()+'/', url)
         url = self.updateQuery(url, controller_state.kwargs)
-        return context.REQUEST.RESPONSE.redirect(url)
+        request = context.REQUEST
+        # this is mostly just for archetypes edit forms...
+        if 'edit' in url and '_authenticator' not in url and \
+                '_authenticator' in request.form:
+            if '?' in url:
+                url += '&'
+            else:
+                url += '?'
+            auth = request.form['_authenticator']
+            if isinstance(auth, list):
+                auth = auth[0]
+            url += '_authenticator=' + auth
+        return request.RESPONSE.redirect(url)
 
 
 registerFormAction('redirect_to',
