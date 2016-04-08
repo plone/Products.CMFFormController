@@ -5,8 +5,8 @@ version = '3.0.6.dev0'
 setup(name='Products.CMFFormController',
       version=version,
       description="CMFFormController provides a form validation mechanism for CMF.",
-      long_description=open("README.txt").read() + "\n" +
-                       open("CHANGES.txt").read(),
+      long_description=open("README.rst").read() + "\n" +
+                       open("CHANGES.rst").read(),
       classifiers=[
         "Framework :: Plone",
         "Framework :: Plone :: 5.0",
