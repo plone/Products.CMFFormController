@@ -1,6 +1,22 @@
 Changelog
 =========
 
+3.0.7 (unreleased)
+------------------
+
+Incompatibilities:
+
+- *add item here*
+
+New:
+
+- *add item here*
+
+Fixes:
+
+- *add item here*
+
+
 3.0.6 (2016-04-09)
 ------------------
 
