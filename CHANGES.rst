@@ -4,7 +4,9 @@ Changelog
 3.0.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+Fixes:
+
+- Minor package cleanup.  [maurits]
 
 
 3.0.5 (2015-06-05)
