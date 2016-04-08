@@ -10,7 +10,8 @@ Incompatibilities:
 
 New:
 
-- *add item here*
+- Added uninstall profile.  Needs Products.GenericSetup higher than
+  1.8.2.  [maurits]
 
 Fixes:
 

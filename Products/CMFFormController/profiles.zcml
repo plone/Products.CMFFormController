@@ -11,4 +11,12 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="CMFFormController"
+      directory="profiles/uninstall"
+      description="Uninstall profile for CMFFormController."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
 </configure>
