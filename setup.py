@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '3.0.7.dev0'
+version = '3.1.0.dev0'
 
 setup(
     name='Products.CMFFormController',
@@ -38,7 +38,7 @@ setup(
         'zope.structuredtext',
         'zope.tales',
         'Products.CMFCore',
-        'Products.GenericSetup',
+        'Products.GenericSetup>1.8.2',
         'Acquisition',
         'transaction',
         'Zope2',

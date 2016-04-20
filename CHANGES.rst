@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.7 (unreleased)
+3.1.0 (unreleased)
 ------------------
 
 Incompatibilities:
@@ -10,7 +10,8 @@ Incompatibilities:
 
 New:
 
-- *add item here*
+- Added uninstall profile.  Needs Products.GenericSetup higher than
+  1.8.2.  [maurits]
 
 Fixes:
 
