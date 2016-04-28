@@ -38,7 +38,7 @@ setup(
         'zope.structuredtext',
         'zope.tales',
         'Products.CMFCore',
-        'Products.GenericSetup>1.8.2',
+        'Products.GenericSetup>=1.8.3',
         'Acquisition',
         'transaction',
         'Zope2',
