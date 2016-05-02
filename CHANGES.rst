@@ -4,17 +4,9 @@ Changelog
 3.1.0 (unreleased)
 ------------------
 
-Incompatibilities:
-
-- *add item here*
-
 New:
 
 - Added uninstall profile.  Needs Products.GenericSetup 1.8.3.  [maurits]
-
-Fixes:
-
-- *add item here*
 
 
 3.0.6 (2016-04-09)
