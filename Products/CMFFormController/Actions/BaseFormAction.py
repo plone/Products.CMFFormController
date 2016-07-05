@@ -1,5 +1,5 @@
 from zope.tales.tales import CompilerError
-from zope.interface import implements
+from zope.interface import implementer
 
 from AccessControl import ClassSecurityInfo
 from Acquisition import aq_base, aq_parent, aq_inner
@@ -20,8 +20,8 @@ except ImportError:
     from AccessControl.Role import RoleManager
 
 
+@implementer(IFormAction,)
 class BaseFormAction(RoleManager):
-    implements(IFormAction,)
 
     security = ClassSecurityInfo()
     security.declareObjectPublic()

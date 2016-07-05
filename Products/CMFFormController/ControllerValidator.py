@@ -32,7 +32,7 @@ from Script import PythonScript as BaseClass
 from ControllerBase import ControllerBase
 from interfaces import IControllerValidator
 
-from zope.interface import implements
+from zope.interface import implementer
 
 # Track the Python bytecode version
 import imp
@@ -77,6 +77,7 @@ def manage_addControllerValidator(self, id, REQUEST=None, submit=None):
     return ''
 
 
+@implementer(IControllerValidator)
 class ControllerValidator(BaseClass, ControllerBase):
     """Web-callable scripts written in a safe subset of Python.
 
@@ -85,8 +86,6 @@ class ControllerValidator(BaseClass, ControllerBase):
     """
 
     meta_type='Controller Validator'
-
-    implements(IControllerValidator)
 
     manage_options = (
         {'label':'Edit',

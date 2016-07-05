@@ -35,7 +35,7 @@ from FormAction import FormActionContainer
 from FormValidator import FormValidatorContainer
 from interfaces import IControllerPythonScript
 
-from zope.interface import implements
+from zope.interface import implementer
 
 # Track the Python bytecode version
 import imp
@@ -84,6 +84,7 @@ def manage_addControllerPythonScript(self, id, REQUEST=None, submit=None):
     return ''
 
 
+@implementer(IControllerPythonScript)
 class ControllerPythonScript(BaseClass, ControllerBase):
     """Web-callable scripts written in a safe subset of Python.
 
@@ -92,8 +93,6 @@ class ControllerPythonScript(BaseClass, ControllerBase):
     """
 
     meta_type='Controller Python Script'
-
-    implements(IControllerPythonScript)
 
     manage_options = (
         {'label':'Edit',

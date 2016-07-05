@@ -26,15 +26,14 @@ from ControllerBase import ControllerBase
 from utils import logException
 from interfaces import IControllerValidator
 
-from zope.interface import implements
+from zope.interface import implementer
 
+@implementer(IControllerValidator)
 class FSControllerValidator (BaseClass, ControllerBase):
     """FSControllerValidators act like Controller Python Scripts but are not
     directly modifiable from the management interface."""
 
     meta_type = 'Filesystem Controller Validator'
-
-    implements(IControllerValidator)
 
     manage_options=(
            (

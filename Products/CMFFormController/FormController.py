@@ -1,6 +1,6 @@
 from __future__ import nested_scopes
 import os
-from zope.interface import implements
+from zope.interface import implementer
 from zope.structuredtext import stx2html
 
 from AccessControl import ClassSecurityInfo
@@ -27,6 +27,7 @@ def registerFormAction(id, factory, description=''):
     form_action_types[id] = FormActionType(id, factory, description)
 
 
+@implementer(IFormControllerTool)
 class FormController(UniqueObject, SimpleItemWithProperties):
     """ """
 
@@ -35,8 +36,6 @@ class FormController(UniqueObject, SimpleItemWithProperties):
     id = 'portal_form_controller'
     title = 'Manages form validation and post-validation actions'
     meta_type= 'Form Controller Tool'
-
-    implements(IFormControllerTool)
 
     manage_options = ( ({'label':'Overview', 'action':'manage_overview'},
                         {'label':'Documentation', 'action':'manage_docs'},
