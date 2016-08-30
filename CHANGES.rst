@@ -4,6 +4,7 @@ Changelog
 3.1.2 (unreleased)
 ------------------
 
+
 Breaking changes:
 
 - *add item here*
@@ -14,7 +15,9 @@ New features:
 
 Bug fixes:
 
-- *add item here*
+- Move patch from plone.protect 3.x to Actions.RedirectTo so it allows ATContentTypes add forms to append auth token.
+  Issue https://github.com/plone/Products.CMFPlone/issues/1335
+  [staeff, fredvd]
 
 
 3.1.1 (2016-08-12)
