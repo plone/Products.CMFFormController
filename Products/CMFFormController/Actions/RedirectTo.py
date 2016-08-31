@@ -26,9 +26,14 @@ class RedirectTo(BaseFormAction):
         if len(urlparse(url)[1]) == 0:
             # No host specified, so url is relative.  Get an absolute url.
             url = urljoin(context.absolute_url() + '/', url)
-        elif (not self.allow_external_url
-              and not getToolByName(context, 'portal_url').isURLInPortal(url)):
-            url = context.absolute_url()
+        elif not self.allow_external_url:
+            url_tool = getToolByName(context, 'portal_url', None)
+            # In tests, the url_tool may be a CMFCore one,
+            # which does not have isURLInPortal.
+            if (url_tool is not None
+                    and hasattr(url_tool, 'isURLInPortal')
+                    and not url_tool.isURLInPortal(url)):
+                url = context.absolute_url()
         url = self.updateQuery(url, controller_state.kwargs)
         request = context.REQUEST
         # this is mostly just for archetypes edit forms...
