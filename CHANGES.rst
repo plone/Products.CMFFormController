@@ -4,14 +4,6 @@ Changelog
 3.0.7 (unreleased)
 ------------------
 
-Incompatibilities:
-
-- *add item here*
-
-New:
-
-- *add item here*
-
 Fixes:
 
 - Move patch from plone.protect 3.x to Actions.RedirectTo so it allows ATContentTypes add forms to append auth token.
