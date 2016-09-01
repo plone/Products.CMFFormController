@@ -16,7 +16,7 @@ Bug fixes:
 
 - Applied security hotfix 20160830 for ``redirect_to``.  This action
   refuses to redirect to unknown external sites.  Added
-  ``redirect_to_external`` action in case someone *does* need to
+  ``external_redirect_to`` action in case someone *does* need to
   redirect to an external site.  This option is also there in the
   hotfix.  [maurits]
 
