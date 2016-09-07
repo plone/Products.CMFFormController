@@ -4,14 +4,6 @@ Changelog
 3.0.8 (unreleased)
 ------------------
 
-Breaking changes:
-
-- *add item here*
-
-New features:
-
-- *add item here*
-
 Bug fixes:
 
 - Applied security hotfix 20160830 for ``redirect_to``.  This action
