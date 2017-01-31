@@ -14,7 +14,7 @@
 import os
 from AccessControl import ClassSecurityInfo
 from App.class_init import InitializeClass
-import Globals
+from App.config import getConfiguration
 from Products.CMFCore.FSMetadata import FSMetadata
 from ControllerBase import ControllerBase
 
@@ -41,7 +41,7 @@ class FSControllerBase(ControllerBase):
     # FSControllerBase
     def _baseUpdateFromFS(self):
         parsed = self._parsed
-        if not parsed or Globals.DevelopmentMode:
+        if not parsed or getConfiguration().debug_mode:
             fp = self._filepath
             try:
                 mtime=os.stat(fp)[8]
