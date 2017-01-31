@@ -155,8 +155,12 @@ class FSPythonScript(BaseFSPythonScript, PythonScript):
         if compile:
             ps._makeFunction()
             self._v_ft = ps._v_ft
-            self.func_code = ps.func_code
-            self.func_defaults = ps.func_defaults
+            if ps.func_code is None:
+                self.func_code = ps.__code__
+                self.func_defaults = ps.__defaults__
+            else:
+                self.func_code = ps.func_code
+                self.func_defaults = ps.func_defaults
         self._body = ps._body
         self._params = ps._params
         self.title = ps.title
