@@ -88,7 +88,7 @@ class FSControllerPythonScript (FSControllerBase, BaseClass):
         validators = self.getValidators(controller_state, REQUEST).getValidators()
 
         # put all arguments into a dict
-        c = self.func_code
+        c = self.__code__
         param_names = c.co_varnames[:c.co_argcount]
         argdict = {}
         index = 0

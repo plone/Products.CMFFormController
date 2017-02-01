@@ -1,12 +1,13 @@
 Changelog
 =========
 
-3.1.4 (unreleased)
+4.0.0 (unreleased)
 ------------------
 
 Breaking changes:
 
-- *add item here*
+- Always use __code__ and __defaults__, to match changes in CMFCore and publisher, like modern Python.
+  [MatthewWilkes]
 
 New features:
 

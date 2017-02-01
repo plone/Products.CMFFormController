@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '3.1.4.dev0'
+version = '4.0.0.dev0'
 
 setup(
     name='Products.CMFFormController',
@@ -11,8 +11,7 @@ setup(
                       open("CHANGES.rst").read()),
     classifiers=[
         "Framework :: Plone",
-        "Framework :: Plone :: 5.0",
-        "Framework :: Plone :: 5.1",
+        "Framework :: Plone :: 6.0",
         "Framework :: Zope2",
         "License :: OSI Approved :: BSD License",
         "License :: OSI Approved :: Zope Public License",
@@ -42,6 +41,6 @@ setup(
         'Products.GenericSetup>=1.8.3',
         'Acquisition',
         'transaction',
-        'Zope2',
+        'Zope2>=4.0.a2',
     ],
 )
