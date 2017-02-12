@@ -4,14 +4,6 @@ Changelog
 3.1.4 (unreleased)
 ------------------
 
-Breaking changes:
-
-- *add item here*
-
-New features:
-
-- *add item here*
-
 Bug fixes:
 
 - Fix import from Globals that was removed in Zope4
