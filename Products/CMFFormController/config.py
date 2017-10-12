@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from Products.CMFCore.permissions import AddPortalContent
 
 ADD_CONTENT_PERMISSION = AddPortalContent
