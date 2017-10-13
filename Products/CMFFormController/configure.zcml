@@ -17,4 +17,8 @@
   <five:deprecatedManageAddDelete
       class=".FSControllerPageTemplate.FSControllerPageTemplate" />
 
+  <utility
+      factory=".setuphandler.HiddenProfiles"
+      name="CMFFormController-hiddenprofiles" />
+
 </configure>

@@ -14,7 +14,13 @@ New features:
 
 Bug fixes:
 
-- *add item here*
+- Do only allow default profile to show up at site setup screen.
+  [jensens]
+
+- Deprecate profiles confusing name.
+  Old: Products.CMFFormController:CMFFormController.
+  New: Products.CMFFormController:default.
+  [jensens]
 
 
 3.1.4 (2017-02-12)
