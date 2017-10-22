@@ -1,16 +1,15 @@
-from zope.tales.tales import CompilerError
-from zope.interface import implementer
-
 from AccessControl import ClassSecurityInfo
 from Acquisition import aq_base, aq_parent, aq_inner
+from IFormAction import IFormAction
 from Products.CMFCore.Expression import Expression
-from Products.PageTemplates.Expressions import getEngine
-from Products.PageTemplates.Expressions import SecureModuleImporter
-
 from Products.CMFCore.utils import getToolByName
 from Products.CMFFormController.config import URL_ENCODING
 from Products.CMFFormController.utils import log
-from IFormAction import IFormAction
+from Products.PageTemplates.Expressions import SecureModuleImporter
+from Products.PageTemplates.Expressions import getEngine#
+from six.moves.urllib.parse import urlparse
+from zope.interface import implementer
+from zope.tales.tales import CompilerError
 from ZTUtils.Zope import make_query
 
 try:
@@ -18,14 +17,6 @@ try:
 except ImportError:
     # Zope <=2.12
     from AccessControl.Role import RoleManager
-
-# python 2 / 3 compatibility
-import six
-
-if six.PY3:
-    from urlparse import parse as urlparse
-else:
-    import urlparse
 
 
 @implementer(IFormAction,)

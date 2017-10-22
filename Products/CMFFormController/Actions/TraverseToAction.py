@@ -1,16 +1,9 @@
 from BaseFormAction import BaseFormAction
-import TraverseTo
-
 from Products.CMFCore.utils import getToolByName
 from Products.CMFFormController.FormController import registerFormAction
+from six.moves.urllib.parse import urlsplit
 
-# python 2 / 3 compatibility
-import six
-
-if six.PY3:
-    from urlparse.parse import urlsplit
-else:
-    from urlparse import urlsplit
+import TraverseTo
 
 
 def factory(arg):

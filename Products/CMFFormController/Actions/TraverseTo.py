@@ -1,16 +1,8 @@
 from BaseFormAction import BaseFormAction
-
 from Products.CMFFormController.FormController import registerFormAction
+from six.moves.urllib.parse import urlparse
 from ZPublisher.Publish import call_object, missing_name, dont_publish_class
 from ZPublisher.mapply import mapply
-
-# python 2 / 3 compatibility
-import six
-
-if six.PY3:
-    from urlparse import parse as urlparse
-else:
-    import urlparse
 
 
 def factory(arg):
