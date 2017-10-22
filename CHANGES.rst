@@ -21,6 +21,9 @@ Bug fixes:
 - Migrate breaking tests to plone.app.testing (Fix https://github.com/plone/Products.CMFPlone/issues/2195)
   [pbauer]
 
+- Fix imports to be compatible with python 2 and 3 using six
+  [rudaporto]
+
 
 3.1.3 (2016-09-07)
 ------------------
