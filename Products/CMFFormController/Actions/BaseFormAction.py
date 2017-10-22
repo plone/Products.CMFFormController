@@ -19,6 +19,14 @@ except ImportError:
     # Zope <=2.12
     from AccessControl.Role import RoleManager
 
+# python 2 / 3 compatibility
+import six
+
+if six.PY3:
+    from urlparse import parse as urlparse
+else:
+    import urlparse
+
 
 @implementer(IFormAction,)
 class BaseFormAction(RoleManager):
@@ -90,7 +98,6 @@ class BaseFormAction(RoleManager):
     def combineArgs(self, url, kwargs):
         """Utility method that takes a URL, parses its existing query string,
         and combines the resulting dict with kwargs"""
-        import urlparse
         import cgi
 
         # parse the existing URL
@@ -124,9 +131,6 @@ class BaseFormAction(RoleManager):
         url encodes
         and updates the query string using the values in kwargs"""
         d = self.combineArgs(url, kwargs)
-
-        import urlparse
-
         # parse the existing URL
         parsed_url = list(urlparse.urlparse(url))
 
