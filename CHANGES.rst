@@ -18,6 +18,9 @@ Bug fixes:
 - Fix import from Globals that was removed in Zope4
   [pbauer]
 
+- Migrate breaking tests to plone.app.testing (Fix https://github.com/plone/Products.CMFPlone/issues/2195)
+  [pbauer]
+
 
 3.1.3 (2016-09-07)
 ------------------
