@@ -30,6 +30,7 @@ setup(
     extras_require=dict(
         test=[
             'plone.app.testing',
+            'plone.app.contenttypes',
         ]
     ),
     install_requires=[
