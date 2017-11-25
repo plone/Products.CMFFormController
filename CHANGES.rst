@@ -4,14 +4,6 @@ Changelog
 3.1.5 (unreleased)
 ------------------
 
-Breaking changes:
-
-- *add item here*
-
-New features:
-
-- *add item here*
-
 Bug fixes:
 
 - Do only allow default profile to show up at site setup screen.
