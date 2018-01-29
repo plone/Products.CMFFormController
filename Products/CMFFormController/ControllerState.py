@@ -59,22 +59,22 @@ class ControllerState(RoleManager):
 
     def set(self, **kwargs):
         """Set state object properties"""
-        if kwargs.has_key('id'):
+        if 'id' in kwargs:
             self.setId(kwargs['id'])
             del kwargs['id']
-        if kwargs.has_key('button'):
+        if 'button' in kwargs:
             self.setButton(kwargs['button'])
             del kwargs['button']
-        if kwargs.has_key('status'):
+        if 'status' in kwargs:
             self.setStatus(kwargs['status'])
             del kwargs['status']
-        if kwargs.has_key('errors'):
+        if 'errors' in kwargs:
             self.setErrors(kwargs['errors'])
             del kwargs['errors']
-        if kwargs.has_key('context'):
+        if 'context' in kwargs:
             self.setContext(kwargs['context'])
             del kwargs['context']
-        if kwargs.has_key('next_action'):
+        if 'next_action' in kwargs:
             self.setNextAction(kwargs['next_action'])
             del kwargs['next_action']
         self.kwargs.update(kwargs)
