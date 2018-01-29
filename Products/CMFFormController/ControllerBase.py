@@ -1,16 +1,17 @@
-import logging
-import os
+from .FormAction import FormAction, FormActionContainer
+from .FormValidator import FormValidator, FormValidatorContainer
+from .globalVars import ANY_CONTEXT, ANY_BUTTON
+from .utils import log
+from AccessControl import ClassSecurityInfo
 from Acquisition import aq_base, aq_inner
 from App.class_init import InitializeClass
-from AccessControl import ClassSecurityInfo
-from Products.PageTemplates.PageTemplateFile import PageTemplateFile
+from Products.CMFCore.FSMetadata import FSMetadata, CMFConfigParser
 from Products.CMFCore.permissions import View, ManagePortal
 from Products.CMFCore.utils import getToolByName
-from Products.CMFCore.FSMetadata import FSMetadata, CMFConfigParser
-from FormAction import FormAction, FormActionContainer
-from FormValidator import FormValidator, FormValidatorContainer
-from globalVars import ANY_CONTEXT, ANY_BUTTON
-from utils import log
+from Products.PageTemplates.PageTemplateFile import PageTemplateFile
+import logging
+import os
+
 
 class ControllerBase:
     """Common functions for objects controlled by portal_form_controller"""
@@ -225,8 +226,8 @@ class ControllerBase:
                     if next_action is None:
                         metadata_actions = [str(a) for a in self.actions.getFiltered(object_id=id)]
                         zmi_actions = [str(a) for a in controller.actions.getFiltered(object_id=id)]
-                        raise ValueError, 'No next action found for %s.%s.%s.%s\nMetadata actions:\n%s\n\nZMI actions:\n%s\n' % \
-                            (id, status, context_type, button, '\n'.join(metadata_actions), '\n'.join(zmi_actions))
+                        raise ValueError('No next action found for %s.%s.%s.%s\nMetadata actions:\n%s\n\nZMI actions:\n%s\n' %
+                                                (id, status, context_type, button, '\n'.join(metadata_actions), '\n'.join(zmi_actions)))
 
         REQUEST.set('controller_state', controller_state)
         return next_action.getAction()(controller_state)
@@ -299,7 +300,7 @@ class ControllerBase:
                 while len(component) < 4:
                     component.append('')
                 if component[0] != 'action':
-                    raise ValueError, '%s: Format for .metadata actions is action.STATUS.CONTEXT_TYPE.BUTTON = ACTION_TYPE:ACTION_ARG (not %s)' % (filepath, k)
+                    raise ValueError('%s: Format for .metadata actions is action.STATUS.CONTEXT_TYPE.BUTTON = ACTION_TYPE:ACTION_ARG (not %s)' % (filepath, k))
                 act = v.split(':',1)
                 while len(act) < 2:
                     act.append('')
@@ -308,7 +309,7 @@ class ControllerBase:
                 self.actions.set(FormAction(id, component[1], component[2], component[3], act[0], act[1]))
 
                 status_key = str(component[1])+'.'+str(context_type)
-                if _buttons_for_status.has_key(status_key):
+                if status_key in _buttons_for_status:
                     _buttons_for_status[status_key].append(component[3])
                 else:
                     _buttons_for_status[status_key] = [component[3]]
@@ -343,13 +344,13 @@ class ControllerBase:
                 while len(component) < 3:
                     component.append('')
                 if component[0] != 'validators':
-                    raise ValueError, '%s: Format for .metadata validators is validators.CONTEXT_TYPE.BUTTON = LIST (not %s)' % (filepath, k)
+                    raise ValueError('%s: Format for .metadata validators is validators.CONTEXT_TYPE.BUTTON = LIST (not %s)' % (filepath, k))
 
                 context_type = component[1]
                 self.validators.set(FormValidator(id, component[1], component[2], v))
 
                 status_key = str(context_type)
-                if _buttons_for_status.has_key(status_key):
+                if status_key in _buttons_for_status:
                     _buttons_for_status[status_key].append(component[2])
                 else:
                     _buttons_for_status[status_key] = [component[2]]

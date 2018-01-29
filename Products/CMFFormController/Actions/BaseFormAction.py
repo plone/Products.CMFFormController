@@ -1,16 +1,18 @@
+from .IFormAction import IFormAction
 from AccessControl import ClassSecurityInfo
 from Acquisition import aq_base, aq_parent, aq_inner
-from IFormAction import IFormAction
 from Products.CMFCore.Expression import Expression
 from Products.CMFCore.utils import getToolByName
 from Products.CMFFormController.config import URL_ENCODING
 from Products.CMFFormController.utils import log
+from Products.PageTemplates.Expressions import getEngine
 from Products.PageTemplates.Expressions import SecureModuleImporter
-from Products.PageTemplates.Expressions import getEngine#
 from six.moves.urllib.parse import urlparse
 from zope.interface import implementer
 from zope.tales.tales import CompilerError
 from ZTUtils.Zope import make_query
+
+import six
 
 try:
     from OFS.role import RoleManager
@@ -35,12 +37,10 @@ class BaseFormAction(RoleManager):
             try:
                 self.expression = Expression(arg)
             except:
-                raise CompilerError, 'Bad action expression %s' % str(arg)
-
+                raise CompilerError('Bad action expression %s' % str(arg))
 
     def __call__(self, controller_state):
         raise NotImplementedError
-
 
     def getArg(self, controller_state):
         """Generate an expression context for the TALES expression used as
@@ -85,7 +85,6 @@ class BaseFormAction(RoleManager):
         exprContext = getEngine().getContext(data)
         return self.expression(exprContext)
 
-
     def combineArgs(self, url, kwargs):
         """Utility method that takes a URL, parses its existing query string,
         and combines the resulting dict with kwargs"""
@@ -99,7 +98,7 @@ class BaseFormAction(RoleManager):
         d = cgi.parse_qs(qs, 1)
         # update with stuff from kwargs
         for k, v in kwargs.items():
-            if isinstance(v, unicode):
+            if isinstance(v, six.text_type):
                 v = v.encode(URL_ENCODING)
             d[k] = [v] # put in a list to be consistent with parse_qs
         # parse_qs behaves a little unexpectedly -- all query string args
@@ -115,7 +114,6 @@ class BaseFormAction(RoleManager):
             else:
                 dnew[k] = v
         return dnew
-
 
     def updateQuery(self, url, kwargs):
         """Utility method that takes a URL, parses its existing query string,
@@ -136,4 +134,3 @@ class BaseFormAction(RoleManager):
         parsed_url[4] = make_query(**d)
         # rebuild the URL
         return urlparse.urlunparse(parsed_url)
-

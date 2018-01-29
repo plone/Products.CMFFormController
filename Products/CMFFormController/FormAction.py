@@ -1,12 +1,13 @@
+from .globalVars import ANY_CONTEXT, ANY_BUTTON
+from .Key import Key
 from AccessControl import ClassSecurityInfo
+from Acquisition import aq_base
 from App.class_init import InitializeClass
 from OFS.SimpleItem import SimpleItem
 from Products.CMFCore.utils import getToolByName
-from Key import Key
-from globalVars import ANY_CONTEXT, ANY_BUTTON
-from Acquisition import aq_base
 
 _marker = []
+
 
 class FormActionType(SimpleItem):
 
@@ -40,11 +41,11 @@ class FormActionKey(Key):
         if controller:
             s = controller._checkId(object_id)
             if s:
-                raise ValueError, 'Illegal template id: %s' % s
+                raise ValueError('Illegal template id: %s' % s)
 
         status = status.strip()
         if not status:
-            raise ValueError, 'Illegal status %s' % (status)
+            raise ValueError('Illegal status %s' % (status))
 
         if not context_type:
             context_type = ANY_CONTEXT
@@ -85,8 +86,8 @@ class FormAction(SimpleItem):
         self.action_type = action_type
         self.action_arg = action_arg
 
-        if not form_action_types.has_key(action_type):
-            raise ValueError, 'Illegal action type %s for %s' % (action_type, object_id)
+        if not action_type in form_action_types:
+            raise ValueError('Illegal action type %s for %s' % (action_type, object_id))
         if action_arg is not None:
             action_arg = action_arg.strip()
         self.action = form_action_types[action_type].getFactory()(action_arg)

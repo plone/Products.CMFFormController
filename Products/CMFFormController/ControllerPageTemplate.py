@@ -1,15 +1,16 @@
-import os
+from .BaseControllerPageTemplate import BaseControllerPageTemplate
+from .FormAction import FormActionContainer
+from .FormValidator import FormValidatorContainer
 from AccessControl import ClassSecurityInfo
 from App.class_init import InitializeClass
 from App.Common import package_home
+from Products.CMFCore.permissions import View
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from Products.PageTemplates.ZopePageTemplate import ZopePageTemplate as BaseClass
-from Products.CMFCore.permissions import View
-from BaseControllerPageTemplate import BaseControllerPageTemplate
-from FormAction import FormActionContainer
-from FormValidator import FormValidatorContainer
+from six.moves.urllib.parse import quote
 
-from urllib import quote
+import os
+
 
 # ###########################################################################
 # Product registration and Add support

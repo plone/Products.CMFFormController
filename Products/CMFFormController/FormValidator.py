@@ -1,12 +1,15 @@
+from .globalVars import ANY_CONTEXT, ANY_BUTTON
+from .Key import Key
 from AccessControl import ClassSecurityInfo
+from Acquisition import aq_base
 from App.class_init import InitializeClass
 from OFS.SimpleItem import SimpleItem
 from Products.CMFCore.utils import getToolByName
-from Key import Key
-from globalVars import ANY_CONTEXT, ANY_BUTTON
-from Acquisition import aq_base
+
+import six
 
 _marker = []
+
 
 class FormValidatorKey(Key):
 
@@ -20,7 +23,7 @@ class FormValidatorKey(Key):
             for p in path_elements:
                 s = controller._checkId(p)
                 if s:
-                    raise ValueError, 'Illegal template id: %s' % s
+                    raise ValueError('Illegal template id: %s' % s)
 
         if not context_type:
             context_type = ANY_CONTEXT
@@ -52,7 +55,7 @@ class FormValidator(SimpleItem):
     def __init__(self, object_id, context_type, button, validators, controller=None):
         self.key = FormValidatorKey(object_id, context_type, button, controller)
 
-        if isinstance(validators, basestring):
+        if isinstance(validators, six.string_types):
             validators = validators.split(',')
         validators = [v.strip() for v in validators if v]
         if controller:
@@ -61,7 +64,7 @@ class FormValidator(SimpleItem):
                 for p in path_elements:
                     s = controller._checkId(p)
                     if s:
-                        raise ValueError, 'Illegal template id: %s' % s
+                        raise ValueError('Illegal template id: %s' % s)
         self.validators = validators
 
     def __copy__(self):

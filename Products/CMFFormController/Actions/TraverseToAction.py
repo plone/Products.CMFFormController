@@ -1,9 +1,9 @@
-from BaseFormAction import BaseFormAction
+from . import TraverseTo
+from .BaseFormAction import BaseFormAction
 from Products.CMFCore.utils import getToolByName
 from Products.CMFFormController.FormController import registerFormAction
+from six.moves import reduce
 from six.moves.urllib.parse import urlsplit
-
-import TraverseTo
 
 
 def factory(arg):
@@ -54,7 +54,7 @@ class TraverseToAction(BaseFormAction):
             else:
                 action_url = url_parts[2]
         else:
-            raise ValueError, 'No %s action found for %s' % (action, controller_state.getContext().getId())
+            raise ValueError('No %s action found for %s' % (action, controller_state.getContext().getId()))
 
         # If we have CMF 1.5, the actual action_url may be hidden behind a method
         # alias. Attempt to resolve this

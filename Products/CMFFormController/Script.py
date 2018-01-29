@@ -12,14 +12,14 @@
 # THIS FILE CONTAINS MODIFIED CODE FROM ZOPE 2.6.2
 ##############################################################################
 
+from App.class_init import InitializeClass
+from Products.CMFCore.FSPythonScript import FSPythonScript as BaseFSPythonScript
+from Products.PythonScripts.PythonScript import PythonScript as BasePythonScript
+from Shared.DC.Scripts.Bindings import NameAssignments as BaseNameAssignments
+from ZODB.POSException import ConflictError
+
 import logging
 import re
-
-from App.class_init import InitializeClass
-from Shared.DC.Scripts.Bindings import NameAssignments as BaseNameAssignments
-from Products.PythonScripts.PythonScript import PythonScript as BasePythonScript
-from Products.CMFCore.FSPythonScript import FSPythonScript as BaseFSPythonScript
-from ZODB.POSException import ConflictError
 
 logger = logging.getLogger('CMFFormController')
 
@@ -99,7 +99,7 @@ class PythonScript(BasePythonScript):
                 k, v = line[2:].split('=', 1)
                 k = k.strip().lower()
                 v = v.strip()
-                if not mdata.has_key(k):
+                if not k in mdata:
                     raise SyntaxError('Unrecognized header line "%s" in file %s' % (line, self._filepath))
                 if v == mdata[k]:
                     # Unchanged value

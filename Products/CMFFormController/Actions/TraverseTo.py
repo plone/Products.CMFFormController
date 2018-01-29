@@ -1,8 +1,8 @@
-from BaseFormAction import BaseFormAction
+from .BaseFormAction import BaseFormAction
 from Products.CMFFormController.FormController import registerFormAction
 from six.moves.urllib.parse import urlparse
-from ZPublisher.Publish import call_object, missing_name, dont_publish_class
 from ZPublisher.mapply import mapply
+from ZPublisher.WSGIPublisher import call_object, missing_name, dont_publish_class
 
 
 def factory(arg):
@@ -16,7 +16,7 @@ class TraverseTo(BaseFormAction):
         # see if this is a relative url or an absolute
         if len(urlparse.urlparse(url)[1]) != 0:
             # host specified, so url is absolute.  No good for traversal.
-            raise ValueError, 'Can\'t traverse to absolute url %s' % str(url)
+            raise ValueError('Can\'t traverse to absolute url %s' % str(url))
 
         url_path = urlparse.urlparse(url)[2]
         # combine args from query string with args from the controller state
@@ -32,7 +32,7 @@ class TraverseTo(BaseFormAction):
         context = controller_state.getContext()
         obj = context.restrictedTraverse(url_path, default=None)
         if obj is None:
-            raise ValueError, 'Unable to find %s\n' % str(url_path)
+            raise ValueError('Unable to find %s\n' % str(url_path))
         return mapply(obj, REQUEST.args, REQUEST,
                                call_object, 1, missing_name, dont_publish_class,
                                REQUEST, bind=1)

@@ -2,12 +2,12 @@
 
 from Products.CMFCore.utils import registerIcon, ToolInit
 
-from config import *
-import ControllerPageTemplate, FSControllerPageTemplate
-import ControllerPythonScript, FSControllerPythonScript
-import ControllerValidator, FSControllerValidator
-import FormController
-from Actions import RedirectTo, TraverseTo, RedirectToAction, TraverseToAction
+from .config import *
+from . import ControllerPageTemplate, FSControllerPageTemplate
+from . import ControllerPythonScript, FSControllerPythonScript
+from . import ControllerValidator, FSControllerValidator
+from . import FormController
+from .Actions import RedirectTo, TraverseTo, RedirectToAction, TraverseToAction
 
 GLOBALS = globals()
 

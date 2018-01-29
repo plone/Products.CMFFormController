@@ -1,27 +1,30 @@
 from __future__ import nested_scopes
-import os
-from zope.interface import implementer
-from zope.structuredtext import stx2html
 
+from .FormAction import FormActionType, FormActionKey, FormAction, FormActionContainer
+from .FormValidator import FormValidatorKey, FormValidator, FormValidatorContainer
+from .ValidationError import ValidationError
 from AccessControl import ClassSecurityInfo
 from App.class_init import InitializeClass
 from App.Common import package_home
 from OFS.ObjectManager import bad_id
-from ZPublisher.Publish import call_object, missing_name, dont_publish_class
-from ZPublisher.mapply import mapply
-from Products.CMFFormController import GLOBALS as fc_globals
-from Products.CMFCore.utils import getToolByName, UniqueObject, SimpleItemWithProperties
 from Products.CMFCore.permissions import ManagePortal
-from Products.PageTemplates.PageTemplateFile import PageTemplateFile
-
+from Products.CMFCore.utils import getToolByName, UniqueObject, SimpleItemWithProperties
+from Products.CMFFormController import GLOBALS as fc_globals
 from Products.CMFFormController.ControllerState import ControllerState
 from Products.CMFFormController.interfaces import IFormControllerTool
-from FormAction import FormActionType, FormActionKey, FormAction, FormActionContainer
-from FormValidator import FormValidatorKey, FormValidator, FormValidatorContainer
-from ValidationError import ValidationError
+from Products.PageTemplates.PageTemplateFile import PageTemplateFile
+from zope.interface import implementer
+from zope.structuredtext import stx2html
+from ZPublisher.mapply import mapply
+from ZPublisher.WSGIPublisher import call_object
+from ZPublisher.WSGIPublisher import dont_publish_class
+from ZPublisher.WSGIPublisher import missing_name
+
+import os
 
 _marker = []
 form_action_types = {}
+
 
 def registerFormAction(id, factory, description=''):
     form_action_types[id] = FormActionType(id, factory, description)
@@ -330,14 +333,14 @@ class FormController(UniqueObject, SimpleItemWithProperties):
             controller_state.set(id=id, context=obj.__parent__)
         else:
             if controller_state is None:
-                raise ValueError, 'No controller state available.  ' + \
+                raise ValueError('No controller state available.  ' + \
                     'This commonly occurs when a ControllerValidator (.vpy) ' + \
                     'script is invoked via the validation mechanism in the ' + \
                     'portal_form tool.  If you are using a package designed to ' + \
                     'be used with portal_form, you are probably inadvertently ' + \
                     'invoking a validator designed for use with CMFFormController (e.g. validate_id).  ' + \
                     'If you are using a package designed to be used with CMFFormController, you probably ' + \
-                    'have a "portal_form" in your URL that needs to be removed.'
+                    'have a "portal_form" in your URL that needs to be removed.')
         controller_state._setValidating(is_validator)
         # Pass environment along, with care so we don't override
         # existing variables.
@@ -374,28 +377,28 @@ class FormController(UniqueObject, SimpleItemWithProperties):
                 # make sure validator exists
                 obj = context.restrictedTraverse(v, default=None)
                 if obj is None:
-                    raise ValueError, 'Unable to find validator %s\n' % str(v)
+                    raise ValueError('Unable to find validator %s\n' % str(v))
                 if not getattr(obj, 'is_validator', 1):
-                    raise ValueError, '%s is not a CMFFormController validator' % str(v)
+                    raise ValueError('%s is not a CMFFormController validator' % str(v))
                 REQUEST = controller_state.getContext().REQUEST
                 controller_state = mapply(obj, args, kwargs,
                                           call_object, 1, missing_name, dont_publish_class,
                                           REQUEST, bind=1)
                 if controller_state is None or getattr(controller_state, '__class__', None) != ControllerState:
-                    raise ValueError, 'Validator %s did not return the state object' % str(v)
+                    raise ValueError('Validator %s did not return the state object' % str(v))
                 controller_state._addValidator(v)
-            except ValidationError, e:
+            except ValidationError as e:
                 # if a validator raises a ValidatorException, execution of
                 # validators is halted and the controller_state is set to
                 # the controller_state embedded in the exception
                 controller_state = e.controller_state
                 state_class = getattr(controller_state, '__class__', None)
                 if state_class != ControllerState:
-                    raise Exception, 'Bad ValidationError state (type = %s)' % str(state_class)
+                    raise Exception('Bad ValidationError state (type = %s)' % str(state_class))
                 break
             state_class = getattr(controller_state, '__class__', None)
             if state_class != ControllerState:
-                raise Exception, 'Bad validator return type from validator %s (%s)' % (str(v), str(state_class))
+                raise Exception('Bad validator return type from validator %s (%s)' % (str(v), str(state_class)))
             REQUEST.set('controller_state', controller_state)
 
         REQUEST.set('controller_state', controller_state)
@@ -443,9 +446,9 @@ class FormController(UniqueObject, SimpleItemWithProperties):
         catalog = getToolByName(self, 'portal_catalog')
         result = catalog.ZopeFindAndApply(portal, obj_metatypes=meta_types, search_sub=1, result=[])
         for (path, r) in result:
-            if action_dict.has_key(r.getId()):
+            if r.getId() in action_dict:
                 del action_dict[r.getId()]
-            if validator_dict.has_key(r.getId()):
+            if r.getId() in validator_dict:
                 del validator_dict[r.getId()]
 
         n_actions = 0

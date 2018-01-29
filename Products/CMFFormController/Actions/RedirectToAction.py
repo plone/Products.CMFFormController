@@ -1,8 +1,9 @@
-from BaseFormAction import BaseFormAction
-import RedirectTo
-
+from . import RedirectTo
+from .BaseFormAction import BaseFormAction
 from Products.CMFCore.utils import getToolByName
 from Products.CMFFormController.FormController import registerFormAction
+from six.moves import reduce
+
 
 def factory(arg):
     """Create a new redirect-to-action action"""
@@ -41,7 +42,7 @@ class RedirectToAction(BaseFormAction):
 
         # (note: action_url may now be an emptry string, but still valid)
         if not haveAction:
-            raise ValueError, 'No %s action found for %s' % (action, controller_state.getContext().getId())
+            raise ValueError('No %s action found for %s' % (action, controller_state.getContext().getId()))
 
         # XXX: Is there a better way to check this?
         if not action_url.startswith('string:'):

@@ -14,24 +14,24 @@
 """ Customizable controlled python scripts that come from the filesystem.
 """
 
-import copy
-from zope.tales.tales import CompilerError
-
-import Acquisition
+from .ControllerPythonScript import ControllerPythonScript
+from .ControllerState import ControllerState
+from .FSControllerBase import FSControllerBase
+from .interfaces import IControllerPythonScript
+from .Script import FSPythonScript as BaseClass
+from .utils import log, logException
 from AccessControl import ClassSecurityInfo
 from App.class_init import InitializeClass
 from OFS.Cache import Cacheable
 from Products.CMFCore.DirectoryView import registerFileExtension, registerMetaType
 from Products.CMFCore.permissions import View
 from Products.CMFCore.utils import getToolByName
-from Script import FSPythonScript as BaseClass
-from ControllerPythonScript import ControllerPythonScript
-from ControllerState import ControllerState
-from FSControllerBase import FSControllerBase
-from utils import log, logException
-from interfaces import IControllerPythonScript
-
 from zope.interface import implementer
+from zope.tales.tales import CompilerError
+
+import Acquisition
+import copy
+
 
 @implementer(IControllerPythonScript)
 class FSControllerPythonScript (FSControllerBase, BaseClass):
@@ -60,7 +60,7 @@ class FSControllerPythonScript (FSControllerBase, BaseClass):
         try:
             self._read_action_metadata(self.getId(), filepath)
             self._read_validator_metadata(self.getId(), self.filepath)
-        except (ValueError, CompilerError), e:
+        except (ValueError, CompilerError) as e:
             log(summary='metadata error', text='file = %s' % filepath)
             raise
 

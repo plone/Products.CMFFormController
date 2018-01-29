@@ -14,19 +14,19 @@
 """ Customizable controlled python scripts that come from the filesystem.
 """
 
+from .ControllerBase import ControllerBase
+from .ControllerValidator import ControllerValidator
+from .interfaces import IControllerValidator
+from .Script import FSPythonScript as BaseClass
+from .utils import logException
 from AccessControl import ClassSecurityInfo
 from App.class_init import InitializeClass
 from OFS.Cache import Cacheable
 from Products.CMFCore.DirectoryView import registerFileExtension, registerMetaType
 from Products.CMFCore.permissions import View
 from Products.CMFCore.utils import getToolByName
-from Script import FSPythonScript as BaseClass
-from ControllerValidator import ControllerValidator
-from ControllerBase import ControllerBase
-from utils import logException
-from interfaces import IControllerValidator
-
 from zope.interface import implementer
+
 
 @implementer(IControllerValidator)
 class FSControllerValidator (BaseClass, ControllerBase):

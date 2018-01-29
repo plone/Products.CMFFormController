@@ -18,21 +18,21 @@ This product provides support for Script objects containing restricted
 Python code.
 """
 
-import os
+from .ControllerBase import ControllerBase
+from .interfaces import IControllerValidator
+from .Script import PythonScript as BaseClass
 from App.Common import package_home
-import AccessControl
-from Products.PageTemplates.PageTemplateFile import PageTemplateFile
-from OFS.SimpleItem import SimpleItem
-from urllib import quote
-from Shared.DC.Scripts.Script import BindingsUI
-from OFS.History import Historical
 from OFS.Cache import Cacheable
+from OFS.History import Historical
+from OFS.SimpleItem import SimpleItem
 from Products.CMFCore.utils import getToolByName
-from Script import PythonScript as BaseClass
-from ControllerBase import ControllerBase
-from interfaces import IControllerValidator
-
+from Products.PageTemplates.PageTemplateFile import PageTemplateFile
+from Shared.DC.Scripts.Script import BindingsUI
+from six.moves.urllib.parse import quote
 from zope.interface import implementer
+
+import AccessControl
+import os
 
 # Track the Python bytecode version
 import imp
