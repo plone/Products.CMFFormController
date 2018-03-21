@@ -79,7 +79,7 @@ class FormAction(SimpleItem):
 
     def __init__(self, object_id, status, context_type, button,
                  action_type, action_arg, controller=None):
-        from FormController import form_action_types
+        from .FormController import form_action_types
 
         self.key = FormActionKey(object_id, status, context_type, button,
                                  controller)
