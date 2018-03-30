@@ -8,6 +8,7 @@ from Products.CMFFormController.utils import log
 from Products.PageTemplates.Expressions import getEngine
 from Products.PageTemplates.Expressions import SecureModuleImporter
 from six.moves.urllib.parse import urlparse
+from six.moves.urllib.parse import urlunparse
 from zope.interface import implementer
 from zope.tales.tales import CompilerError
 from ZTUtils.Zope import make_query
@@ -91,7 +92,7 @@ class BaseFormAction(RoleManager):
         import cgi
 
         # parse the existing URL
-        parsed_url = list(urlparse.urlparse(url))
+        parsed_url = list(urlparse(url))
         # get the existing query string
         qs = parsed_url[4]
         # parse the query into a dict
@@ -100,7 +101,7 @@ class BaseFormAction(RoleManager):
         for k, v in kwargs.items():
             if isinstance(v, six.text_type):
                 v = v.encode(URL_ENCODING)
-            d[k] = [v] # put in a list to be consistent with parse_qs
+            d[k] = [v]  # put in a list to be consistent with parse_qs
         # parse_qs behaves a little unexpectedly -- all query string args
         # are represented as lists.  I think the reason is so that you get
         # consistent behavior for things like http://myurl?a=1&a=2&a=3
@@ -121,7 +122,7 @@ class BaseFormAction(RoleManager):
         and updates the query string using the values in kwargs"""
         d = self.combineArgs(url, kwargs)
         # parse the existing URL
-        parsed_url = list(urlparse.urlparse(url))
+        parsed_url = list(urlparse(url))
 
         # re-encode the string
         # We use ZTUtils.make_query here because it
@@ -133,4 +134,4 @@ class BaseFormAction(RoleManager):
         # destination urls.
         parsed_url[4] = make_query(**d)
         # rebuild the URL
-        return urlparse.urlunparse(parsed_url)
+        return urlunparse(parsed_url)

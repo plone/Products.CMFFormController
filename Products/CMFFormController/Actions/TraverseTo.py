@@ -14,11 +14,11 @@ class TraverseTo(BaseFormAction):
     def __call__(self, controller_state):
         url = self.getArg(controller_state)
         # see if this is a relative url or an absolute
-        if len(urlparse.urlparse(url)[1]) != 0:
+        if len(urlparse(url)[1]) != 0:
             # host specified, so url is absolute.  No good for traversal.
             raise ValueError('Can\'t traverse to absolute url %s' % str(url))
 
-        url_path = urlparse.urlparse(url)[2]
+        url_path = urlparse(url)[2]
         # combine args from query string with args from the controller state
         # (args in the state supercede those in the query string)
         args = self.combineArgs(url, controller_state.kwargs)
