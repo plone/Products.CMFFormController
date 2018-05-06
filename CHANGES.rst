@@ -16,6 +16,9 @@ New features:
 
 Bug fixes:
 
+- Fix dict key sorting in Python 3
+  [ale-rt]
+
 - Fix import from Globals that was removed in Zope4
   [pbauer]
 
