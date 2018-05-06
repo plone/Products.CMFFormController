@@ -1,10 +1,12 @@
-from .globalVars import ANY_CONTEXT, ANY_BUTTON
+from .globalVars import ANY_BUTTON
+from .globalVars import ANY_CONTEXT
 from .Key import Key
 from AccessControl import ClassSecurityInfo
 from Acquisition import aq_base
 from App.class_init import InitializeClass
 from OFS.SimpleItem import SimpleItem
 from Products.CMFCore.utils import getToolByName
+
 
 _marker = []
 
@@ -187,9 +189,7 @@ class FormActionContainer(SimpleItem):
     def getFiltered(self, object_id=_marker, status=_marker, context_type=_marker,
                     button=_marker, action_type=_marker, action_arg=_marker):
         filtered = []
-        keys = self.actions.keys()
-        keys.sort()
-        for key in keys:
+        for key in sorted(self.actions):
             action = self.actions[key]
             if object_id != _marker and not action.getObjectId() == object_id:
                 continue

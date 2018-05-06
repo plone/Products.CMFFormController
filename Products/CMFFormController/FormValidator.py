@@ -1,4 +1,5 @@
-from .globalVars import ANY_CONTEXT, ANY_BUTTON
+from .globalVars import ANY_BUTTON
+from .globalVars import ANY_CONTEXT
 from .Key import Key
 from AccessControl import ClassSecurityInfo
 from Acquisition import aq_base
@@ -7,6 +8,7 @@ from OFS.SimpleItem import SimpleItem
 from Products.CMFCore.utils import getToolByName
 
 import six
+
 
 _marker = []
 
@@ -143,9 +145,7 @@ class FormValidatorContainer(SimpleItem):
     def getFiltered(self, object_id=_marker, context_type=_marker,
                     button=_marker, validators=_marker):
         filtered = []
-        keys = self.validators.keys()
-        keys.sort()
-        for key in keys:
+        for key in sorted(self.validators):
             validator = self.validators[key]
             if object_id != _marker and not validator.getObjectId() == object_id:
                 continue
