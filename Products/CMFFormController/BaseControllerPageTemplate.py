@@ -1,8 +1,9 @@
+from .ControllerBase import ControllerBase
 from AccessControl import ClassSecurityInfo
 from App.class_init import InitializeClass
 from Products.CMFCore.permissions import View
 from Products.CMFCore.utils import getToolByName
-from ControllerBase import ControllerBase
+
 
 class BaseControllerPageTemplate(ControllerBase):
 

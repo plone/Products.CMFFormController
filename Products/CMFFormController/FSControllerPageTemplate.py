@@ -14,21 +14,22 @@
 """ Customizable validated page templates that come from the filesystem.
 """
 
-import copy
+from .BaseControllerPageTemplate import BaseControllerPageTemplate
+from .ControllerPageTemplate import ControllerPageTemplate
+from .FSControllerBase import FSControllerBase
+from .utils import log, logException
+from AccessControl import ClassSecurityInfo
+from App.class_init import InitializeClass
+from OFS.Cache import Cacheable
+from Products.CMFCore.DirectoryView import registerFileExtension, registerMetaType
+from Products.CMFCore.FSPageTemplate import FSPageTemplate as BaseClass
+from Products.CMFCore.permissions import View
+from Products.PageTemplates.ZopePageTemplate import Src
 from zope.tales.tales import CompilerError
 
 import Acquisition
-from App.class_init import InitializeClass
-from AccessControl import ClassSecurityInfo
-from OFS.Cache import Cacheable
-from Products.PageTemplates.ZopePageTemplate import Src
-from Products.CMFCore.DirectoryView import registerFileExtension, registerMetaType
-from Products.CMFCore.permissions import View
-from Products.CMFCore.FSPageTemplate import FSPageTemplate as BaseClass
-from BaseControllerPageTemplate import BaseControllerPageTemplate
-from ControllerPageTemplate import ControllerPageTemplate
-from FSControllerBase import FSControllerBase
-from utils import log, logException
+import copy
+
 
 class FSControllerPageTemplate(FSControllerBase, BaseClass, BaseControllerPageTemplate):
     """Wrapper for Controller Page Template"""
@@ -52,7 +53,7 @@ class FSControllerPageTemplate(FSControllerBase, BaseClass, BaseControllerPageTe
         try:
             self._read_action_metadata(self.getId(), filepath)
             self._read_validator_metadata(self.getId(), filepath)
-        except (ValueError, CompilerError), e:
+        except (ValueError, CompilerError) as e:
             log(summary='metadata error', text='file = %s' % filepath)
             raise
 

@@ -1,8 +1,8 @@
-from BaseFormAction import BaseFormAction
+from .BaseFormAction import BaseFormAction
 from Products.CMFCore.utils import getToolByName
 from Products.CMFFormController.FormController import registerFormAction
-from urlparse import urljoin
-from urlparse import urlparse
+from six.moves.urllib.parse import urljoin
+from six.moves.urllib.parse import urlparse
 
 
 def factory(arg):

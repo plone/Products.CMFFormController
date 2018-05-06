@@ -11,12 +11,14 @@
 #
 ##########################################################################
 
-import os
+from .ControllerBase import ControllerBase
 from AccessControl import ClassSecurityInfo
 from App.class_init import InitializeClass
 from App.config import getConfiguration
 from Products.CMFCore.FSMetadata import FSMetadata
-from ControllerBase import ControllerBase
+
+import os
+
 
 class FSControllerBase(ControllerBase):
     """Common functions for filesystem objects controlled by portal_form_controller"""

@@ -6,7 +6,8 @@ Changelog
 
 Breaking changes:
 
-- Always use __code__ and __defaults__, to match changes in CMFCore and publisher, like modern Python.
+- Always use __code__ and __defaults__, to match changes in CMFCore and
+  publisher, like modern Python.
   [MatthewWilkes]
 
 New features:
@@ -18,8 +19,12 @@ Bug fixes:
 - Fix import from Globals that was removed in Zope4
   [pbauer]
 
-- Migrate breaking tests to plone.app.testing (Fix https://github.com/plone/Products.CMFPlone/issues/2195)
+- Migrate breaking tests to plone.app.testing (Fix
+  https://github.com/plone/Products.CMFPlone/issues/2195)
   [pbauer]
+
+- Fix imports to be compatible with python 2 and 3 using six
+  [rudaporto]
 
 
 3.1.3 (2016-09-07)
@@ -31,12 +36,12 @@ Bug fixes:
   refuses to redirect to unknown external sites.  Added
   ``external_redirect_to`` action in case someone *does* need to
   redirect to an external site.  This option is also there in the
-  hotfix.  [maurits]
+  hotfix.
+  [maurits]
 
 
 3.1.2 (2016-08-31)
 ------------------
-
 
 Bug fixes:
 
@@ -59,7 +64,8 @@ Bug fixes:
 
 New:
 
-- Added uninstall profile.  Needs Products.GenericSetup 1.8.3.  [maurits]
+- Added uninstall profile. Needs Products.GenericSetup 1.8.3.
+  [maurits]
 
 
 3.0.6 (2016-04-09)
@@ -67,20 +73,23 @@ New:
 
 Fixes:
 
-- Minor package cleanup.  [maurits]
+- Minor package cleanup.
+  [maurits]
 
 
 3.0.5 (2015-06-05)
 ------------------
 
 - Additional check in BaseControllerPageTemplate when we try to delete an entry
-  from the request, that has already been deleted [cekk]
+  from the request, that has already been deleted
+  [cekk]
 
 
 3.0.4 (2015-03-08)
 ------------------
 
-- Reduce verbosity of _read_action_metadata and _read_validator_metadata when there are no default action or default validator assigned.
+- Reduce verbosity of _read_action_metadata and _read_validator_metadata when
+  there are no default action or default validator assigned.
   [ericof]
 
 - Ported to plone.app.testing
@@ -97,11 +106,13 @@ Fixes:
 - ControllerState.py: Don't use list as default parameter value.
   [kleist]
 
+
 3.0.2 - 2011-04-03
 ------------------
 
 - Update RoleManager imports to avoid deprecation warning on Zope 2.13.
   [davisagli]
+
 
 3.0.1 - 2010-10-27
 ------------------
@@ -109,10 +120,12 @@ Fixes:
 - Fixed template with chameleon incompatibility.
   [swampmonkey]
 
+
 3.0 - 2010-07-18
 ----------------
 
 - No changes.
+
 
 3.0a1 - 2009-11-13
 ------------------
@@ -140,11 +153,13 @@ Fixes:
 - Purged old Zope 2 Interface interfaces for Zope 2.12 compatibility.
   [elro]
 
+
 2.1.2 - 2008-03-26
 ------------------
 
 - Added metadata.xml to GenericSetup profile.
   [hannosch]
+
 
 2.1.1 - 2007-10-07
 ------------------
@@ -159,11 +174,13 @@ Fixes:
 - Made tests pass without Plone being installed.
   [hannosch]
 
+
 2.1 - 2007-08-09
 ----------------
 
 - No changes.
   [hannosch]
+
 
 2.1rc1 - 2007-07-09
 -------------------
@@ -172,6 +189,7 @@ Fixes:
   which is not available in utilities.
   [wichert]
 
+
 2.1b4 - 2007-05-05
 ------------------
 
@@ -179,11 +197,13 @@ Fixes:
   environments.
   [hannosch]
 
+
 2.1b3 - 2007-05-01
 ------------------
 
 - Back to getToolByName we go.
   [wichert]
+
 
 2.1b2 - 2007-03-23
 ------------------
@@ -199,6 +219,7 @@ Fixes:
 - Replaced getToolByName by getUtility calls.
   [hannosch]
 
+
 2.1b1 - 2007-03-05
 ------------------
 
@@ -211,6 +232,7 @@ Fixes:
 
 - Removed all occurrences of portal_status_message.
   [hannosch]
+
 
 2.0.7 - 2006-01-27
 ------------------
@@ -225,6 +247,7 @@ Fixes:
   button or any content-type.
   [deo]
 
+
 2.0.6 - 2006-11-04
 ------------------
 
@@ -233,6 +256,7 @@ Fixes:
 
 - Converted log functions to use the logging package instead of zLOG.
   [hannosch]
+
 
 2.0.5 - 2006-09-08
 ------------------
@@ -251,12 +275,14 @@ Fixes:
 - Cleaned up test infrastructure, removed custom testrunner.
   [hannosch]
 
+
 2.0.4 - 2006-06-17
 ------------------
 
 - Fix issue with usage of relative urls for action traversal, rather than
   actual physical paths, which are necessary.
   [alecm]
+
 
 2.0.3 - 2006-06-09
 ------------------
@@ -265,6 +291,7 @@ Fixes:
   in the folder category. Also, made action traversal/redirection less
   error prone.
   [alecm]
+
 
 2.0.2 - 2006-05-15
 ------------------
@@ -286,6 +313,7 @@ Fixes:
 - Update tests to comply with PloneTestCase 0.8 API.
   [hannosch]
 
+
 2.0.1 - 2006-03-28
 ------------------
 
@@ -300,6 +328,7 @@ Fixes:
 
 - Shut down DeprecationWarning for product_name of ToolInit.
   [hannosch]
+
 
 2.0 - 2006-02-25
 ----------------
@@ -324,6 +353,7 @@ Fixes:
   format_stx and expandPath
   [hannosch]
 
+
 1.0.7 - 2005-12-18
 ------------------
 
@@ -332,6 +362,7 @@ Fixes:
 
 - Made tests compatible with Zope 2.9 (transaction module)
   [hannosch]
+
 
 1.0.6 - 2005-10-09
 ------------------

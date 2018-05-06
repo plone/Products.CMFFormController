@@ -1,17 +1,19 @@
-from zope.tales.tales import CompilerError
-from zope.interface import implementer
-
+from .IFormAction import IFormAction
 from AccessControl import ClassSecurityInfo
 from Acquisition import aq_base, aq_parent, aq_inner
 from Products.CMFCore.Expression import Expression
-from Products.PageTemplates.Expressions import getEngine
-from Products.PageTemplates.Expressions import SecureModuleImporter
-
 from Products.CMFCore.utils import getToolByName
 from Products.CMFFormController.config import URL_ENCODING
 from Products.CMFFormController.utils import log
-from IFormAction import IFormAction
+from Products.PageTemplates.Expressions import getEngine
+from Products.PageTemplates.Expressions import SecureModuleImporter
+from six.moves.urllib.parse import urlparse
+from six.moves.urllib.parse import urlunparse
+from zope.interface import implementer
+from zope.tales.tales import CompilerError
 from ZTUtils.Zope import make_query
+
+import six
 
 try:
     from OFS.role import RoleManager
@@ -36,12 +38,10 @@ class BaseFormAction(RoleManager):
             try:
                 self.expression = Expression(arg)
             except:
-                raise CompilerError, 'Bad action expression %s' % str(arg)
-
+                raise CompilerError('Bad action expression %s' % str(arg))
 
     def __call__(self, controller_state):
         raise NotImplementedError
-
 
     def getArg(self, controller_state):
         """Generate an expression context for the TALES expression used as
@@ -86,24 +86,22 @@ class BaseFormAction(RoleManager):
         exprContext = getEngine().getContext(data)
         return self.expression(exprContext)
 
-
     def combineArgs(self, url, kwargs):
         """Utility method that takes a URL, parses its existing query string,
         and combines the resulting dict with kwargs"""
-        import urlparse
         import cgi
 
         # parse the existing URL
-        parsed_url = list(urlparse.urlparse(url))
+        parsed_url = list(urlparse(url))
         # get the existing query string
         qs = parsed_url[4]
         # parse the query into a dict
         d = cgi.parse_qs(qs, 1)
         # update with stuff from kwargs
         for k, v in kwargs.items():
-            if isinstance(v, unicode):
+            if isinstance(v, six.text_type):
                 v = v.encode(URL_ENCODING)
-            d[k] = [v] # put in a list to be consistent with parse_qs
+            d[k] = [v]  # put in a list to be consistent with parse_qs
         # parse_qs behaves a little unexpectedly -- all query string args
         # are represented as lists.  I think the reason is so that you get
         # consistent behavior for things like http://myurl?a=1&a=2&a=3
@@ -118,17 +116,13 @@ class BaseFormAction(RoleManager):
                 dnew[k] = v
         return dnew
 
-
     def updateQuery(self, url, kwargs):
         """Utility method that takes a URL, parses its existing query string,
         url encodes
         and updates the query string using the values in kwargs"""
         d = self.combineArgs(url, kwargs)
-
-        import urlparse
-
         # parse the existing URL
-        parsed_url = list(urlparse.urlparse(url))
+        parsed_url = list(urlparse(url))
 
         # re-encode the string
         # We use ZTUtils.make_query here because it
@@ -140,5 +134,4 @@ class BaseFormAction(RoleManager):
         # destination urls.
         parsed_url[4] = make_query(**d)
         # rebuild the URL
-        return urlparse.urlunparse(parsed_url)
-
+        return urlunparse(parsed_url)

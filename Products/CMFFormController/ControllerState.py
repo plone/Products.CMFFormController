@@ -1,8 +1,10 @@
+from .FormAction import FormAction
+from .globalVars import ANY_CONTEXT, ANY_BUTTON
 from AccessControl import ClassSecurityInfo
 from App.class_init import InitializeClass
 from Products.CMFCore.utils import getToolByName
-from FormAction import FormAction
-from globalVars import ANY_CONTEXT, ANY_BUTTON
+
+import six
 
 try:
     from OFS.role import RoleManager
@@ -57,22 +59,22 @@ class ControllerState(RoleManager):
 
     def set(self, **kwargs):
         """Set state object properties"""
-        if kwargs.has_key('id'):
+        if 'id' in kwargs:
             self.setId(kwargs['id'])
             del kwargs['id']
-        if kwargs.has_key('button'):
+        if 'button' in kwargs:
             self.setButton(kwargs['button'])
             del kwargs['button']
-        if kwargs.has_key('status'):
+        if 'status' in kwargs:
             self.setStatus(kwargs['status'])
             del kwargs['status']
-        if kwargs.has_key('errors'):
+        if 'errors' in kwargs:
             self.setErrors(kwargs['errors'])
             del kwargs['errors']
-        if kwargs.has_key('context'):
+        if 'context' in kwargs:
             self.setContext(kwargs['context'])
             del kwargs['context']
-        if kwargs.has_key('next_action'):
+        if 'next_action' in kwargs:
             self.setNextAction(kwargs['next_action'])
             del kwargs['next_action']
         self.kwargs.update(kwargs)
@@ -129,7 +131,7 @@ class ControllerState(RoleManager):
         err = {}
         for k,v in self.errors.items():
             # make allowances for old-style string errors
-            if isinstance(v, basestring):
+            if isinstance(v, six.string_types):
                 err[k] = v
             else:
                 err[k] = v[0]
@@ -140,7 +142,7 @@ class ControllerState(RoleManager):
         err = {}
         for k,v in self.errors.items():
             # make allowances for old-style string errors
-            if isinstance(v, basestring):
+            if isinstance(v, six.string_types):
                 err[k] = (v, None)
             else:
                 err[k] = v
@@ -152,7 +154,7 @@ class ControllerState(RoleManager):
         self.errors = {}
         # make allowances for old-style errors
         for k,v in errors.items():
-            if isinstance(v, basestring):
+            if isinstance(v, six.string_types):
                 self.errors[k] = (v, None)
             else:
                 self.errors[k] = v
@@ -212,7 +214,7 @@ class ControllerState(RoleManager):
                 args = None
         controller = getToolByName(self.getContext(), 'portal_form_controller')
         if not action_type in controller.validActionTypes():
-            raise KeyError, 'Unknown action type %s\n' % action_type
+            raise KeyError('Unknown action type %s\n' % action_type)
         self.next_action = FormAction(self.getId(), self.getStatus(), ANY_CONTEXT, ANY_BUTTON, action_type, args, controller)
 
     # indicate that a validator has been executed
@@ -221,7 +223,7 @@ class ControllerState(RoleManager):
 
     # remove a validator from the list of already-executed validators
     def clearValidator(self, validator):
-        if self._validators.has_key(validator):
+        if validator in self._validators:
             del self._validators[validator]
 
     # clear the list of already-executed validators
@@ -235,7 +237,7 @@ class ControllerState(RoleManager):
         elif not isinstance(validators, list):
             validators = [validators]
         for v in validators:
-            if not self._validators.has_key(v):
+            if not v in self._validators:
                 return 0
         return 1
 

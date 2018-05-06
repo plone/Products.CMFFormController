@@ -15,14 +15,15 @@
    filesystem.
 """
 
-import os
 from AccessControl import ClassSecurityInfo
+from BaseControllerPageTemplate import BaseControllerPageTemplate
+from FSControllerBase import FSControllerBase
 from Products.CMFCore.permissions import View
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile as BaseClass
 from Products.PageTemplates.TALES import CompilerError
-from BaseControllerPageTemplate import BaseControllerPageTemplate
-from FSControllerBase import FSControllerBase
 from utils import log, logException
+
+import os
 
 
 class ControllerPageTemplateFile(BaseClass, BaseControllerPageTemplate, FSControllerBase):
@@ -52,7 +53,7 @@ class ControllerPageTemplateFile(BaseClass, BaseControllerPageTemplate, FSContro
             self._read_action_metadata(self.getId(), self.filepath)
             self._read_validator_metadata(self.getId(), self.filepath)
             return retval
-        except (ValueError, CompilerError), e:
+        except (ValueError, CompilerError) as e:
             log(summary='metadata error', text='file = %s' % self.filepath)
             raise
 
