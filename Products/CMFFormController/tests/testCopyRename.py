@@ -2,7 +2,7 @@
 # Test copying/pasting of controller objects
 #
 
-from plone.app.testing.bbb import PloneTestCase
+from plone.app.testing.bbb_at import PloneTestCase
 
 from Products.CMFFormController.FormAction import FormAction
 from Products.CMFFormController.FormValidator import FormValidator
