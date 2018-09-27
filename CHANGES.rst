@@ -29,6 +29,9 @@ Bug fixes:
 - Fix imports to be compatible with python 2 and 3 using six
   [rudaporto]
 
+- Switch to bbb_at.PloneTestCase.
+  [pbauer]
+
 
 3.1.3 (2016-09-07)
 ------------------
