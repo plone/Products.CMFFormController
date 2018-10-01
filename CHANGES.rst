@@ -1,36 +1,22 @@
 Changelog
 =========
 
+.. You should *NOT* be adding new change log entries to this file.
+   You should create a file in the news directory instead.
+   For helpful instructions, please see:
+   https://github.com/plone/plone.releaser/blob/master/ADD-A-NEWS-ITEM.rst
+
+.. towncrier release notes start
+
 4.0.0 (unreleased)
 ------------------
 
-Breaking changes:
-
-- Always use __code__ and __defaults__, to match changes in CMFCore and
-  publisher, like modern Python.
-  [MatthewWilkes]
-
-New features:
-
-- *add item here*
-
 Bug fixes:
-
-- Fix dict key sorting in Python 3
-  [ale-rt]
-
-- Fix import from Globals that was removed in Zope4
-  [pbauer]
 
 - Migrate breaking tests to plone.app.testing (Fix
   https://github.com/plone/Products.CMFPlone/issues/2195)
   [pbauer]
 
-- Fix imports to be compatible with python 2 and 3 using six
-  [rudaporto]
-
-- Switch to bbb_at.PloneTestCase.
-  [pbauer]
 
 
 3.1.3 (2016-09-07)

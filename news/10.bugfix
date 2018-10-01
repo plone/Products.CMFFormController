@@ -1,0 +1,4 @@
+Fix import from Globals that was removed in Zope4.
+
+[pbauer]
+
