@@ -26,7 +26,6 @@ from .interfaces import IControllerPythonScript
 from .Script import PythonScript as BaseClass
 from App.Common import package_home
 from OFS.Cache import Cacheable
-from OFS.History import Historical
 from OFS.SimpleItem import SimpleItem
 from Products.CMFCore.utils import getToolByName
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
@@ -110,7 +109,7 @@ class ControllerPythonScript(BaseClass, ControllerBase):
         {'label':'Proxy',
          'action':'manage_proxyForm',
          'help': ('OFSP','DTML-DocumentOrMethod_Proxy.stx')},
-        ) + Historical.manage_options + SimpleItem.manage_options + \
+        ) + SimpleItem.manage_options + \
         Cacheable.manage_options
 
     is_validator = 0
