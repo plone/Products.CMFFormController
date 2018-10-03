@@ -67,6 +67,14 @@ class TestRedirectToFunctional(unittest.TestCase):
             'Authorization', 'Basic {0}:{1}'.format(
                 TEST_USER_NAME, TEST_USER_PASSWORD))
 
+    def tearDown(self):
+        # still have to delete the created pages manually
+        # because of test isolation problems
+        del self.portal['page']
+        del self.portal['front-page']
+        transaction.commit()
+        super(TestRedirectToFunctional, self).tearDown()
+
     def test_regression(self):
         csrf_token = createToken()
         target = 'front-page'
