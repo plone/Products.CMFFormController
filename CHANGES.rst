@@ -8,16 +8,6 @@ Changelog
 
 .. towncrier release notes start
 
-4.0.0 (unreleased)
-------------------
-
-Bug fixes:
-
-- Migrate breaking tests to plone.app.testing (Fix
-  https://github.com/plone/Products.CMFPlone/issues/2195)
-  [pbauer]
-
-
 
 3.1.3 (2016-09-07)
 ------------------
