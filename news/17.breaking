@@ -1,2 +1,0 @@
-Always use __code__ and __defaults__, to match changes in CMFCore and publisher, like modern Python.
-[MatthewWilkes]

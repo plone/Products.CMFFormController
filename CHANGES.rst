@@ -8,6 +8,26 @@ Changelog
 
 .. towncrier release notes start
 
+4.0.0 (2018-11-05)
+------------------
+
+Breaking changes:
+
+
+- Always use __code__ and __defaults__, to match changes in CMFCore and
+  publisher, like modern Python. [MatthewWilkes] (#17)
+
+
+Bug fixes:
+
+
+- Fix import from Globals that was removed in Zope4. [pbauer] (#10)
+- Fix imports to be compatible with python 2 and 3 using six. [rudaporto] (#13)
+- Fix dict key sorting in Python 3. [ale-rt] (#15)
+- Switch to bbb_at.PloneTestCase. [pbauer] (#16)
+- fix testisolation problems [petschki] (#18)
+- Migrate breaking tests to plone.app.testing. [pbauer] (#2195)
+
 
 3.1.3 (2016-09-07)
 ------------------
