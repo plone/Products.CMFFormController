@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+4.0.1 (2019-02-13)
+------------------
+
+Bug fixes:
+
+
+- Fix problem with action sorting while upgading a Plone site in python 3.
+  [jensens] (#29)
+
+
 4.0.0 (2018-11-05)
 ------------------
 
