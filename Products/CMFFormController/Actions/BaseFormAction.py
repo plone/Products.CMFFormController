@@ -7,6 +7,7 @@ from Products.CMFFormController.config import URL_ENCODING
 from Products.CMFFormController.utils import log
 from Products.PageTemplates.Expressions import getEngine
 from Products.PageTemplates.Expressions import SecureModuleImporter
+from six.moves.urllib.parse import parse_qs
 from six.moves.urllib.parse import urlparse
 from six.moves.urllib.parse import urlunparse
 from zope.interface import implementer
@@ -89,14 +90,13 @@ class BaseFormAction(RoleManager):
     def combineArgs(self, url, kwargs):
         """Utility method that takes a URL, parses its existing query string,
         and combines the resulting dict with kwargs"""
-        import cgi
 
         # parse the existing URL
         parsed_url = list(urlparse(url))
         # get the existing query string
         qs = parsed_url[4]
         # parse the query into a dict
-        d = cgi.parse_qs(qs, 1)
+        d = parse_qs(qs, 1)
         # update with stuff from kwargs
         for k, v in kwargs.items():
             if isinstance(v, six.text_type):
