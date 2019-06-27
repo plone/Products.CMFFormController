@@ -8,6 +8,15 @@ Changelog
 
 .. towncrier release notes start
 
+4.1.0 (2019-06-27)
+------------------
+
+New features:
+
+
+- Add support for Python 3.8 [pbauer] (#20)
+
+
 4.0.1 (2019-02-13)
 ------------------
 
