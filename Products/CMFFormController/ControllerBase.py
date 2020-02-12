@@ -4,7 +4,7 @@ from .globalVars import ANY_CONTEXT, ANY_BUTTON
 from .utils import log
 from AccessControl import ClassSecurityInfo
 from Acquisition import aq_base, aq_inner
-from App.class_init import InitializeClass
+from AccessControl.class_init import InitializeClass
 from Products.CMFCore.FSMetadata import FSMetadata, CMFConfigParser
 from Products.CMFCore.permissions import View, ManagePortal
 from Products.CMFCore.utils import getToolByName

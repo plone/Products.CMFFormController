@@ -3,7 +3,7 @@ from .globalVars import ANY_CONTEXT
 from .Key import Key
 from AccessControl import ClassSecurityInfo
 from Acquisition import aq_base
-from App.class_init import InitializeClass
+from AccessControl.class_init import InitializeClass
 from OFS.SimpleItem import SimpleItem
 from Products.CMFCore.utils import getToolByName
 

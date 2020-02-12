@@ -21,7 +21,7 @@ from .interfaces import IControllerPythonScript
 from .Script import FSPythonScript as BaseClass
 from .utils import log, logException
 from AccessControl import ClassSecurityInfo
-from App.class_init import InitializeClass
+from AccessControl.class_init import InitializeClass
 from OFS.Cache import Cacheable
 from Products.CMFCore.DirectoryView import registerFileExtension, registerMetaType
 from Products.CMFCore.permissions import View

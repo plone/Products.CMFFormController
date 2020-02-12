@@ -13,7 +13,7 @@
 
 from .ControllerBase import ControllerBase
 from AccessControl import ClassSecurityInfo
-from App.class_init import InitializeClass
+from AccessControl.class_init import InitializeClass
 from App.config import getConfiguration
 from Products.CMFCore.FSMetadata import FSMetadata
 

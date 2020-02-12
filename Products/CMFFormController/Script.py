@@ -12,7 +12,7 @@
 # THIS FILE CONTAINS MODIFIED CODE FROM ZOPE 2.6.2
 ##############################################################################
 
-from App.class_init import InitializeClass
+from AccessControl.class_init import InitializeClass
 from Products.CMFCore.FSPythonScript import FSPythonScript as BaseFSPythonScript
 from Products.PythonScripts.PythonScript import PythonScript as BasePythonScript
 from Shared.DC.Scripts.Bindings import NameAssignments as BaseNameAssignments

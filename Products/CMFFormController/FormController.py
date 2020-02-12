@@ -4,7 +4,7 @@ from .FormAction import FormActionType, FormActionKey, FormAction, FormActionCon
 from .FormValidator import FormValidatorKey, FormValidator, FormValidatorContainer
 from .ValidationError import ValidationError
 from AccessControl import ClassSecurityInfo
-from App.class_init import InitializeClass
+from AccessControl.class_init import InitializeClass
 from App.Common import package_home
 from OFS.ObjectManager import bad_id
 from Products.CMFCore.permissions import ManagePortal

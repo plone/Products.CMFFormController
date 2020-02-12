@@ -19,7 +19,7 @@ from .ControllerPageTemplate import ControllerPageTemplate
 from .FSControllerBase import FSControllerBase
 from .utils import log, logException
 from AccessControl import ClassSecurityInfo
-from App.class_init import InitializeClass
+from AccessControl.class_init import InitializeClass
 from OFS.Cache import Cacheable
 from Products.CMFCore.DirectoryView import registerFileExtension, registerMetaType
 from Products.CMFCore.FSPageTemplate import FSPageTemplate as BaseClass
