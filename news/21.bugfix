@@ -1,0 +1,2 @@
+Fixed AttributeError: 'dict_keys' object has no attribute 'sort' on Python 3.
+[maurits]
