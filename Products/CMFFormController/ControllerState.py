@@ -1,7 +1,7 @@
 from .FormAction import FormAction
 from .globalVars import ANY_CONTEXT, ANY_BUTTON
 from AccessControl import ClassSecurityInfo
-from App.class_init import InitializeClass
+from AccessControl.class_init import InitializeClass
 from Products.CMFCore.utils import getToolByName
 
 import six

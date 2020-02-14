@@ -4,7 +4,7 @@ from .FormAction import FormActionType, FormActionKey, FormAction, FormActionCon
 from .FormValidator import FormValidatorKey, FormValidator, FormValidatorContainer
 from .ValidationError import ValidationError
 from AccessControl import ClassSecurityInfo
-from App.class_init import InitializeClass
+from AccessControl.class_init import InitializeClass
 from App.Common import package_home
 from OFS.ObjectManager import bad_id
 from Products.CMFCore.permissions import ManagePortal
@@ -126,8 +126,7 @@ class FormController(UniqueObject, SimpleItemWithProperties):
     security.declareProtected(ManagePortal, 'listActionTypes')
     def listActionTypes(self):
         """Return a list of available action types."""
-        keys = form_action_types.keys()
-        keys.sort()
+        keys = sorted(form_action_types.keys())
         action_types = []
         for k in keys:
             action_types.append(form_action_types.get(k))

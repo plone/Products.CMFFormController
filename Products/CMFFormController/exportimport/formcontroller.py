@@ -17,7 +17,7 @@ $Id$
 
 import os
 from AccessControl import ClassSecurityInfo
-from App.class_init import InitializeClass
+from AccessControl.class_init import InitializeClass
 from App.Common import package_home
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 
