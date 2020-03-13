@@ -8,6 +8,18 @@ Changelog
 
 .. towncrier release notes start
 
+4.1.1 (2020-03-13)
+------------------
+
+Bug fixes:
+
+
+- Fixed AttributeError: 'dict_keys' object has no attribute 'sort' on Python 3.
+  [maurits] (#21)
+- Fixed ModuleNotFoundError: No module named 'App.class_init' on Zope 5.
+  [maurits] (#22)
+
+
 4.1.0 (2019-06-27)
 ------------------
 
