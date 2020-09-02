@@ -1,0 +1,4 @@
+Removed security declaration for nonexistent method ``ZPythonScriptHTML_changePrefs``.
+This method was removed from ``Products.PythonScripts`` in version 4.2, from October 2018.
+Added ``Products.PythonScripts>=4.2`` as dependency.
+[maurits]

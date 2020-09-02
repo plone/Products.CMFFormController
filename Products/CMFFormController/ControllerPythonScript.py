@@ -127,7 +127,7 @@ class ControllerPythonScript(BaseClass, ControllerBase):
     security.declareProtected('Change Python Scripts',
       'ZPythonScriptHTML_editAction',
       'ZPythonScript_setTitle', 'ZPythonScript_edit',
-      'ZPythonScriptHTML_upload', 'ZPythonScriptHTML_changePrefs')
+      'ZPythonScriptHTML_upload')
 
 
     def __init__(self, *args, **kwargs):

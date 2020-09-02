@@ -49,5 +49,6 @@ setup(
         'Acquisition',
         'transaction',
         'Zope2>=4.0.a2',
+        'Products.PythonScripts>=4.2',
     ],
 )
