@@ -37,8 +37,8 @@ _nice_bind_names = {'context': 'name_context',
                     'subpath': 'name_subpath',
                     'state': 'name_state'}
 
-_first_indent = re.compile('(?m)^ *(?! |$)')
-_nonempty_line = re.compile('(?m)^(.*\S.*)$')
+_first_indent = re.compile(r'(?m)^ *(?! |$)')
+_nonempty_line = re.compile(r'(?m)^(.*\S.*)$')
 
 
 class NameAssignments(BaseNameAssignments):

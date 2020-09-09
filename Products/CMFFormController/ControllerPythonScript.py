@@ -65,8 +65,8 @@ _default_file = os.path.join(package_home(globals()),
 _marker = []  # Create a new marker object
 
 
-_first_indent = re.compile('(?m)^ *(?! |$)')
-_nonempty_line = re.compile('(?m)^(.*\S.*)$')
+_first_indent = re.compile(r'(?m)^ *(?! |$)')
+_nonempty_line = re.compile(r'(?m)^(.*\S.*)$')
 
 # ###########################################################################
 # Product registration and Add support
