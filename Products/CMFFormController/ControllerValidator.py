@@ -33,10 +33,18 @@ from zope.interface import implementer
 import AccessControl
 import os
 
+
 # Track the Python bytecode version
-import imp
-Python_magic = imp.get_magic()
-del imp
+# This does not seem used anymore, but that is what I think in version 1.0-alpha already,
+# so it might be magically found when accessed by code in Products.PythonScripts.
+try:
+    from importlib.util import MAGIC_NUMBER
+    Python_magic = MAGIC_NUMBER
+except ImportError:
+    # Python 2
+    import imp
+    Python_magic = imp.get_magic()
+    del imp
 
 # This should only be incremented to force recompilation.
 Script_magic = 3
