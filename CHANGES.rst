@@ -8,6 +8,20 @@ Changelog
 
 .. towncrier release notes start
 
+4.1.3 (2020-09-26)
+------------------
+
+Bug fixes:
+
+
+- Removed security declaration for nonexistent method ``ZPythonScriptHTML_changePrefs``.
+  This method was removed from ``Products.PythonScripts`` in version 4.2, from October 2018.
+  Added ``Products.PythonScripts>=4.2`` as dependency.
+  Fixed deprecation warning for module ``imp``.
+  Fixed invalid escape sequence.
+  [maurits] (#3130)
+
+
 4.1.2 (2020-04-23)
 ------------------
 
