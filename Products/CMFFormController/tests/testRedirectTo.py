@@ -7,8 +7,8 @@ from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import TEST_USER_PASSWORD
+from plone.testing.zope import Browser
 from plone.protect import createToken
-from plone.testing.z2 import Browser
 
 import transaction
 import unittest
@@ -98,6 +98,7 @@ class TestRedirectToFunctional(unittest.TestCase):
 
         # The same without the testbrowser
         self.assertIsNone(self.request.response.headers.get('location'))
+        self.request.environ["REQUEST_METHOD"] = "POST"
         self.request.REQUEST_METHOD = 'POST'
         self.request.form['workflow_action'] = 'publish'
         self.request.form['paths'] = path
