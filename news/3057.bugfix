@@ -1,0 +1,2 @@
+Tests: set request method to POST in a way that works on Plone 6 as well.
+[maurits]
