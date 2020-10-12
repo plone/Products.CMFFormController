@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+4.1.4 (2020-10-12)
+------------------
+
+Bug fixes:
+
+
+- Tests: set request method to POST in a way that works on Plone 6 as well.
+  [maurits] (#3057)
+
+
 4.1.3 (2020-09-26)
 ------------------
 
